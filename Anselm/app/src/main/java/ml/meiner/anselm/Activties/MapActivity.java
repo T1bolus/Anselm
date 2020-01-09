@@ -17,6 +17,7 @@ public class MapActivity extends AppCompatActivity {
         setContentView(R.layout.activity_mapactivity);
     }
 
+
     public void backtoMain(View view)
     {
         Intent intent = new Intent(this, MainActivity.class);
