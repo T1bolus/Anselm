@@ -16,6 +16,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import ml.meiner.anselm.Acitivies.MapActivity;
 import ml.meiner.anselm.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -35,21 +36,7 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navView, navController);
         // Get the SupportMapFragment and request notification
         // when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.FirstMap);
+        MapActivity map = new MapActivity();
+    }
 
-    }
-    public class MapsMarkerActivity extends AppCompatActivity
-            implements OnMapReadyCallback {
-        // Include the OnCreate() method here too, as described above.
-        @Override
-        public void onMapReady(GoogleMap googleMap) {
-            // Add a marker in Sydney, Australia,
-            // and move the map's camera to the same location.
-            LatLng sydney = new LatLng(-33.852, 151.211);
-            googleMap.addMarker(new MarkerOptions().position(sydney)
-                    .title("Marker in Sydney"));
-            googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-        }
-    }
 }
