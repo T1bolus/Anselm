@@ -1,4 +1,4 @@
-package ml.meiner.anselm;
+package ml.meiner.anselm.Main;
 
 import android.os.Bundle;
 
@@ -15,6 +15,8 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+
+import ml.meiner.anselm.R;
 
 public class MainActivity extends AppCompatActivity {
 
