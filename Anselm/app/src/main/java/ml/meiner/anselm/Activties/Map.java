@@ -9,18 +9,23 @@ import androidx.appcompat.app.AppCompatActivity;
 import ml.meiner.anselm.Main.MainActivity;
 import ml.meiner.anselm.R;
 
-public class MapActivity extends AppCompatActivity {
+public class Map extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mapactivity);
+        setContentView(R.layout.activity_map);
     }
 
-
-    public void backtoMain(View view)
+    public void gotoHistory(View view)
     {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, History.class);
+        startActivity(intent);
+    }
+
+    public void gotoRating(View view)
+    {
+        Intent intent = new Intent(this, Rating.class);
         startActivity(intent);
     }
 }

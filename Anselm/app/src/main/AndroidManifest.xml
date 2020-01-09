@@ -29,9 +29,9 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".Activties.MapActivity" />
-        <activity android:name=".Activties.RatingActivity" />
-        <activity android:name=".Activties.HistoryActivity" />
+        <activity android:name=".Activties.Map" />
+        <activity android:name=".Activties.Rating" />
+        <activity android:name=".Activties.History" />
         <activity android:name=".Main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
