@@ -1,9 +1,11 @@
 package ml.meiner.anselm.Main;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
+import androidx.appcompat.app.AppCompatActivity;
+import ml.meiner.anselm.Activties.MapActivity;
 import ml.meiner.anselm.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -13,4 +15,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
+
+    public void sendMessage(View view)
+    {
+        Intent intent = new Intent(this, MapActivity.class);
+        startActivity(intent);
+    }
+
 }
