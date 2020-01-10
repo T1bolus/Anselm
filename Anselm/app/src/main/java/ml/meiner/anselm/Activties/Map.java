@@ -71,7 +71,6 @@ public class Map extends AppCompatActivity implements GoogleMap.OnMyLocationClic
         }
 
 
-
         // Add a marker
         // and move the map's camera to the same location.
         LatLng oldenburg = new LatLng(53.1267, 8.2384);
@@ -95,6 +94,10 @@ public class Map extends AppCompatActivity implements GoogleMap.OnMyLocationClic
                 //TODO: Locaction wird noch nicht angezeigt nach dem akzeptieren der Berechtigung, erst wenn die Activity neu aufgerufen wird
                 mMap.setMyLocationEnabled(true);
                 mMap.setOnMyLocationClickListener(this);
+
+                //Reload to using new Permissions
+                Intent intent = new Intent(this, Map.class);
+                startActivity(intent);
                 return;
             }
             Toast.makeText(this, "Location Permissions declined:\n", Toast.LENGTH_LONG).show();
