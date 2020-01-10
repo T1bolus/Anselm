@@ -12,7 +12,9 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import androidx.annotation.NonNull;
@@ -34,7 +36,6 @@ public class Map extends AppCompatActivity implements GoogleMap.OnMyLocationClic
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
-
         //Activate ASync to enable Map interaction
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -51,7 +52,6 @@ public class Map extends AppCompatActivity implements GoogleMap.OnMyLocationClic
         Intent intent = new Intent(this, CustomerHistory.class);
         startActivity(intent);
     }
-
 
     @Override
     public void onMapReady(GoogleMap map)
@@ -78,16 +78,14 @@ public class Map extends AppCompatActivity implements GoogleMap.OnMyLocationClic
 
                 // Creating a marker
                 MarkerOptions markerOptions = new MarkerOptions();
-
                 // Setting the position for the marker
                 markerOptions.position(latLng);
-
+                markerOptions.draggable(true);
+                markerOptions.flat(true);
+                markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.test));
                 // Setting the title for the marker.
                 // This will be displayed on taping the marker
-                markerOptions.title(latLng.latitude + " : " + latLng.longitude);
-
-                // Clears the previously touched position
-                mMap.clear();
+                markerOptions.title("Ladestation: " + latLng.latitude + " : " + latLng.longitude);
 
                 // Animating to the touched position
                 mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
@@ -97,6 +95,7 @@ public class Map extends AppCompatActivity implements GoogleMap.OnMyLocationClic
             }
         });
 
+
         // Add a marker
         // and move the map's camera to the same location.
         LatLng oldenburg = new LatLng(53.1267, 8.2384);
@@ -104,7 +103,6 @@ public class Map extends AppCompatActivity implements GoogleMap.OnMyLocationClic
                 .title("Marker in Oldenburg"));
         map.moveCamera(CameraUpdateFactory.newLatLng(oldenburg));
     }
-
 
     @Override
     public void onMyLocationClick(@NonNull Location location)
