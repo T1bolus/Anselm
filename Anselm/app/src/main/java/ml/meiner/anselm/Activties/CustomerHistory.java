@@ -2,19 +2,18 @@ package ml.meiner.anselm.Activties;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import ml.meiner.anselm.R;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import ml.meiner.anselm.Main.MainActivity;
-import ml.meiner.anselm.R;
-
-public class History extends AppCompatActivity {
+public class CustomerHistory extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_history);
+        setContentView(R.layout.activity_customerhistory);
     }
 
     public void gotoMap(View view)
@@ -23,9 +22,9 @@ public class History extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void gotoRating(View view)
+    public void gotoProviderHistory(View view)
     {
-        Intent intent = new Intent(this, Rating.class);
+        Intent intent = new Intent(this, ProviderHistory.class);
         startActivity(intent);
     }
 }
