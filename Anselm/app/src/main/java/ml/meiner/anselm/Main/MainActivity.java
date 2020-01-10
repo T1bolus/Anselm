@@ -6,9 +6,9 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import ml.meiner.anselm.Activties.History;
+import ml.meiner.anselm.Activties.ProviderHistory;
 import ml.meiner.anselm.Activties.Map;
-import ml.meiner.anselm.Activties.Rating;
+import ml.meiner.anselm.Activties.CustomerHistory;
 import ml.meiner.anselm.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -25,15 +25,15 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void gotoHistory(View view)
+    public void gotoProviderHistory(View view)
     {
-        Intent intent = new Intent(this, History.class);
+        Intent intent = new Intent(this, ProviderHistory.class);
         startActivity(intent);
     }
 
-    public void gotoRating(View view)
+    public void gotoCustomerHistory(View view)
     {
-        Intent intent = new Intent(this, Rating.class);
+        Intent intent = new Intent(this, CustomerHistory.class);
         startActivity(intent);
     }
 
