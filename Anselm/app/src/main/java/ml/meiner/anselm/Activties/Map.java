@@ -41,15 +41,15 @@ public class Map extends AppCompatActivity implements GoogleMap.OnMyLocationClic
         mapFragment.getMapAsync(this);
     }
 
-    public void gotoProviderHistory(View view)
+    public void gotoInseration(View view)
     {
-        Intent intent = new Intent(this, ProviderHistory.class);
+        Intent intent = new Intent(this, Inseration.class);
         startActivity(intent);
     }
 
-    public void gotoCustomerHistory(View view)
+    public void gotoHistory(View view)
     {
-        Intent intent = new Intent(this, CustomerHistory.class);
+        Intent intent = new Intent(this, History.class);
         startActivity(intent);
     }
 

@@ -30,8 +30,8 @@
             android:value="@string/google_maps_key" />
 
         <activity android:name=".Activties.Map" />
-        <activity android:name=".Activties.CustomerHistory" />
-        <activity android:name=".Activties.ProviderHistory" />
+        <activity android:name=".Activties.History" />
+        <activity android:name=".Activties.Inseration" />
         <activity android:name=".Main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
