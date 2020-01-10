@@ -6,38 +6,85 @@
     android:layout_height="match_parent"
     tools:context=".Activties.Inseration">
 
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="gotoMap"
-        android:text="Map"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.089"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.963" />
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="gotoHistory"
-        android:text="Verlauf"
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="408dp"
+        android:layout_height="225dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.919"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.963" />
+        app:layout_constraintVertical_bias="0.29"
+        tools:context="com.example.mapwithmarker.MapsMarkerActivity"
+        />
+
+    <EditText
+        android:id="@+id/plain_text_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Adresse"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/map"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.895" />
+
+    <EditText
+        android:id="@+id/plain_text_input1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Vorname"
+        android:inputType="text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/map"
+        app:layout_constraintVertical_bias="0.186" />
+
+    <EditText
+        android:id="@+id/plain_text_input2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nachname"
+        android:inputType="text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/plain_text_input1"
+        app:layout_constraintVertical_bias="0.091" />
+
+    <EditText
+        android:id="@+id/plain_text_input3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Betrag pro Stunde"
+        android:inputType="number   "
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/plain_text_input2"
+        app:layout_constraintVertical_bias="0.131" />
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
+        android:id="@+id/plain_text_inpu4"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Inserierungen"
-        tools:layout_editor_absoluteX="174dp"
-        tools:layout_editor_absoluteY="191dp" />
+        android:hint="Koordinaten"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/plain_text_input1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.921" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
