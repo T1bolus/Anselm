@@ -52,6 +52,7 @@ public class Map extends AppCompatActivity implements GoogleMap.OnMyLocationClic
         startActivity(intent);
     }
 
+
     @Override
     public void onMapReady(GoogleMap map)
     {
@@ -63,13 +64,38 @@ public class Map extends AppCompatActivity implements GoogleMap.OnMyLocationClic
             // location permission from the user.
             mMap.setMyLocationEnabled(true);
             mMap.setOnMyLocationClickListener(this);
+
         }
         else //No Permissions
         {
             //Request GPS Permission
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_LOCATION_REQUEST_CODE);
         }
+        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
 
+            @Override
+            public void onMapClick(LatLng latLng) {
+
+                // Creating a marker
+                MarkerOptions markerOptions = new MarkerOptions();
+
+                // Setting the position for the marker
+                markerOptions.position(latLng);
+
+                // Setting the title for the marker.
+                // This will be displayed on taping the marker
+                markerOptions.title(latLng.latitude + " : " + latLng.longitude);
+
+                // Clears the previously touched position
+                mMap.clear();
+
+                // Animating to the touched position
+                mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
+
+                // Placing a marker on the touched position
+                mMap.addMarker(markerOptions);
+            }
+        });
 
 
         // Add a marker
@@ -79,6 +105,7 @@ public class Map extends AppCompatActivity implements GoogleMap.OnMyLocationClic
                 .title("Marker in Oldenburg"));
         map.moveCamera(CameraUpdateFactory.newLatLng(oldenburg));
     }
+
 
     @Override
     public void onMyLocationClick(@NonNull Location location)
