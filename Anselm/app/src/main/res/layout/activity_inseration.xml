@@ -8,83 +8,46 @@
 
 
     <fragment
-        android:id="@+id/map"
+        android:id="@+id/googlemap"
         android:name="com.google.android.gms.maps.SupportMapFragment"
-        android:layout_width="408dp"
-        android:layout_height="225dp"
+        android:layout_width="417dp"
+        android:layout_height="365dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.47"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.29"
-        tools:context="com.example.mapwithmarker.MapsMarkerActivity"
-        />
+        app:layout_constraintVertical_bias="0.127"
+        tools:context="com.example.mapwithmarker.MapsMarkerActivity" />
 
-    <EditText
-        android:id="@+id/plain_text_input"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Adresse"
-        android:inputType="text"
-        app:layout_constraintBottom_toTopOf="@+id/map"
+    <SearchView
+        android:id="@+id/sv_location"
+        android:layout_width="416dp"
+        android:layout_height="58dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/inseration_style"
+        android:iconifiedByDefault="false"
+        android:queryHint="Search.."
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.895" />
+        app:layout_constraintVertical_bias="0.043" />
 
     <EditText
-        android:id="@+id/plain_text_input1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Vorname"
-        android:inputType="text"
+        android:id="@+id/editText"
+        android:layout_width="398dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.461"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/map"
-        app:layout_constraintVertical_bias="0.186" />
-
-    <EditText
-        android:id="@+id/plain_text_input2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Nachname"
-        android:inputType="text"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/plain_text_input1"
-        app:layout_constraintVertical_bias="0.091" />
-
-    <EditText
-        android:id="@+id/plain_text_input3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Betrag pro Stunde"
-        android:inputType="number   "
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/plain_text_input2"
-        app:layout_constraintVertical_bias="0.131" />
-
-    <TextView
-        android:id="@+id/plain_text_inpu4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Koordinaten"
-        android:inputType="text"
-        app:layout_constraintBottom_toTopOf="@+id/plain_text_input1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.921" />
+        app:layout_constraintTop_toBottomOf="@+id/googlemap"
+        app:layout_constraintVertical_bias="0.068" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
