@@ -10,20 +10,20 @@
     <fragment
         android:id="@+id/googlemap"
         android:name="com.google.android.gms.maps.SupportMapFragment"
-        android:layout_width="417dp"
-        android:layout_height="365dp"
+        android:layout_width="402dp"
+        android:layout_height="455dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.47"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.127"
+        app:layout_constraintVertical_bias="0.0"
         tools:context="com.example.mapwithmarker.MapsMarkerActivity" />
 
     <SearchView
         android:id="@+id/sv_location"
-        android:layout_width="416dp"
-        android:layout_height="58dp"
+        android:layout_width="391dp"
+        android:layout_height="70dp"
         android:layout_margin="10dp"
         android:background="@drawable/inseration_style"
         android:iconifiedByDefault="false"
@@ -33,7 +33,7 @@
         app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.043" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/editText"
@@ -41,13 +41,29 @@
         android:layout_height="49dp"
         android:layout_marginTop="8dp"
         android:ems="10"
+        android:hint="Vorname"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.461"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/googlemap"
-        app:layout_constraintVertical_bias="0.068" />
+        app:layout_constraintVertical_bias="0.0" />
+
+    <EditText
+        android:id="@+id/editText1"
+        android:layout_width="398dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="Nachname"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText"
+        app:layout_constraintVertical_bias="0.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
