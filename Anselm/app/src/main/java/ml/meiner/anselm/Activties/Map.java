@@ -82,7 +82,7 @@ public class Map extends AppCompatActivity implements GoogleMap.OnMyLocationClic
                 markerOptions.position(latLng);
                 markerOptions.draggable(true);
                 markerOptions.flat(true);
-                markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.test));
+                markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.new_mark));
                 // Setting the title for the marker.
                 // This will be displayed on taping the marker
                 markerOptions.title("Ladestation: " + latLng.latitude + " : " + latLng.longitude);
