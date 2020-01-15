@@ -11,6 +11,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -70,20 +71,41 @@ public class Inseration extends FragmentActivity implements OnMapReadyCallback {
         });
 
     mapFragment.getMapAsync(this);
+
     }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
+        map.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+                // Remove the marker
+                marker.remove();
+            }
+        });
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(map.getCameraPosition().target);
+        markerOptions.draggable(true);
+        markerOptions.flat(true);
+        markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.new_mark));
         markerCenter = map.addMarker(markerOptions);
-
         map.setOnCameraMoveListener(new GoogleMap.OnCameraMoveListener() {
             public void onCameraMove() {
                 markerCenter.setPosition(map.getCameraPosition().target);
             }
         });
+
+    }
+
+    public void insertMark(android.view.View view){
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.draggable(true);
+        markerOptions.flat(true);
+        markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.new_mark));
+        markerOptions.position(map.getCameraPosition().target);
+        map.addMarker(markerOptions);
     }
 }
 
