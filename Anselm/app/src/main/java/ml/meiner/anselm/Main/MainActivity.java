@@ -7,12 +7,9 @@ import android.widget.Button;
 
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -29,7 +26,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     GoogleMap map;
     SupportMapFragment mapFragment;
-    LatLng latlng;
     private static final int RC_SIGN_IN = 1338;
 
 
@@ -55,10 +51,11 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
 
-        map.addMarker(new MarkerOptions()
+        /*map.addMarker(new MarkerOptions()
                 .position(latlng)
                 .title("Marker"));
         map.animateCamera(CameraUpdateFactory.newLatLngZoom(latlng, 10));
+        */
     }
 
     public void gotoInseration(View view) {
