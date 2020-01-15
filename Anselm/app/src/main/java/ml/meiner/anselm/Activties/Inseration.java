@@ -11,7 +11,9 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 
@@ -26,7 +28,7 @@ public class Inseration extends FragmentActivity implements OnMapReadyCallback {
     GoogleMap map;
     SupportMapFragment mapFragment;
     SearchView searchView;
-
+    Marker markerCenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -53,7 +55,7 @@ public class Inseration extends FragmentActivity implements OnMapReadyCallback {
                     }
                     Address address = addressList.get(0);
                     LatLng latlng = new LatLng(address.getLatitude(), address.getLongitude());
-                    map.addMarker(new MarkerOptions().position(latlng).title(location));
+                    //map.addMarker(new MarkerOptions().position(latlng).title(location));
                     map.animateCamera(CameraUpdateFactory.newLatLngZoom(latlng, 10));
 
                 }
@@ -73,6 +75,15 @@ public class Inseration extends FragmentActivity implements OnMapReadyCallback {
     @Override
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(map.getCameraPosition().target);
+        markerCenter = map.addMarker(markerOptions);
+
+        map.setOnCameraMoveListener(new GoogleMap.OnCameraMoveListener() {
+            public void onCameraMove() {
+                markerCenter.setPosition(map.getCameraPosition().target);
+            }
+        });
     }
 }
 
