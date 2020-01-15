@@ -52,28 +52,28 @@
     <fragment
         android:id="@+id/googlemap"
         android:name="com.google.android.gms.maps.SupportMapFragment"
-        android:layout_width="408dp"
-        android:layout_height="264dp"
+        android:layout_width="275dp"
+        android:layout_height="187dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.211"
+        app:layout_constraintVertical_bias="0.218"
         tools:context="com.example.mapwithmarker.MapsMarkerActivity" />
 
     <Button
-        android:id="@+id/button3"
-        android:layout_width="417dp"
-        android:layout_height="276dp"
+        android:id="@+id/buttonMap"
+        android:layout_width="273dp"
+        android:layout_height="186dp"
+        android:layout_marginTop="36dp"
         android:background="@null"
         android:onClick="gotoMap"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.211" />
+        app:layout_constraintVertical_bias="0.163" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
