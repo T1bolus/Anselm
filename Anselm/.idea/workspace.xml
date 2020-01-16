@@ -6,9 +6,7 @@
     </shared>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="97968012-5de0-405f-9df6-6cd6bd73eed2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/ml/meiner/anselm/Activties/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/ml/meiner/anselm/Activties/Map.java" afterDir="false" />
-    </list>
+    <list default="true" id="97968012-5de0-405f-9df6-6cd6bd73eed2" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/build/classes/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -113,8 +111,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/ml/meiner/anselm/Activties/Map.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="48" column="59" selection-start-line="48" selection-start-column="59" selection-end-line="48" selection-end-column="59" />
+            <state relative-caret-position="595">
+              <caret line="62" column="45" lean-forward="true" selection-start-line="62" selection-start-column="45" selection-end-line="62" selection-end-column="45" />
             </state>
           </provider>
         </entry>
@@ -527,8 +525,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/ml/meiner/anselm/Activties/Map.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="48" column="59" selection-start-line="48" selection-start-column="59" selection-end-line="48" selection-end-column="59" />
+        <state relative-caret-position="595">
+          <caret line="62" column="45" lean-forward="true" selection-start-line="62" selection-start-column="45" selection-end-line="62" selection-end-column="45" />
         </state>
       </provider>
     </entry>
