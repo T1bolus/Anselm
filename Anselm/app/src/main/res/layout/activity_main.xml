@@ -23,46 +23,37 @@
         android:id="@+id/button"
         android:layout_width="212dp"
         android:layout_height="53dp"
-        android:layout_marginTop="36dp"
         android:background="@drawable/inseration_style"
         android:onClick="gotoHistory"
         android:text="History"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/button1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/googlemap"
-        app:layout_constraintVertical_bias="0.017" />
+        app:layout_constraintTop_toBottomOf="@+id/googlemap" />
 
     <Button
         android:id="@+id/buttonsignup"
         android:layout_width="212dp"
         android:layout_height="53dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="44dp"
         android:background="@drawable/inseration_style"
         android:onClick="login"
         android:text="Signup"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button1"
-        app:layout_constraintVertical_bias="0.133" />
+        app:layout_constraintTop_toBottomOf="@+id/button1" />
 
     <Button
         android:id="@+id/button1"
         android:layout_width="212dp"
         android:layout_height="53dp"
-        android:layout_marginTop="37dp"
         android:background="@drawable/inseration_style"
         android:onClick="gotoInseration"
         android:text="Inserierungen"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button"
-        app:layout_constraintVertical_bias="0.021" />
+        tools:layout_editor_absoluteY="443dp" />
 
     <fragment
         android:id="@+id/googlemap"
@@ -101,15 +92,15 @@
         android:id="@+id/button2"
         android:layout_width="212dp"
         android:layout_height="53dp"
+        android:layout_marginTop="48dp"
         android:background="@drawable/inseration_style"
         android:onClick="gotoDatabase"
         android:text="Daten hinzufügen"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.921" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonsignup" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
