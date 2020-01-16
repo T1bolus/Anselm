@@ -6,6 +6,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
 import com.google.android.gms.maps.GoogleMap;
@@ -19,14 +22,16 @@ import com.google.firebase.auth.FirebaseUser;
 import java.util.Arrays;
 import java.util.List;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import ml.meiner.anselm.Activties.History;
 import ml.meiner.anselm.Activties.Inseration;
 import ml.meiner.anselm.Activties.Map;
+import ml.meiner.anselm.DataBase.DataHandlerActivity;
+import ml.meiner.anselm.DataBase.UsersDatabaseAdapter;
 import ml.meiner.anselm.R;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
+
+    UsersDatabaseAdapter usersDatabaseAdapter;
 
     GoogleMap map;
     SupportMapFragment mapFragment;
@@ -39,10 +44,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.googlemap);
-
-
-
         mapFragment.getMapAsync(this);
+
+        usersDatabaseAdapter = new UsersDatabaseAdapter(getApplicationContext());
 
 
     }
@@ -73,6 +77,11 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
     public void gotoMap(View view) {
         Intent intent = new Intent(this, Map.class);
+        startActivity(intent);
+    }
+
+    public void gotoTestActivity(View view) {
+        Intent intent = new Intent(this, DataHandlerActivity.class);
         startActivity(intent);
     }
 
