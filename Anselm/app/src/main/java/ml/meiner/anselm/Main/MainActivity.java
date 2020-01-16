@@ -1,10 +1,16 @@
 package ml.meiner.anselm.Main;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
@@ -21,6 +27,8 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import ml.meiner.anselm.Activties.History;
 import ml.meiner.anselm.Activties.Inseration;
 import ml.meiner.anselm.Activties.Map;
@@ -28,8 +36,8 @@ import ml.meiner.anselm.R;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
 
-    GoogleMap map;
-    SupportMapFragment mapFragment;
+    private GoogleMap mMap;
+    static int MY_LOCATION_REQUEST_CODE = 1339;
     private static final int RC_SIGN_IN = 1338;
     boolean logged_in = false;
 
@@ -38,29 +46,48 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.googlemap);
 
-
-
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.googlemap);
         mapFragment.getMapAsync(this);
-
-
     }
 
 
 
 
-
-
     @Override
-    public void onMapReady(GoogleMap googleMap) {
-        map = googleMap;
+    public void onMapReady(GoogleMap map) {
+        mMap = map;
 
-        /*map.addMarker(new MarkerOptions()
-                .position(latlng)
-                .title("Marker"));
-        map.animateCamera(CameraUpdateFactory.newLatLngZoom(latlng, 10));
-        */
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            // TODO: Before enabling the My Location layer, you must request
+            // location permission from the user.
+            mMap.setMyLocationEnabled(true);
+
+            LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+            Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+
+            //mMap.moveCamera(CameraUpdateFactory.newLatLng());
+
+        } else //No Permissions
+        {
+            //Request GPS Permission
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_LOCATION_REQUEST_CODE);
+        }
+
+    }
+
+    //Handler for Permission Result
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        if (requestCode == MY_LOCATION_REQUEST_CODE) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                //TODO: Locaction wird noch nicht angezeigt nach dem akzeptieren der Berechtigung, erst wenn die Activity neu aufgerufen wird
+                mMap.setMyLocationEnabled(true);
+
+                return;
+            }
+            Toast.makeText(this, "Location Permissions declined:\n", Toast.LENGTH_LONG).show();
+        }
     }
 
     public void gotoInseration(View view) {
@@ -134,8 +161,11 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 // sign-in flow using the back button. Otherwise check
                 // response.getError().getErrorCode() and handle the error.
                 // ...
-                TextView nameLabel = this.findViewById((R.id.textView));
-                nameLabel.setText("Anmeldung fehlgeschlagen Fehler:" + response.getError().getMessage());
+                if(response != null)
+                {
+                    TextView nameLabel = this.findViewById((R.id.textView));
+                    nameLabel.setText("Anmeldung fehlgeschlagen Fehler:" + response.getError().getMessage());
+                }
             }
         }
     }
