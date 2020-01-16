@@ -134,6 +134,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 // sign-in flow using the back button. Otherwise check
                 // response.getError().getErrorCode() and handle the error.
                 // ...
+                TextView nameLabel = this.findViewById((R.id.textView));
+                nameLabel.setText("Anmeldung fehlgeschlagen");
             }
         }
     }
