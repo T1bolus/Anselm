@@ -177,9 +177,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 Button btn = this.findViewById(R.id.buttonsignup);
                 btn.setText("Ausloggen");
-                TextView nameLabel = this.findViewById((R.id.textView));
-                nameLabel.setText("Hallo " + user.getDisplayName());
-                logged_in = true;
+                TextView nameLabel = this.findViewById(R.id.textView);
+                if(user != null)
+                {
+                    nameLabel.setText("Hallo " + user.getDisplayName());
+                    logged_in = true;
+                }
 
                 // ...
             } else {

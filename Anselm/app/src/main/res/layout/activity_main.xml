@@ -80,15 +80,10 @@
         android:id="@+id/buttonMap"
         android:layout_width="273dp"
         android:layout_height="186dp"
-        android:layout_marginTop="36dp"
         android:background="@null"
         android:onClick="gotoMap"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.163" />
+        tools:layout_editor_absoluteX="68dp"
+        tools:layout_editor_absoluteY="119dp" />
 
     <TextView
         android:id="@+id/textView"
@@ -99,6 +94,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button1"
         app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="212dp"
+        android:layout_height="53dp"
+        android:background="@drawable/inseration_style"
+        android:onClick="gotoTestActivity"
+        android:text="Daten hinzufügen"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.921" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
