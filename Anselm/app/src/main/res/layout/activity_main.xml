@@ -82,8 +82,10 @@
         android:layout_height="186dp"
         android:background="@null"
         android:onClick="gotoMap"
-        tools:layout_editor_absoluteX="68dp"
-        tools:layout_editor_absoluteY="119dp" />
+        app:layout_constraintBottom_toBottomOf="@+id/googlemap"
+        app:layout_constraintEnd_toEndOf="@+id/googlemap"
+        app:layout_constraintStart_toStartOf="@+id/googlemap"
+        app:layout_constraintTop_toTopOf="@+id/googlemap" />
 
     <TextView
         android:id="@+id/textView"
