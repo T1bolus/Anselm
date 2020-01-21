@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private static final float MIN_DISTANCE = 1000;
 
     UsersDatabaseAdapter usersDatabaseAdapter;
+    FirebaseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -185,7 +186,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
             if (resultCode == RESULT_OK) {
                 // Successfully signed in
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                user = FirebaseAuth.getInstance().getCurrentUser();
                 Button btn = this.findViewById(R.id.buttonsignup);
                 btn.setText("Ausloggen");
                 TextView nameLabel = this.findViewById(R.id.textView);
