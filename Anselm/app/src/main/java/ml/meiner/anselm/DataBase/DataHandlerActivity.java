@@ -29,14 +29,12 @@ public class DataHandlerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_datahandleractivity);
-        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
 
 
-        insertRowFrom = (Button) findViewById(R.id.insertRowFrom);
-        mUserName = (TextView) findViewById(R.id.userNameTxt);
-        mUserPhone = (TextView) findViewById(R.id.userPhoneTxt);
-        mUserEmail = (TextView) findViewById(R.id.userEmailTxt);
+        insertRowFrom = findViewById(R.id.insertRowFrom);
+        mUserName = findViewById(R.id.userNameTxt);
+        mUserPhone = findViewById(R.id.userPhoneTxt);
+        mUserEmail = findViewById(R.id.userEmailTxt);
 
 
         ActionBar actionBar = getSupportActionBar();
@@ -58,6 +56,7 @@ public class DataHandlerActivity extends AppCompatActivity {
             toast("Bitte alle Felder ausfüllen!");
         }else{
             UsersDatabaseAdapter.insertEntry(userNameTxtView.getText().toString().trim(),userPhoneTxtView.getText().toString(),userEmailTxtView.getText().toString());
+            // Weg in die Main
             Intent myIntent = new Intent(DataHandlerActivity.this, MainActivity.class);
             DataHandlerActivity.this.startActivity(myIntent);
         }
