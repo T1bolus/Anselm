@@ -9,9 +9,9 @@ public class MarkerModelObject {
     private int longitude;
     private int latitude;
 
-    private String firstname;
-    private String lastName;
-    private String telnumber;
+    private String first_name;
+    private String last_name;
+    private String tel_number;
 
     // Um später snapshot vom Parkplatz zu übergeben
     public Uri photoID;
@@ -25,15 +25,15 @@ public class MarkerModelObject {
     }
 
     public String getFirstname() {
-        return firstname;
+        return first_name;
     }
 
     public String getLastName() {
-        return lastName;
+        return last_name;
     }
 
     public String getTelnumber() {
-        return telnumber;
+        return tel_number;
     }
 
     public Uri getPhotoID() {
@@ -49,15 +49,15 @@ public class MarkerModelObject {
     }
 
     public void setFirstname(String firstname) {
-        this.firstname = firstname;
+        this.first_name = firstname;
     }
 
     public void setLastName(String lastName) {
-        this.lastName = lastName;
+        this.last_name = lastName;
     }
 
     public void setTelnumber(String telnumber) {
-        this.telnumber = telnumber;
+        this.tel_number = telnumber;
     }
 
     public void setPhotoID(Uri photoID) {

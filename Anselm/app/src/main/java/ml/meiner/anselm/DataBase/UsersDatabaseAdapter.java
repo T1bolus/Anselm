@@ -15,7 +15,8 @@ public class UsersDatabaseAdapter {
     static final String TABLE_NAME = "USERS";
     static final int DATABASE_VERSION = 1;
     // SQL Statement to create a new database.
-    static final String DATABASE_CREATE = "create table " + TABLE_NAME + "( ID integer primary key autoincrement,user_name  text,user_phone  text,user_email text); ";
+    //static final String DATABASE_CREATE = "create table " + TABLE_NAME + "( ID integer primary key autoincrement,user_name  text,user_phone  text,user_email text); ";
+    static final String DATABASE_CREATE = "create table " + TABLE_NAME + "( ID integer primary key autoincrement,first_name  text,last_name  text,tel_number text, longitude integer, latidude integer); ";
     private static final String TAG = "UsersDatabaseAdapter:";
 
     // Variable to hold the database instance
@@ -47,14 +48,16 @@ public class UsersDatabaseAdapter {
     }
 
     // method to insert a record in Table
-    public static String insertEntry(String user_name, String user_phone, String user_email) {
+    public static String insertEntry(String first_name, String last_name, String tel_number, int longitude, int latitude) {
 
         try {
             ContentValues newValues = new ContentValues();
             // Assign values for each column.
-            newValues.put("user_name", user_name);
-            newValues.put("user_phone", user_phone);
-            newValues.put("user_email", user_email);
+            newValues.put("first_name", first_name);
+            newValues.put("last_name", last_name);
+            newValues.put("tel_number", tel_number);
+            newValues.put("longitude", longitude);
+            newValues.put("latidude", latitude);
 
             // Insert the row into your table
             db = dbHelper.getWritableDatabase();
@@ -65,12 +68,6 @@ public class UsersDatabaseAdapter {
         } catch (Exception ex) {
         }
         return "ok";
-    }
-
-    // method to express all information
-    public static ArrayList<MarkerModelObject> getAllData() {
-
-        return ArrayList<MarkerModelObject> data;
     }
 
     // method to get the password  of userName
