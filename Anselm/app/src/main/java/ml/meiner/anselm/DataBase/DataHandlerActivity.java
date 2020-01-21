@@ -29,14 +29,12 @@ public class DataHandlerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_datahandleractivity);
-        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
 
 
-        insertRowFrom = (Button) findViewById(R.id.insertRowFrom);
-        mUserName = (TextView) findViewById(R.id.userNameTxt);
-        mUserPhone = (TextView) findViewById(R.id.userPhoneTxt);
-        mUserEmail = (TextView) findViewById(R.id.userEmailTxt);
+        insertRowFrom = findViewById(R.id.insertRowFrom);
+        mUserName = findViewById(R.id.userNameTxt);
+        mUserPhone = findViewById(R.id.userPhoneTxt);
+        mUserEmail = findViewById(R.id.userEmailTxt);
 
 
         ActionBar actionBar = getSupportActionBar();
@@ -48,16 +46,17 @@ public class DataHandlerActivity extends AppCompatActivity {
 
     public void insertRow(View view) {
 
-        TextView userNameTxtView = findViewById(R.id.userNameTxt);
-        TextView userPhoneTxtView = findViewById(R.id.userPhoneTxt);
-        TextView userEmailTxtView = findViewById(R.id.userEmailTxt);
+        TextView firstNameTxtView = findViewById(R.id.userNameTxt);
+        TextView lastNameTxtView = findViewById(R.id.userPhoneTxt);
+        TextView telnumberTxtView = findViewById(R.id.userEmailTxt);
 
-        if(userNameTxtView.getText().toString().trim().equals("")
-                || userPhoneTxtView.getText().toString().trim().equals("")
-                || userEmailTxtView.getText().toString().trim().equals("")){
+        if(firstNameTxtView.getText().toString().trim().equals("")
+                || lastNameTxtView.getText().toString().trim().equals("")
+                || telnumberTxtView.getText().toString().trim().equals("")){
             toast("Bitte alle Felder ausfüllen!");
         }else{
-            UsersDatabaseAdapter.insertEntry(userNameTxtView.getText().toString().trim(),userPhoneTxtView.getText().toString(),userEmailTxtView.getText().toString());
+            UsersDatabaseAdapter.insertEntry(firstNameTxtView.getText().toString().trim(),lastNameTxtView.getText().toString(),telnumberTxtView.getText().toString(),1,1);
+            // Weg in die Main
             Intent myIntent = new Intent(DataHandlerActivity.this, MainActivity.class);
             DataHandlerActivity.this.startActivity(myIntent);
         }

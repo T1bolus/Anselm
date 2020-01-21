@@ -79,7 +79,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
 
 
-        //TEST AD
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
             public void onInitializationComplete(InitializationStatus initializationStatus) {
