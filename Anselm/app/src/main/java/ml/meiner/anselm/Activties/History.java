@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import ml.meiner.anselm.DataBase.MarkerModelObject;
 import ml.meiner.anselm.R;
 import ml.meiner.anselm.model.historyListDataHandler;
 
@@ -18,24 +19,34 @@ public class History extends AppCompatActivity {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
 
-    private ArrayList<String> datalist;
+    private ArrayList<MarkerModelObject> datalist;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
 
+
+        MarkerModelObject testobj = new MarkerModelObject();
+        testobj.setLastName("HALLO MEIN NAME IST SIMON!!!");
+
         datalist = new ArrayList<>();
-        datalist.add("Auftrag X: Zu viel Geld bekommen und keins abgegeben");
-        datalist.add("Irgendein anderer Text der mit der Datenbank aufgefüllt werden muss");
-        datalist.add("Irgendein anderer Text der mit der Datenbank aufgefüllt werden muss");
-        datalist.add("Irgendein anderer Text der mit der Datenbank aufgefüllt werden muss");
-        datalist.add("Irgendein anderer Text der mit der Datenbank aufgefüllt werden muss");
-        datalist.add("Irgendein anderer Text der mit der Datenbank aufgefüllt werden muss");
-        datalist.add("Irgendein anderer Text der mit der Datenbank aufgefüllt werden muss");
-        datalist.add("Irgendein anderer Text der mit der Datenbank aufgefüllt werden muss");
-        datalist.add("Irgendein anderer Text der mit der Datenbank aufgefüllt werden muss");
-        datalist.add("Irgendein anderer Text der mit der Datenbank aufgefüllt werden muss");
+        datalist.add(testobj);
+
+        MarkerModelObject testobj2 = new MarkerModelObject();
+        testobj2.setLastName("Auftrag X: Zu viel Geld bekommen und keins abgegeben");
+
+        datalist.add(testobj2);
+        datalist.add(testobj2);
+        datalist.add(testobj2);
+        datalist.add(testobj2);
+        datalist.add(testobj2);
+        datalist.add(testobj2);
+        datalist.add(testobj2);
+        datalist.add(testobj2);
+        datalist.add(testobj2);
+        datalist.add(testobj2);
+        datalist.add(testobj2);
 
 
 
