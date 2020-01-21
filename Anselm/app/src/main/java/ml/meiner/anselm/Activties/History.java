@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import java.util.ArrayList;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,24 +18,24 @@ public class History extends AppCompatActivity {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
 
-    private String[] datalist;
+    private ArrayList<String> datalist;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
 
-        datalist = new String[10];
-        datalist[0] = "Auftrag X: Zu viel Geld bekommen und keins abgegeben";
-        datalist[1] = "Irgendein anderer Text der mit der Datenbank aufgefüllt werden muss";
-        datalist[2] = "Irgendein anderer Text der mit der Datenbank aufgefüllt werden muss";
-        datalist[3] = "Irgendein anderer Text der mit der Datenbank aufgefüllt werden muss";
-        datalist[4] = "Irgendein anderer Text der mit der Datenbank aufgefüllt werden muss";
-        datalist[5] = "Irgendein anderer Text der mit der Datenbank aufgefüllt werden muss";
-        datalist[6] = "Irgendein anderer Text der mit der Datenbank aufgefüllt werden muss";
-        datalist[7] = "Irgendein anderer Text der mit der Datenbank aufgefüllt werden muss";
-        datalist[8] = "Irgendein anderer Text der mit der Datenbank aufgefüllt werden muss";
-        datalist[9] = "Irgendein anderer Text der mit der Datenbank aufgefüllt werden muss";
+        datalist = new ArrayList<>();
+        datalist.add("Auftrag X: Zu viel Geld bekommen und keins abgegeben");
+        datalist.add("Irgendein anderer Text der mit der Datenbank aufgefüllt werden muss");
+        datalist.add("Irgendein anderer Text der mit der Datenbank aufgefüllt werden muss");
+        datalist.add("Irgendein anderer Text der mit der Datenbank aufgefüllt werden muss");
+        datalist.add("Irgendein anderer Text der mit der Datenbank aufgefüllt werden muss");
+        datalist.add("Irgendein anderer Text der mit der Datenbank aufgefüllt werden muss");
+        datalist.add("Irgendein anderer Text der mit der Datenbank aufgefüllt werden muss");
+        datalist.add("Irgendein anderer Text der mit der Datenbank aufgefüllt werden muss");
+        datalist.add("Irgendein anderer Text der mit der Datenbank aufgefüllt werden muss");
+        datalist.add("Irgendein anderer Text der mit der Datenbank aufgefüllt werden muss");
 
 
 
