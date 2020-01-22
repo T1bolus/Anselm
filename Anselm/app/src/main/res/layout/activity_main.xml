@@ -56,18 +56,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button" />
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="212dp"
-        android:layout_height="53dp"
-        android:layout_marginTop="20dp"
-        android:onClick="gotoDatabase"
-        android:text="Daten hinzufügen"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button1" />
-
     <TextView
         android:id="@+id/textView"
         android:layout_width="207dp"

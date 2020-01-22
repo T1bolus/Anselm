@@ -8,12 +8,12 @@ import java.util.ArrayList;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
-import ml.meiner.anselm.DataBase.MarkerModelObject;
+
 import ml.meiner.anselm.R;
 
 public class historyListDataHandler extends RecyclerView.Adapter<historyListDataHandler.MyViewHolder> {
 
-    private ArrayList<MarkerModelObject> mDataset;
+    private ArrayList<String> mDataset;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -29,7 +29,7 @@ public class historyListDataHandler extends RecyclerView.Adapter<historyListData
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public historyListDataHandler(ArrayList<MarkerModelObject> myDataset) {
+    public historyListDataHandler(ArrayList<String> myDataset) {
         mDataset = myDataset;
     }
 
@@ -50,7 +50,7 @@ public class historyListDataHandler extends RecyclerView.Adapter<historyListData
     public void onBindViewHolder(MyViewHolder holder, int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        holder.textView.setText(mDataset.get(position).getLastName());
+        holder.textView.setText(mDataset.get(position));
 
     }
 

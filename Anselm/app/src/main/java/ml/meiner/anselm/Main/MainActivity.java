@@ -41,8 +41,6 @@ import androidx.core.content.ContextCompat;
 import ml.meiner.anselm.Activties.History;
 import ml.meiner.anselm.Activties.Inseration;
 import ml.meiner.anselm.Activties.Map;
-import ml.meiner.anselm.DataBase.UsersDatabaseAdapter;
-import ml.meiner.anselm.DataBase.DataHandlerActivity;
 import ml.meiner.anselm.R;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback, LocationListener
@@ -56,8 +54,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private LocationManager locationManager;
     private static final long MIN_TIME = 400;
     private static final float MIN_DISTANCE = 1000;
-
-    UsersDatabaseAdapter usersDatabaseAdapter;
+    
     FirebaseUser user;
 
     private AdView mAdView;
@@ -69,9 +66,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.googlemap);
         mapFragment.getMapAsync(this);
-
-
-        usersDatabaseAdapter = new UsersDatabaseAdapter(getApplicationContext());
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -138,11 +132,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
             Toast.makeText(this, "Location Permissions declined:\n", Toast.LENGTH_LONG).show();
         }
-    }
-
-    public void gotoDatabase(View view) {
-        Intent intent = new Intent(this, DataHandlerActivity.class);
-        startActivity(intent);
     }
 
     public void gotoInseration(View view) {
