@@ -1,16 +1,16 @@
 package ml.meiner.anselm.DataBase;
 
-public class Player {
+public class Chargingstation {
 
     private int id;
     private String name;
     private String position;
     private int height;
 
-    public Player() {
+    public Chargingstation() {
     }
 
-    public Player(int id, String name, String position, int height) {
+    public Chargingstation(int id, String name, String position, int height) {
         this.id = id;
         this.name = name;
         this.position = position;
