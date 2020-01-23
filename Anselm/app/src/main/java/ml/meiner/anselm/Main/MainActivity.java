@@ -69,6 +69,17 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        user = FirebaseAuth.getInstance().getCurrentUser();
+
+        if (user != null)
+        {
+            Button btn = this.findViewById(R.id.buttonsignup);
+            TextView nameLabel = this.findViewById(R.id.textView);
+            btn.setText("Ausloggen");
+            nameLabel.setText("Hallo " + user.getDisplayName());
+            logged_in = true;
+        }
+
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.googlemap);
         mapFragment.getMapAsync(this);
 
