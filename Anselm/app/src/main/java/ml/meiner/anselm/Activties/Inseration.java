@@ -18,6 +18,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.io.IOException;
@@ -39,26 +40,27 @@ public class Inseration extends FragmentActivity implements OnMapReadyCallback {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-
-        //Get FirebaseUser
-        if (savedInstanceState == null) {
-            Bundle extras = getIntent().getExtras();
-            if(extras == null) {
-                user = null;
-            }
-            else {
-                user = (FirebaseUser) savedInstanceState.getSerializable("User");
-                
-            }
-        }
-        else
-            user = (FirebaseUser) savedInstanceState.getSerializable("User");
-
-        if(user != null)
+        /*
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null && user.isEmailVerified())
         {
-            TextView text = findViewById(R.id.textView2);
-            text.setText("Username: " + user.getDisplayName());
+            TextView view = this.findViewById(R.id.textView2);
+            if(user.getDisplayName() != null)
+            {
+                view.setText("User: " + user.getDisplayName());
+            }
+            view.setText("User: FAILED");
+
+            // User is signed in
         }
+        else {
+            TextView view = this.findViewById(R.id.textView2);
+            view.setText("Nicht angemeldet!");
+            // No user is signed in
+        }
+         */
+
+
 
 
 

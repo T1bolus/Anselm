@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private LocationManager locationManager;
     private static final long MIN_TIME = 400;
     private static final float MIN_DISTANCE = 1000;
-    
+
     FirebaseUser user;
 
     private AdView mAdView;
@@ -116,12 +116,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             mMap.setMyLocationEnabled(true);
 
 
-        } else //No Permissions
+        }
+        else //No Permissions
         {
             //Request GPS Permission
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_LOCATION_REQUEST_CODE);
         }
-
     }
 
     //Handler for Permission Result
@@ -140,7 +140,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     public void gotoInseration(View view) {
         Intent intent = new Intent(this, Inseration.class);
-        intent.putExtra("User", user);
         startActivity(intent);
     }
     public void gotoHistory(View view) {
