@@ -171,6 +171,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     public void gotoInseration(View view) {
         Intent intent = new Intent(this, Inseration.class);
+        intent.putExtra("User", user);
         startActivity(intent);
     }
     public void gotoHistory(View view) {
