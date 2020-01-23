@@ -9,6 +9,7 @@ import android.location.Geocoder;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.widget.SearchView;
+import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -18,6 +19,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.io.IOException;
 import java.util.List;
@@ -33,9 +35,33 @@ public class Inseration extends FragmentActivity implements OnMapReadyCallback {
     SupportMapFragment mapFragment;
     SearchView searchView;
     Marker markerCenter;
+    FirebaseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
+        //Get FirebaseUser
+        if (savedInstanceState == null) {
+            Bundle extras = getIntent().getExtras();
+            if(extras == null) {
+                user = null;
+            }
+            else {
+                user = (FirebaseUser) savedInstanceState.getSerializable("User");
+                
+            }
+        }
+        else
+            user = (FirebaseUser) savedInstanceState.getSerializable("User");
+
+        if(user != null)
+        {
+            TextView text = findViewById(R.id.textView2);
+            text.setText("Username: " + user.getDisplayName());
+        }
+
+
 
         // ruft Actinivty auf
         super.onCreate(savedInstanceState);
