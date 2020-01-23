@@ -54,7 +54,8 @@ public class Inseration extends FragmentActivity implements OnMapReadyCallback {
             toast.show();
             // User is signed in
         }
-        else {
+        else
+        {
             Context context = getApplicationContext();
             CharSequence text = "Nicht angemeldet!";
             int duration = Toast.LENGTH_SHORT;
