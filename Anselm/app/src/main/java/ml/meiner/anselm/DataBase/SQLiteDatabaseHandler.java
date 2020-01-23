@@ -12,8 +12,8 @@ import java.util.List;
 public class SQLiteDatabaseHandler extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION = 1;
-    private static final String DATABASE_NAME = "PlayersDB";
-    private static final String TABLE_NAME = "Players";
+    private static final String DATABASE_NAME = "OurDb";
+    private static final String TABLE_NAME = "Chargingstations";
     private static final String KEY_ID = "id";
     private static final String KEY_NAME = "name";
     private static final String KEY_POSITION = "position";
@@ -27,7 +27,7 @@ public class SQLiteDatabaseHandler extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CREATION_TABLE = "CREATE TABLE Players ( "
+        String CREATION_TABLE = "CREATE TABLE Chargingstations ( "
                 + "id INTEGER PRIMARY KEY AUTOINCREMENT, " + "name TEXT, "
                 + "position TEXT, " + "height INTEGER )";
 
@@ -41,14 +41,14 @@ public class SQLiteDatabaseHandler extends SQLiteOpenHelper {
         this.onCreate(db);
     }
 
-    public void deleteOne(Player player) {
+    public void deleteOne(Chargingstation chargingstation) {
         // Get reference to writable DB
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(TABLE_NAME, "id = ?", new String[] { String.valueOf(player.getId()) });
+        db.delete(TABLE_NAME, "id = ?", new String[] { String.valueOf(chargingstation.getId()) });
         db.close();
     }
 
-    public Player getPlayer(int id) {
+    public Chargingstation getPlayer(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(TABLE_NAME, // a. table
                 COLUMNS, // b. column names
@@ -62,59 +62,59 @@ public class SQLiteDatabaseHandler extends SQLiteOpenHelper {
         if (cursor != null)
             cursor.moveToFirst();
 
-        Player player = new Player();
-        player.setId(Integer.parseInt(cursor.getString(0)));
-        player.setName(cursor.getString(1));
-        player.setPosition(cursor.getString(2));
-        player.setHeight(Integer.parseInt(cursor.getString(3)));
+        Chargingstation chargingstation = new Chargingstation();
+        chargingstation.setId(Integer.parseInt(cursor.getString(0)));
+        chargingstation.setName(cursor.getString(1));
+        chargingstation.setPosition(cursor.getString(2));
+        chargingstation.setHeight(Integer.parseInt(cursor.getString(3)));
 
-        return player;
+        return chargingstation;
     }
 
-    public List<Player> allPlayers() {
+    public List<Chargingstation> allChargingstations() {
 
-        List<Player> players = new LinkedList<Player>();
+        List<Chargingstation> chargingstations = new LinkedList<Chargingstation>();
         String query = "SELECT  * FROM " + TABLE_NAME;
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
-        Player player = null;
+        Chargingstation chargingstation = null;
 
         if (cursor.moveToFirst()) {
             do {
-                player = new Player();
-                player.setId(Integer.parseInt(cursor.getString(0)));
-                player.setName(cursor.getString(1));
-                player.setPosition(cursor.getString(2));
-                player.setHeight(Integer.parseInt(cursor.getString(3)));
-                players.add(player);
+                chargingstation = new Chargingstation();
+                chargingstation.setId(Integer.parseInt(cursor.getString(0)));
+                chargingstation.setName(cursor.getString(1));
+                chargingstation.setPosition(cursor.getString(2));
+                chargingstation.setHeight(Integer.parseInt(cursor.getString(3)));
+                chargingstations.add(chargingstation);
             } while (cursor.moveToNext());
         }
 
-        return players;
+        return chargingstations;
     }
 
-    public void addPlayer(Player player) {
+    public void addChargingstation(Chargingstation chargingstation) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(KEY_NAME, player.getName());
-        values.put(KEY_POSITION, player.getPosition());
-        values.put(KEY_HEIGHT, player.getHeight());
+        values.put(KEY_NAME, chargingstation.getName());
+        values.put(KEY_POSITION, chargingstation.getPosition());
+        values.put(KEY_HEIGHT, chargingstation.getHeight());
         // insert
         db.insert(TABLE_NAME,null, values);
         db.close();
     }
 
-    public int updatePlayer(Player player) {
+    public int updateChargingstation(Chargingstation chargingstation) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(KEY_NAME, player.getName());
-        values.put(KEY_POSITION, player.getPosition());
-        values.put(KEY_HEIGHT, player.getHeight());
+        values.put(KEY_NAME, chargingstation.getName());
+        values.put(KEY_POSITION, chargingstation.getPosition());
+        values.put(KEY_HEIGHT, chargingstation.getHeight());
 
         int i = db.update(TABLE_NAME, // table
                 values, // column/value
                 "id = ?", // selections
-                new String[] { String.valueOf(player.getId()) });
+                new String[] { String.valueOf(chargingstation.getId()) });
 
         db.close();
 
