@@ -163,11 +163,13 @@ public class Inseration extends FragmentActivity implements OnMapReadyCallback {
 //        markerOptions.position(map.getCameraPosition().target);
 //        markerOptions.title("Ladestation: " + address);
 //        map.addMarker(markerOptions);
-        Intent intent = new Intent(this, Inseration2.class);
-//        intent.putExtra("email", "myemail@gmail.com");
-        startActivity(intent);
+        goToInseration2(view, address);
     }
-
+        public void goToInseration2(View view, String address ){
+            Intent intent = new Intent(this, Inseration2.class);
+            intent.putExtra("address", address);
+            startActivity(intent);
+        }
 }
 
 

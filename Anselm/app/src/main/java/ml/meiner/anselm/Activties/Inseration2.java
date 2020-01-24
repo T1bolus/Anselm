@@ -33,9 +33,9 @@ public class Inseration2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inseration2);
-//        Intent i = getIntent();
-//        String myemail = i.getStringExtra("email");
-
+        Intent i = getIntent();
+        String address = i.getStringExtra("address");
+        System.out.println(address);
     }
 
 
