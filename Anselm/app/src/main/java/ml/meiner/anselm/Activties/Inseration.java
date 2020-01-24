@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -40,27 +41,31 @@ public class Inseration extends FragmentActivity implements OnMapReadyCallback {
     FirebaseUser user;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-
-        /*
+    protected void onCreate(Bundle savedInstanceState)
+    {
         user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null && user.isEmailVerified())
-        {
-            TextView view = this.findViewById(R.id.textView2);
-            if(user.getDisplayName() != null)
-            {
-                view.setText("User: " + user.getDisplayName());
-            }
-            view.setText("User: FAILED");
 
+        if (user != null)
+        {
+            Context context = getApplicationContext();
+            CharSequence text = user.getDisplayName();
+            int duration = Toast.LENGTH_SHORT;
+
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
             // User is signed in
         }
-        else {
-            TextView view = this.findViewById(R.id.textView2);
-            view.setText("Nicht angemeldet!");
+        else
+        {
+            Context context = getApplicationContext();
+            CharSequence text = "Nicht angemeldet!";
+            int duration = Toast.LENGTH_SHORT;
+
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
             // No user is signed in
         }
-         */
+
 
 
 
