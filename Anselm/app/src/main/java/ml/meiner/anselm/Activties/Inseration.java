@@ -8,6 +8,7 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.SearchView;
 import android.widget.TextView;
 
@@ -150,15 +151,18 @@ public class Inseration extends FragmentActivity implements OnMapReadyCallback {
         String country = addresses.get(0).getCountryName();
         String postalCode = addresses.get(0).getPostalCode();
         String knownName = addresses.get(0).getFeatureName();
-        MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.draggable(true);
-        markerOptions.flat(true);
-        markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.new_mark));
-        markerOptions.position(map.getCameraPosition().target);
-        markerOptions.title("Ladestation: " + address);
-        map.addMarker(markerOptions);
-
+//        MarkerOptions markerOptions = new MarkerOptions();
+//        markerOptions.draggable(true);
+//        markerOptions.flat(true);
+//        markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.new_mark));
+//        markerOptions.position(map.getCameraPosition().target);
+//        markerOptions.title("Ladestation: " + address);
+//        map.addMarker(markerOptions);
+        Intent intent = new Intent(this, Inseration2.class);
+//        intent.putExtra("email", "myemail@gmail.com");
+        startActivity(intent);
     }
+
 }
 
 

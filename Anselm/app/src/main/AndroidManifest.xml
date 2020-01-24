@@ -34,6 +34,7 @@
         <activity android:name=".Activties.Map" />
         <activity android:name=".Activties.History" />
         <activity android:name=".Activties.Inseration" />
+        <activity android:name=".Activties.Inseration2" />
         <activity android:name=".Main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
