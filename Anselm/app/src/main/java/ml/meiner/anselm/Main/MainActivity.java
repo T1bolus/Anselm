@@ -39,6 +39,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -50,6 +51,7 @@ import ml.meiner.anselm.Activties.History;
 import ml.meiner.anselm.Activties.Inseration;
 import ml.meiner.anselm.Activties.Map;
 import ml.meiner.anselm.DataBase.Chargingstation;
+import ml.meiner.anselm.DataBase.CloudFirestore;
 import ml.meiner.anselm.DataBase.SQLiteDatabaseHandler;
 import ml.meiner.anselm.R;
 
@@ -57,8 +59,7 @@ import ml.meiner.anselm.R;
 //https://firebase.google.com/docs/firestore/quickstart?authuser=0
 
 
-public class MainActivity extends AppCompatActivity implements OnMapReadyCallback, LocationListener
-{
+public class MainActivity extends AppCompatActivity implements OnMapReadyCallback, LocationListener {
 
     private GoogleMap mMap;
     static int MY_LOCATION_REQUEST_CODE = 1339;
@@ -72,7 +73,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     FirebaseUser user;
 
     private AdView mAdView;
-    private FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,8 +81,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         user = FirebaseAuth.getInstance().getCurrentUser();
 
-        if (user != null)
-        {
+        if (user != null) {
             Button btn = this.findViewById(R.id.buttonsignup);
             TextView nameLabel = this.findViewById(R.id.textView);
             btn.setText("Ausloggen");
@@ -144,24 +143,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 //        });
 
 
-        //Firebase Cloud Realtime Database init
-        db = FirebaseFirestore.getInstance();
-
-
-
-        db.collection("users").add("TESSSST").addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-            @Override
-            public void onSuccess(DocumentReference documentReference) {
-                Log.d("","DocumentSnapshot added with ID: " + documentReference.getId());
-            }
-        })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w("", "Error adding document", e);
-                    }
-                });
-
     }
 
     @Override
@@ -173,13 +154,16 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     @Override
-    public void onStatusChanged(String provider, int status, Bundle extras) { }
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+    }
 
     @Override
-    public void onProviderEnabled(String provider) { }
+    public void onProviderEnabled(String provider) {
+    }
 
     @Override
-    public void onProviderDisabled(String provider) { }
+    public void onProviderDisabled(String provider) {
+    }
 
 
     @Override
@@ -192,8 +176,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             mMap.setMyLocationEnabled(true);
 
 
-        }
-        else //No Permissions
+        } else //No Permissions
         {
             //Request GPS Permission
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_LOCATION_REQUEST_CODE);
@@ -215,22 +198,43 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     public void gotoInseration(View view) {
+
+        Chargingstation station = new Chargingstation();
+        station.setAddress("Lange Straße");
+        station.setLatitude(0);
+        station.setLongitude(0);
+        station.setName("Test Station");
+        station.setCee16(true);
+        station.setSchuko(true);
+        station.setTyp2(true);
+
+        CloudFirestore fbdb = new CloudFirestore();
+        //fbdb.fetchAllChargingStations(this, MainActivity.dataReady);
+        //fbdb.addChargingStation(station);
+
+
+
         Intent intent = new Intent(this, Inseration.class);
         startActivity(intent);
     }
+
+    public void dataReady(ArrayList<Chargingstation> stations)
+    {
+
+    }
+
     public void gotoHistory(View view) {
         Intent intent = new Intent(this, History.class);
         startActivity(intent);
     }
+
     public void gotoMap(View view) {
         Intent intent = new Intent(this, Map.class);
         startActivity(intent);
     }
 
-    public void login(View view)
-    {
-        if(logged_in == false)
-        {
+    public void login(View view) {
+        if (logged_in == false) {
             List<AuthUI.IdpConfig> providers = Arrays.asList(
                     //new AuthUI.IdpConfig.EmailBuilder().build(),
                     new AuthUI.IdpConfig.GoogleBuilder().build());
@@ -243,9 +247,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                             .build(),
                     RC_SIGN_IN);
 
-        }
-        else
-        {
+        } else {
             AuthUI.getInstance()
                     .signOut(this)
                     .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -275,8 +277,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 user = FirebaseAuth.getInstance().getCurrentUser();
                 Button btn = this.findViewById(R.id.buttonsignup);
                 TextView nameLabel = this.findViewById(R.id.textView);
-                if(user != null)
-                {
+                if (user != null) {
                     btn.setText("Ausloggen");
                     nameLabel.setText("Hallo " + user.getDisplayName());
                     logged_in = true;
@@ -288,8 +289,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 // sign-in flow using the back button. Otherwise check
                 // response.getError().getErrorCode() and handle the error.
                 // ...
-                if(response != null)
-                {
+                if (response != null) {
                     TextView nameLabel = this.findViewById((R.id.textView));
                     nameLabel.setText("Anmeldung fehlgeschlagen Fehler:" + response.getError().getMessage());
                 }
