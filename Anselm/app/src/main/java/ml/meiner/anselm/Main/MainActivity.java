@@ -144,24 +144,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 //        });
 
 
-        //Firebase Cloud Realtime Database init
-        db = FirebaseFirestore.getInstance();
-
-
-
-        db.collection("users").add("TESSSST").addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-            @Override
-            public void onSuccess(DocumentReference documentReference) {
-                Log.d("","DocumentSnapshot added with ID: " + documentReference.getId());
-            }
-        })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w("", "Error adding document", e);
-                    }
-                });
-
     }
 
     @Override
