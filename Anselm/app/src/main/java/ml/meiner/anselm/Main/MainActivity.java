@@ -8,6 +8,7 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.location.LocationListener;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
@@ -29,9 +31,13 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Arrays;
 import java.util.List;
@@ -46,6 +52,10 @@ import ml.meiner.anselm.Activties.Map;
 import ml.meiner.anselm.DataBase.Chargingstation;
 import ml.meiner.anselm.DataBase.SQLiteDatabaseHandler;
 import ml.meiner.anselm.R;
+
+
+//https://firebase.google.com/docs/firestore/quickstart?authuser=0
+
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback, LocationListener
 {
@@ -62,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     FirebaseUser user;
 
     private AdView mAdView;
-    private SQLiteDatabaseHandler db;
+    private FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,6 +106,61 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
+
+
+        ///////////////////FOR DEBUGGING
+//        mAdView.setAdListener(new AdListener() {
+//            @Override
+//            public void onAdLoaded() {
+//                // Code to be executed when an ad finishes loading.
+//                System.out.println("Loaded!");
+//            }
+//
+//            @Override
+//            public void onAdFailedToLoad(int errorCode) {
+//                // Code to be executed when an ad request fails.
+//                System.out.println("Error! " + errorCode);
+//
+//            }
+//
+//            @Override
+//            public void onAdOpened() {
+//                // Code to be executed when an ad opens an overlay that
+//                // covers the screen.
+//            }
+//
+//            @Override
+//            public void onAdLeftApplication() {
+//                // Code to be executed when the user has left the app.
+//            }
+//
+//            @Override
+//            public void onAdClosed() {
+//                // Code to be executed when when the user is about to return
+//                // to the app after tapping on an ad.
+//                System.out.println("CLOSED");
+//
+//            }
+//        });
+
+
+        //Firebase Cloud Realtime Database init
+        db = FirebaseFirestore.getInstance();
+
+
+
+        db.collection("users").add("TESSSST").addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+            @Override
+            public void onSuccess(DocumentReference documentReference) {
+                Log.d("","DocumentSnapshot added with ID: " + documentReference.getId());
+            }
+        })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w("", "Error adding document", e);
+                    }
+                });
 
     }
 

@@ -6,6 +6,8 @@ public class Chargingstation {
     private String name;
     private String position;
     private int height;
+    private double longitude;
+    private double latitude;
 
     public Chargingstation() {
     }
