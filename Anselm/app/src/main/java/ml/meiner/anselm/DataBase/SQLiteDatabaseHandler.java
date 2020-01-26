@@ -63,7 +63,7 @@ public class SQLiteDatabaseHandler extends SQLiteOpenHelper {
             cursor.moveToFirst();
 
         Chargingstation chargingstation = new Chargingstation();
-        chargingstation.setId(Integer.parseInt(cursor.getString(0)));
+        chargingstation.setId(cursor.getString(0));
         chargingstation.setName(cursor.getString(1));
         chargingstation.setPosition(cursor.getString(2));
         chargingstation.setHeight(Integer.parseInt(cursor.getString(3)));
@@ -82,7 +82,7 @@ public class SQLiteDatabaseHandler extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 chargingstation = new Chargingstation();
-                chargingstation.setId(Integer.parseInt(cursor.getString(0)));
+                chargingstation.setId(cursor.getString(0));
                 chargingstation.setName(cursor.getString(1));
                 chargingstation.setPosition(cursor.getString(2));
                 chargingstation.setHeight(Integer.parseInt(cursor.getString(3)));

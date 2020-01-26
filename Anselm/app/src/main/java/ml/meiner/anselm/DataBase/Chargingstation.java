@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class Chargingstation {
 
-    private int id;
+    private String id;
     private String name;
     private FirebaseUser user;
     private String uid;
@@ -17,6 +17,7 @@ public class Chargingstation {
     private double longitude;
     private double latitude;
     private String address;
+    private float pph; // Price per Houre in Euro
 
     //plugs
     private boolean typ1;
@@ -32,18 +33,18 @@ public class Chargingstation {
     public Chargingstation() {
     }
 
-    public Chargingstation(int id, String name, String position, int height) {
+    public Chargingstation(String id, String name, String position, int height) {
         this.id = id;
         this.name = name;
         this.position = position;
         this.height = height;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -178,5 +179,13 @@ public class Chargingstation {
 
     public void setUid(String uid) {
         this.uid = uid;
+    }
+
+    public float getPph() {
+        return pph;
+    }
+
+    public void setPph(float pph) {
+        this.pph = pph;
     }
 }

@@ -208,8 +208,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         station.setSchuko(true);
         station.setTyp2(true);
 
-        CloudFirestore fbdb = new CloudFirestore();
-        fbdb.fetchAllChargingStations(this);
+        //CloudFirestore fbdb = CloudFirestore.getInstance();
+        //fbdb.fetchAllChargingStations(this);
         //fbdb.addChargingStation(station);
 
 
