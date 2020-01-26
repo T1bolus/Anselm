@@ -15,8 +15,10 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.List;
 
 import androidx.annotation.NonNull;
+
 
 public class CloudFirestore
 {
@@ -24,10 +26,7 @@ public class CloudFirestore
     ArrayList<Chargingstation> stations = new ArrayList<>();
     boolean chargingStationfetched = false;
 
-    Object mObject;
-    Method mMethod;
-
-
+    private List<CloudFirestoreListener> listeners = new ArrayList<CloudFirestoreListener>();
 
     //Firebase Cloud Realtime Database init
     public CloudFirestore()
@@ -76,10 +75,9 @@ public class CloudFirestore
     }
 
 
-    public void fetchAllChargingStations(Object object, Method method)
+    public void fetchAllChargingStations(CloudFirestoreListener listener)
     {
-        mObject = object;
-        mMethod = method;
+        listeners.add(listener);
 
         db.collection("chargingstations")
                 .get()
@@ -92,14 +90,8 @@ public class CloudFirestore
                                 stations.add(document.toObject(Chargingstation.class));
                             }
 
-
-                            try {
-                                mMethod.invoke(mObject, stations);
-                            } catch (IllegalAccessException e) {
-                                e.printStackTrace();
-                            } catch (InvocationTargetException e) {
-                                e.printStackTrace();
-                            }
+                            for (CloudFirestoreListener hl : listeners)
+                                hl.chargingStationsReady(stations);
 
                             chargingStationfetched = true;
                         } else {
@@ -113,8 +105,6 @@ public class CloudFirestore
 
     public ArrayList<Chargingstation> getAllChargingStations()
     {
-
-
         return stations;
     }
 
