@@ -29,7 +29,6 @@
         android:background="@drawable/inseration_style"
         android:iconifiedByDefault="false"
         android:queryHint="Search.."
-        android:la=""
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.2"
