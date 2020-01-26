@@ -38,7 +38,6 @@ public class Inseration2 extends AppCompatActivity {
 
 
 
-
         TextView tv = (TextView)findViewById(R.id.addressBox);
         tv.setText(address);
 
@@ -46,7 +45,7 @@ public class Inseration2 extends AppCompatActivity {
         //FIREBASE LOGIN
         user = FirebaseAuth.getInstance().getCurrentUser();
 
-        if (user != null) //Only logged in User should be able to pass
+        if (user == null) //Only logged in User should be able to pass
         {
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
@@ -136,6 +135,8 @@ public class Inseration2 extends AppCompatActivity {
         station.setUid(user.getUid());
         station.setId(""); //TODOOO
 
+
+        cloudFirestore.addChargingStation(station);
     }
 
 
