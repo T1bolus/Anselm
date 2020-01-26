@@ -19,20 +19,20 @@
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/lastName"
         android:layout_width="398dp"
         android:layout_height="49dp"
         android:layout_marginBottom="12dp"
         android:ems="10"
         android:hint="Nachname"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/editText"
+        app:layout_constraintBottom_toTopOf="@+id/firstName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.076"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/firstName"
         android:layout_width="398dp"
         android:layout_height="49dp"
         android:layout_marginTop="8dp"
@@ -53,13 +53,13 @@
         android:layout_height="51dp"
         android:ems="10"
         android:inputType="textPostalAddress"
-        app:layout_constraintBottom_toTopOf="@+id/editText3"
+        app:layout_constraintBottom_toTopOf="@+id/pph"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.673"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/editText3"
+        android:id="@+id/pph"
         android:layout_width="216dp"
         android:layout_height="45dp"
         android:layout_marginBottom="396dp"
@@ -104,10 +104,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText3" />
+        app:layout_constraintTop_toBottomOf="@+id/pph" />
 
     <Switch
-        android:id="@+id/switch1"
+        android:id="@+id/typ1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -116,7 +116,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
     <Switch
-        android:id="@+id/switch2"
+        android:id="@+id/schuko"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
@@ -125,7 +125,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
     <Switch
-        android:id="@+id/switch3"
+        android:id="@+id/typ2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="104dp"
@@ -135,7 +135,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
     <Switch
-        android:id="@+id/switch4"
+        android:id="@+id/cee_blue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="104dp"
@@ -145,7 +145,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
     <Switch
-        android:id="@+id/switch5"
+        android:id="@+id/ccs"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="208dp"
@@ -155,7 +155,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
     <Switch
-        android:id="@+id/switch6"
+        android:id="@+id/cee16"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="208dp"
@@ -165,7 +165,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
     <Switch
-        android:id="@+id/switch7"
+        android:id="@+id/chademo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="296dp"
@@ -175,7 +175,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
     <Switch
-        android:id="@+id/switch8"
+        android:id="@+id/cee32"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="312dp"
@@ -199,7 +199,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:text="Benutzername"
-        app:layout_constraintBottom_toTopOf="@+id/editText2"
+        app:layout_constraintBottom_toTopOf="@+id/lastName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.46"
         app:layout_constraintStart_toStartOf="parent" />

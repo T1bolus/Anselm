@@ -37,9 +37,9 @@ public class History extends AppCompatActivity {
         // create our sqlite helper class
         db = new SQLiteDatabaseHandler(this);
         // create some chargingstations
-        Chargingstation chargingstation1 = new Chargingstation(1, "Lebron James", "F", 203);
-        Chargingstation chargingstation2 = new Chargingstation(2, "Kevin Durant", "F", 208);
-        Chargingstation chargingstation3 = new Chargingstation(3, "Rudy Gobert", "C", 214);
+        Chargingstation chargingstation1 = new Chargingstation("1", "Lebron James", "F", 203);
+        Chargingstation chargingstation2 = new Chargingstation("2", "Kevin Durant", "F", 208);
+        Chargingstation chargingstation3 = new Chargingstation("3", "Rudy Gobert", "C", 214);
         // add them
         db.addChargingstation(chargingstation1);
         db.addChargingstation(chargingstation2);
