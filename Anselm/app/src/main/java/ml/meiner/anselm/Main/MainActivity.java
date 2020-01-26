@@ -7,11 +7,13 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
 import android.location.LocationListener;
+import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -85,9 +87,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         user = FirebaseAuth.getInstance().getCurrentUser();
 
         if (user != null) {
-            Button btn = this.findViewById(R.id.buttonsignup);
+            ImageView btn = this.findViewById(R.id.buttonsignup);
             TextView nameLabel = this.findViewById(R.id.textView);
-            btn.setText("Ausloggen");
             nameLabel.setText("Hallo " + user.getDisplayName());
             logged_in = true;
         }
