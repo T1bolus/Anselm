@@ -52,6 +52,7 @@ import ml.meiner.anselm.Activties.Inseration;
 import ml.meiner.anselm.Activties.Map;
 import ml.meiner.anselm.DataBase.Chargingstation;
 import ml.meiner.anselm.DataBase.CloudFirestore;
+import ml.meiner.anselm.DataBase.CloudFirestoreListener;
 import ml.meiner.anselm.DataBase.SQLiteDatabaseHandler;
 import ml.meiner.anselm.R;
 
@@ -59,7 +60,7 @@ import ml.meiner.anselm.R;
 //https://firebase.google.com/docs/firestore/quickstart?authuser=0
 
 
-public class MainActivity extends AppCompatActivity implements OnMapReadyCallback, LocationListener {
+public class MainActivity extends AppCompatActivity implements OnMapReadyCallback, LocationListener, CloudFirestoreListener {
 
     private GoogleMap mMap;
     static int MY_LOCATION_REQUEST_CODE = 1339;
@@ -69,6 +70,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private LocationManager locationManager;
     private static final long MIN_TIME = 400;
     private static final float MIN_DISTANCE = 1000;
+
+    ArrayList<Chargingstation> stations = new ArrayList<>();
+
 
     FirebaseUser user;
 
@@ -209,7 +213,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         station.setTyp2(true);
 
         CloudFirestore fbdb = new CloudFirestore();
-        //fbdb.fetchAllChargingStations(this, MainActivity.dataReady);
+        fbdb.fetchAllChargingStations(this);
         //fbdb.addChargingStation(station);
 
 
@@ -218,10 +222,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         startActivity(intent);
     }
 
-    public void dataReady(ArrayList<Chargingstation> stations)
-    {
-
-    }
 
     public void gotoHistory(View view) {
         Intent intent = new Intent(this, History.class);
@@ -295,5 +295,11 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 }
             }
         }
+    }
+
+    @Override
+    public void chargingStationsReady(ArrayList<Chargingstation> stations)
+    {
+        this.stations = stations;
     }
 }
