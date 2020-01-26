@@ -20,13 +20,18 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.ArrayList;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import ml.meiner.anselm.DataBase.Chargingstation;
+import ml.meiner.anselm.DataBase.CloudFirestore;
+import ml.meiner.anselm.DataBase.CloudFirestoreListener;
 import ml.meiner.anselm.R;
 
-public class Map extends AppCompatActivity implements GoogleMap.OnMyLocationClickListener, OnMapReadyCallback, LocationListener {
+public class Map extends AppCompatActivity implements GoogleMap.OnMyLocationClickListener, OnMapReadyCallback, LocationListener, CloudFirestoreListener {
     //Google Map Object
     private GoogleMap mMap;
 
@@ -36,6 +41,9 @@ public class Map extends AppCompatActivity implements GoogleMap.OnMyLocationClic
     private static final long MIN_TIME = 4000;
     private static final float MIN_DISTANCE = 1000;
     boolean once = false;
+
+    ArrayList<Chargingstation> stations = new ArrayList<>();
+
 
 
     @Override
@@ -50,6 +58,9 @@ public class Map extends AppCompatActivity implements GoogleMap.OnMyLocationClic
             locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, MIN_TIME, MIN_DISTANCE, this); //You can also use LocationManager.GPS_PROVIDER and LocationManager.PASSIVE_PROVIDER
         }
+
+        CloudFirestore cloudFirestore = CloudFirestore.getInstance();
+        cloudFirestore.fetchAllChargingStations(this);
     }
 
 
@@ -153,6 +164,33 @@ public class Map extends AppCompatActivity implements GoogleMap.OnMyLocationClic
                 return;
             }
             Toast.makeText(this, "Location Permissions declined:\n", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    @Override
+    public void chargingStationsReady(ArrayList<Chargingstation> stations)
+    {
+        this.stations = stations;
+
+        //TODO: MAKER Löschen
+
+        for(Chargingstation cs: stations)
+        {
+            LatLng pos = new LatLng(cs.getLatitude(), cs.getLongitude());
+
+            // Creating a marker
+            MarkerOptions markerOptions = new MarkerOptions();
+            // Setting the position for the marker
+            markerOptions.position(pos);
+            markerOptions.draggable(true);
+            markerOptions.flat(true);
+            markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.new_mark));
+            // Setting the title for the marker.
+            // This will be displayed on taping the marker
+            markerOptions.title("Ladestation: " + cs.getName() + " : " + pos.latitude + " : " + pos.longitude);
+
+            // Placing a marker on the touched position
+            mMap.addMarker(markerOptions);
         }
     }
 }

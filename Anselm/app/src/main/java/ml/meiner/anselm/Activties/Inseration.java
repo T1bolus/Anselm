@@ -29,6 +29,7 @@ import java.util.List;
 import java.util.Locale;
 
 import androidx.fragment.app.FragmentActivity;
+import ml.meiner.anselm.DataBase.CloudFirestore;
 import ml.meiner.anselm.R;
 
 public class Inseration extends FragmentActivity implements OnMapReadyCallback {
@@ -39,6 +40,7 @@ public class Inseration extends FragmentActivity implements OnMapReadyCallback {
     SearchView searchView;
     Marker markerCenter;
     FirebaseUser user;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)

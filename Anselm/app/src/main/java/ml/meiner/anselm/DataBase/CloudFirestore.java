@@ -12,8 +12,6 @@ import com.google.firebase.firestore.FirebaseFirestoreSettings;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,12 +22,24 @@ public class CloudFirestore
 {
     private FirebaseFirestore db;
     ArrayList<Chargingstation> stations = new ArrayList<>();
-    boolean chargingStationfetched = false;
 
     private List<CloudFirestoreListener> listeners = new ArrayList<CloudFirestoreListener>();
 
+    private static CloudFirestore instance = null;
+
+
+    public static CloudFirestore getInstance()
+    {
+        if(instance == null)
+        {
+            instance = new CloudFirestore();
+        }
+
+        return instance;
+    }
+
     //Firebase Cloud Realtime Database init
-    public CloudFirestore()
+    private CloudFirestore()
     {
         db = FirebaseFirestore.getInstance();
 
@@ -77,7 +87,8 @@ public class CloudFirestore
 
     public void fetchAllChargingStations(CloudFirestoreListener listener)
     {
-        listeners.add(listener);
+        if(listeners.contains(listener) == false) //add only new listeners
+            listeners.add(listener);
 
         db.collection("chargingstations")
                 .get()
@@ -90,14 +101,13 @@ public class CloudFirestore
                                 stations.add(document.toObject(Chargingstation.class));
                             }
 
+                            //Inform all listeners
                             for (CloudFirestoreListener hl : listeners)
                                 hl.chargingStationsReady(stations);
 
-                            chargingStationfetched = true;
                         } else {
                             Log.d("", "Error getting documents: ", task.getException());
 
-                            chargingStationfetched = false;
                         }
                     }
                 });
@@ -107,7 +117,5 @@ public class CloudFirestore
     {
         return stations;
     }
-
-
 
 }
