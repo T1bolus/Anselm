@@ -1,16 +1,12 @@
 package ml.meiner.anselm.DataBase;
 
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.Exclude;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class Chargingstation {
 
     private String id;
     private String name;
-    private FirebaseUser user;
+    private String username;
+    private String usernamePicturePath;
     private String uid;
     private String position; //Blödsinn
     private int height; //Blödsinn
@@ -165,14 +161,6 @@ public class Chargingstation {
         this.cee32 = cee32;
     }
 
-    public FirebaseUser getUser() {
-        return user;
-    }
-
-    public void setUser(FirebaseUser user) {
-        this.user = user;
-    }
-
     public String getUid() {
         return uid;
     }
@@ -187,5 +175,21 @@ public class Chargingstation {
 
     public void setPph(float pph) {
         this.pph = pph;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getUsernamePicturePath() {
+        return usernamePicturePath;
+    }
+
+    public void setUsernamePicturePath(String usernamePicturePath) {
+        this.usernamePicturePath = usernamePicturePath;
     }
 }

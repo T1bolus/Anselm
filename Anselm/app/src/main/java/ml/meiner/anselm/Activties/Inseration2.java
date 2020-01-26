@@ -56,8 +56,6 @@ public class Inseration2 extends AppCompatActivity {
             userText.setText(user.getDisplayName());
         }
 
-
-
     }
 
 
@@ -131,12 +129,16 @@ public class Inseration2 extends AppCompatActivity {
         station.setCee32(cee32);
         station.setLongitude(longitude);
         station.setLatitude(latitude);
-        station.setUser(user);
+        station.setUsername(user.getDisplayName());
+        station.setUsernamePicturePath(user.getPhotoUrl().getPath());
         station.setUid(user.getUid());
         station.setId(""); //TODOOO
 
 
         cloudFirestore.addChargingStation(station);
+
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 
 
