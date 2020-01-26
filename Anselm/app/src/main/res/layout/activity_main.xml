@@ -11,12 +11,30 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:layout_width="40dp"
+        android:onClick="login"
+        android:layout_height="60dp"
+        android:layout_marginRight="20dp"
+        android:id="@+id/buttonsignup"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/login"></ImageView>
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="96dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintVertical_bias="0.0" />
+</RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="0dp"
             android:layout_marginRight="20dp">
 
             <TextView
@@ -25,6 +43,7 @@
                 android:text="My Dashboard"
                 android:textColor="#FFFFFF"
                 android:textSize="34sp" />
+
         </RelativeLayout>
 
         <RelativeLayout
@@ -199,29 +218,6 @@
             </androidx.cardview.widget.CardView>
 
         </GridLayout>
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="96dp"
-            android:layout_height="20dp"
-            android:layout_marginTop="12dp"
-            app:layout_constraintBottom_toTopOf="@+id/buttonsignup"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button1"
-            app:layout_constraintVertical_bias="0.0" />
-
-        <Button
-            android:id="@+id/buttonsignup"
-            android:layout_width="212dp"
-            android:layout_height="53dp"
-            android:layout_marginTop="32dp"
-            android:onClick="login"
-            android:text="Signup"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button1" />
 
     </LinearLayout>
 
