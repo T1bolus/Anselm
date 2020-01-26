@@ -96,7 +96,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
-                        android:text="TEST"
+                        android:text="My Stations"
                         android:textColor="#6f6f6f"
                         android:textSize="16sp"></TextView>
                 </LinearLayout>
@@ -123,13 +123,13 @@
                     <ImageView
                         android:layout_width="80dp"
                         android:layout_height="80dp"
-                        android:src="@drawable/new_mark"></ImageView>
+                        android:src="@drawable/moin"></ImageView>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
-                        android:text="TEST"
+                        android:text="Insert Station"
                         android:textColor="#6f6f6f"
                         android:textSize="16sp"></TextView>
                 </LinearLayout>
@@ -155,13 +155,13 @@
                     <ImageView
                         android:layout_width="80dp"
                         android:layout_height="80dp"
-                        android:src="@drawable/new_mark"></ImageView>
+                        android:src="@drawable/setting"></ImageView>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
-                        android:text="TEST"
+                        android:text="Settings"
                         android:textColor="#6f6f6f"
                         android:textSize="16sp"></TextView>
                 </LinearLayout>
@@ -186,13 +186,13 @@
                     <ImageView
                         android:layout_width="80dp"
                         android:layout_height="80dp"
-                        android:src="@drawable/new_mark"></ImageView>
+                        android:src="@drawable/view"></ImageView>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
-                        android:text="TEST"
+                        android:text="View Things"
                         android:textColor="#6f6f6f"
                         android:textSize="16sp"></TextView>
                 </LinearLayout>
