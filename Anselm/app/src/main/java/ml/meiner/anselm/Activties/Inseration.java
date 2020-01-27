@@ -13,6 +13,7 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -49,6 +50,10 @@ public class Inseration extends FragmentActivity implements OnMapReadyCallback, 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+        // ruft Actinivty auf
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_inseration);
+
 
         user = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -69,14 +74,6 @@ public class Inseration extends FragmentActivity implements OnMapReadyCallback, 
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         }
-
-
-        CloudFirestore cloudFirestore = CloudFirestore.getInstance();
-        cloudFirestore.fetchAllChargingStations(this);
-
-        // ruft Actinivty auf
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_inseration);
 
         searchView = findViewById(R.id.sv_location);
         mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.googlemap);
@@ -113,6 +110,10 @@ public class Inseration extends FragmentActivity implements OnMapReadyCallback, 
 
         mapFragment.getMapAsync(this);
 
+
+        CloudFirestore cloudFirestore = CloudFirestore.getInstance();
+        cloudFirestore.fetchAllChargingStations(this);
+
     }
 
     @Override
@@ -126,6 +127,10 @@ public class Inseration extends FragmentActivity implements OnMapReadyCallback, 
                 marker.remove();
             }
         });
+
+        LatLng latLng = new LatLng(53, 8);
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 6);
+        map.animateCamera(cameraUpdate);
     }
 
     public void insertMark(android.view.View view) throws IOException {
@@ -193,7 +198,7 @@ public class Inseration extends FragmentActivity implements OnMapReadyCallback, 
             markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.new_mark));
             // Setting the title for the marker.
             // This will be displayed on taping the marker
-            markerOptions.title("Ladestation: " + cs.getName() + " : " + pos.latitude + " : " + pos.longitude);
+            markerOptions.title(cs.getName() + ": " + pos.latitude + " : " + pos.longitude);
 
             // Placing a marker on the touched position
             map.addMarker(markerOptions);

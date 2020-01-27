@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public void onLocationChanged(Location location) {
         LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 10);
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 12);
         mMap.animateCamera(cameraUpdate);
         locationManager.removeUpdates(this);
     }
@@ -152,6 +152,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             //Request GPS Permission
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_LOCATION_REQUEST_CODE);
         }
+
+        LatLng latLng = new LatLng(53, 8);
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 5);
+        mMap.animateCamera(cameraUpdate);
     }
 
     //Handler for Permission Result
