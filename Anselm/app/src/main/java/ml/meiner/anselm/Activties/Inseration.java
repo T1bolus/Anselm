@@ -30,6 +30,7 @@ import java.util.Locale;
 
 import androidx.fragment.app.FragmentActivity;
 import ml.meiner.anselm.DataBase.CloudFirestore;
+import ml.meiner.anselm.Main.MainActivity;
 import ml.meiner.anselm.R;
 
 public class Inseration extends FragmentActivity implements OnMapReadyCallback {
@@ -49,13 +50,7 @@ public class Inseration extends FragmentActivity implements OnMapReadyCallback {
 
         if (user != null)
         {
-            Context context = getApplicationContext();
-            CharSequence text = user.getDisplayName();
-            int duration = Toast.LENGTH_SHORT;
-
-            Toast toast = Toast.makeText(context, text, duration);
-            toast.show();
-            // User is signed in
+            Toast.makeText(getApplicationContext(), user.getDisplayName(), Toast.LENGTH_SHORT).show();
         }
         else
         {
@@ -65,7 +60,10 @@ public class Inseration extends FragmentActivity implements OnMapReadyCallback {
 
             Toast toast = Toast.makeText(context, text, duration);
             toast.show();
-            // No user is signed in
+
+
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
         }
 
 

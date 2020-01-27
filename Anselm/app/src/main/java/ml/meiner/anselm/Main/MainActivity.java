@@ -67,7 +67,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private GoogleMap mMap;
     static int MY_LOCATION_REQUEST_CODE = 1339;
     private static final int RC_SIGN_IN = 1338;
-    boolean logged_in = false;
 
     private LocationManager locationManager;
     private static final long MIN_TIME = 400;
@@ -87,10 +86,13 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         user = FirebaseAuth.getInstance().getCurrentUser();
 
         if (user != null) {
-            ImageView btn = this.findViewById(R.id.buttonsignup);
             TextView nameLabel = this.findViewById(R.id.textView);
             nameLabel.setText("Hallo " + user.getDisplayName());
-            logged_in = true;
+        }
+        else
+        {
+            TextView nameLabel = this.findViewById(R.id.textView);
+            nameLabel.setText("Nicht_angemeldet!");
         }
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.googlemap);
@@ -231,7 +233,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     public void login(View view) {
-        if (logged_in == false) {
+        if (user == null) {
             List<AuthUI.IdpConfig> providers = Arrays.asList(
                     //new AuthUI.IdpConfig.EmailBuilder().build(),
                     new AuthUI.IdpConfig.GoogleBuilder().build());
@@ -250,10 +252,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                         public void onComplete(@NonNull Task<Void> task) {
                             // ...
-                            logged_in = false;
 
-                            Button btn = MainActivity.this.findViewById(R.id.buttonsignup);
-                            btn.setText("Einloggen");
+                            Toast.makeText(MainActivity.this, "Abgemeldet!", Toast.LENGTH_LONG).show();
+                            user = null;
 
                             TextView nameLabel = MainActivity.this.findViewById((R.id.textView));
                             nameLabel.setText("");
@@ -272,12 +273,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             if (resultCode == RESULT_OK) {
                 // Successfully signed in
                 user = FirebaseAuth.getInstance().getCurrentUser();
-                Button btn = this.findViewById(R.id.buttonsignup);
                 TextView nameLabel = this.findViewById(R.id.textView);
                 if (user != null) {
-                    btn.setText("Ausloggen");
                     nameLabel.setText("Hallo " + user.getDisplayName());
-                    logged_in = true;
+
+                    Toast.makeText(MainActivity.this, "Hallo " + user.getDisplayName(), Toast.LENGTH_LONG).show();
+
                 }
 
                 // ...
@@ -288,7 +289,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 // ...
                 if (response != null) {
                     TextView nameLabel = this.findViewById((R.id.textView));
-                    nameLabel.setText("Anmeldung fehlgeschlagen Fehler:" + response.getError().getMessage());
+                    nameLabel.setText("Anmeldung_fehlgeschlagen Fehler:" + response.getError().getMessage());
+
+                    Toast.makeText(this, "Anmeldung fehlgeschlagen Fehler:" + response.getError().getMessage(), Toast.LENGTH_LONG).show();
+
                 }
             }
         }
