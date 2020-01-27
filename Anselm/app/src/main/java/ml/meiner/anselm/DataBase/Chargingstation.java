@@ -1,6 +1,9 @@
 package ml.meiner.anselm.DataBase;
 
 
+import java.util.ArrayList;
+import java.util.Date;
+
 public class Chargingstation {
 
     private String id;
@@ -14,6 +17,10 @@ public class Chargingstation {
     private double latitude;
     private String address;
     private float pph; // Price per Houre in Euro
+    //TODO: Datum für mögliche Reservierungen
+    ArrayList<Date> freeTimes;
+    ArrayList<Date> bookedTimes;
+
 
     //plugs
     private boolean typ1;
