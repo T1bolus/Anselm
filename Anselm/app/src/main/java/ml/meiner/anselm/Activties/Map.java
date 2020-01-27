@@ -141,7 +141,7 @@ public class Map extends AppCompatActivity implements GoogleMap.OnMyLocationClic
     {
         this.stations = stations;
 
-        //TODO: MAKER Löschen
+        //TODO: MARKER Löschen
 
         for(Chargingstation cs: stations)
         {

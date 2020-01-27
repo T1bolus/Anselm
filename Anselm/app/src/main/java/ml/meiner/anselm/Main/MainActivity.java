@@ -31,7 +31,9 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -103,49 +105,15 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, MIN_TIME, MIN_DISTANCE, this); //You can also use LocationManager.GPS_PROVIDER and LocationManager.PASSIVE_PROVIDER
         }
 
-        MobileAds.initialize(this, new OnInitializationCompleteListener() {
-            @Override
-            public void onInitializationComplete(InitializationStatus initializationStatus) {
-            }
-        });
-
-
-        ///////////////////FOR DEBUGGING
-//        mAdView.setAdListener(new AdListener() {
+//        MobileAds.initialize(this, new OnInitializationCompleteListener() {
 //            @Override
-//            public void onAdLoaded() {
-//                // Code to be executed when an ad finishes loading.
-//                System.out.println("Loaded!");
-//            }
-//
-//            @Override
-//            public void onAdFailedToLoad(int errorCode) {
-//                // Code to be executed when an ad request fails.
-//                System.out.println("Error! " + errorCode);
-//
-//            }
-//
-//            @Override
-//            public void onAdOpened() {
-//                // Code to be executed when an ad opens an overlay that
-//                // covers the screen.
-//            }
-//
-//            @Override
-//            public void onAdLeftApplication() {
-//                // Code to be executed when the user has left the app.
-//            }
-//
-//            @Override
-//            public void onAdClosed() {
-//                // Code to be executed when when the user is about to return
-//                // to the app after tapping on an ad.
-//                System.out.println("CLOSED");
-//
+//            public void onInitializationComplete(InitializationStatus initializationStatus) {
 //            }
 //        });
 
 
+        CloudFirestore cloudFirestore = CloudFirestore.getInstance();
+        cloudFirestore.fetchAllChargingStations(this);
     }
 
     @Override
@@ -302,5 +270,25 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void chargingStationsReady(ArrayList<Chargingstation> stations)
     {
         this.stations = stations;
+
+        //TODO: MARKER Löschen
+
+        for(Chargingstation cs: stations)
+        {
+            LatLng pos = new LatLng(cs.getLatitude(), cs.getLongitude());
+
+            // Creating a marker
+            MarkerOptions markerOptions = new MarkerOptions();
+            // Setting the position for the marker
+            markerOptions.position(pos);
+            markerOptions.flat(true);
+            markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.new_mark));
+            // Setting the title for the marker.
+            // This will be displayed on taping the marker
+            markerOptions.title("Ladestation: " + cs.getName() + " : " + pos.latitude + " : " + pos.longitude);
+
+            // Placing a marker on the touched position
+            mMap.addMarker(markerOptions);
+        }
     }
 }

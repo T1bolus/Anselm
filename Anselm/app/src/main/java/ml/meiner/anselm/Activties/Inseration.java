@@ -25,15 +25,18 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 import androidx.fragment.app.FragmentActivity;
+import ml.meiner.anselm.DataBase.Chargingstation;
 import ml.meiner.anselm.DataBase.CloudFirestore;
+import ml.meiner.anselm.DataBase.CloudFirestoreListener;
 import ml.meiner.anselm.Main.MainActivity;
 import ml.meiner.anselm.R;
 
-public class Inseration extends FragmentActivity implements OnMapReadyCallback {
+public class Inseration extends FragmentActivity implements OnMapReadyCallback, CloudFirestoreListener {
 
     //instanziert die SearchView und das MapFragment
     GoogleMap map;
@@ -46,6 +49,7 @@ public class Inseration extends FragmentActivity implements OnMapReadyCallback {
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+
         user = FirebaseAuth.getInstance().getCurrentUser();
 
         if (user != null)
@@ -67,9 +71,8 @@ public class Inseration extends FragmentActivity implements OnMapReadyCallback {
         }
 
 
-
-
-
+        CloudFirestore cloudFirestore = CloudFirestore.getInstance();
+        cloudFirestore.fetchAllChargingStations(this);
 
         // ruft Actinivty auf
         super.onCreate(savedInstanceState);
@@ -127,8 +130,6 @@ public class Inseration extends FragmentActivity implements OnMapReadyCallback {
 
     public void insertMark(android.view.View view) throws IOException {
 
-
-       GoogleMap mMap = map;
         Geocoder geocoder;
         List<Address> addresses;
 
@@ -172,7 +173,30 @@ public class Inseration extends FragmentActivity implements OnMapReadyCallback {
             intent.putExtra("address", address);
             startActivity(intent);
         }
+
+
+    @Override
+    public void chargingStationsReady(ArrayList<Chargingstation> stations)
+    {
+
+        //TODO: MARKER Löschen
+
+        for(Chargingstation cs: stations)
+        {
+            LatLng pos = new LatLng(cs.getLatitude(), cs.getLongitude());
+
+            // Creating a marker
+            MarkerOptions markerOptions = new MarkerOptions();
+            // Setting the position for the marker
+            markerOptions.position(pos);
+            markerOptions.flat(true);
+            markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.new_mark));
+            // Setting the title for the marker.
+            // This will be displayed on taping the marker
+            markerOptions.title("Ladestation: " + cs.getName() + " : " + pos.latitude + " : " + pos.longitude);
+
+            // Placing a marker on the touched position
+            map.addMarker(markerOptions);
+        }
+    }
 }
-
-
-
