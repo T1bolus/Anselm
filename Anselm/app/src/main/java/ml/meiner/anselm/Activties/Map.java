@@ -111,37 +111,6 @@ public class Map extends AppCompatActivity implements GoogleMap.OnMyLocationClic
             //Request GPS Permission
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_LOCATION_REQUEST_CODE);
         }
-        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-
-            @Override
-            public void onMapClick(LatLng latLng) {
-
-                // Creating a marker
-                MarkerOptions markerOptions = new MarkerOptions();
-                // Setting the position for the marker
-                markerOptions.position(latLng);
-                markerOptions.draggable(true);
-                markerOptions.flat(true);
-                markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.new_mark));
-                // Setting the title for the marker.
-                // This will be displayed on taping the marker
-                markerOptions.title("Ladestation: " + latLng.latitude + " : " + latLng.longitude);
-
-                // Animating to the touched position
-                mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
-
-                // Placing a marker on the touched position
-                mMap.addMarker(markerOptions);
-            }
-        });
-
-
-        // Add a marker
-        // and move the map's camera to the same location.
-        LatLng oldenburg = new LatLng(53.1267, 8.2384);
-        map.addMarker(new MarkerOptions().position(oldenburg)
-                .title("Marker in Oldenburg"));
-        map.moveCamera(CameraUpdateFactory.newLatLng(oldenburg));
     }
 
     @Override
@@ -172,7 +141,7 @@ public class Map extends AppCompatActivity implements GoogleMap.OnMyLocationClic
     {
         this.stations = stations;
 
-        //TODO: MAKER Löschen
+        //TODO: MARKER Löschen
 
         for(Chargingstation cs: stations)
         {
@@ -182,7 +151,6 @@ public class Map extends AppCompatActivity implements GoogleMap.OnMyLocationClic
             MarkerOptions markerOptions = new MarkerOptions();
             // Setting the position for the marker
             markerOptions.position(pos);
-            markerOptions.draggable(true);
             markerOptions.flat(true);
             markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.new_mark));
             // Setting the title for the marker.

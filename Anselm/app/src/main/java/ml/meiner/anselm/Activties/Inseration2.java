@@ -6,6 +6,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -47,6 +48,8 @@ public class Inseration2 extends AppCompatActivity {
 
         if (user == null) //Only logged in User should be able to pass
         {
+            Toast.makeText(this, "Bitte einloggen um Ladetsationen hinzuzufügen!", Toast.LENGTH_LONG).show();
+
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         }
@@ -55,8 +58,6 @@ public class Inseration2 extends AppCompatActivity {
             TextView userText = findViewById(R.id.textView8);
             userText.setText(user.getDisplayName());
         }
-
-
 
     }
 
@@ -94,28 +95,28 @@ public class Inseration2 extends AppCompatActivity {
         pph = Float.valueOf(textView.getText().toString());
 
         switchv = findViewById(R.id.typ1);
-        typ1 = switchv.getShowText();
+        typ1 = switchv.isChecked();
 
         switchv = findViewById(R.id.typ2);
-        typ2 = switchv.getShowText();
+        typ2 = switchv.isChecked();
 
         switchv = findViewById(R.id.ccs);
-        ccs = switchv.getShowText();
+        ccs = switchv.isChecked();
 
         switchv = findViewById(R.id.chademo);
-        chademo = switchv.getShowText();
+        chademo = switchv.isChecked();
 
         switchv = findViewById(R.id.schuko);
-        schuko = switchv.getShowText();
+        schuko = switchv.isChecked();
 
         switchv = findViewById(R.id.cee_blue);
-        cee_blue = switchv.getShowText();
+        cee_blue = switchv.isChecked();
 
         switchv = findViewById(R.id.cee16);
-        cee16 = switchv.getShowText();
+        cee16 = switchv.isChecked();
 
         switchv = findViewById(R.id.cee32);
-        cee32 = switchv.getShowText();
+        cee32 = switchv.isChecked();
 
 
         station.setName(firstName + " " + lastName);
@@ -131,12 +132,16 @@ public class Inseration2 extends AppCompatActivity {
         station.setCee32(cee32);
         station.setLongitude(longitude);
         station.setLatitude(latitude);
-        station.setUser(user);
+        station.setUsername(user.getDisplayName());
+        station.setUsernamePicturePath(user.getPhotoUrl().getPath());
         station.setUid(user.getUid());
         station.setId(""); //TODOOO
 
 
-        cloudFirestore.addChargingStation(station);
+        cloudFirestore.addChargingStation(this, station);
+
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 
 

@@ -1,6 +1,8 @@
 package ml.meiner.anselm.DataBase;
 
+import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -16,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
+import ml.meiner.anselm.Main.MainActivity;
 
 
 public class CloudFirestore
@@ -50,19 +53,23 @@ public class CloudFirestore
     }
 
 
-    public void addChargingStation(Chargingstation chargingstation)
+    public void addChargingStation(final Context context, Chargingstation chargingstation)
     {
 
         db.collection("chargingstations").add(chargingstation).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
             @Override
             public void onSuccess(DocumentReference documentReference) {
                 Log.d("","DocumentSnapshot added with ID: " + documentReference.getId());
+
+                Toast.makeText(context, "Ladestation hinzugefügt!", Toast.LENGTH_LONG).show();
             }
         })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Log.w("", "Error adding document", e);
+
+                        Toast.makeText(context, "Ladestation nicht hinzugefügt!", Toast.LENGTH_LONG).show();
                     }
                 });
 

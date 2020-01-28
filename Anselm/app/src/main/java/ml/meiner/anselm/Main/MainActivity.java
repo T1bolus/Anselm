@@ -31,7 +31,9 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -67,7 +69,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private GoogleMap mMap;
     static int MY_LOCATION_REQUEST_CODE = 1339;
     private static final int RC_SIGN_IN = 1338;
-    boolean logged_in = false;
 
     private LocationManager locationManager;
     private static final long MIN_TIME = 400;
@@ -87,10 +88,13 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         user = FirebaseAuth.getInstance().getCurrentUser();
 
         if (user != null) {
-            ImageView btn = this.findViewById(R.id.buttonsignup);
             TextView nameLabel = this.findViewById(R.id.textView);
             nameLabel.setText("Hallo " + user.getDisplayName());
-            logged_in = true;
+        }
+        else
+        {
+            TextView nameLabel = this.findViewById(R.id.textView);
+            nameLabel.setText("Nicht_angemeldet!");
         }
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.googlemap);
@@ -101,55 +105,21 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, MIN_TIME, MIN_DISTANCE, this); //You can also use LocationManager.GPS_PROVIDER and LocationManager.PASSIVE_PROVIDER
         }
 
-        MobileAds.initialize(this, new OnInitializationCompleteListener() {
-            @Override
-            public void onInitializationComplete(InitializationStatus initializationStatus) {
-            }
-        });
-
-
-        ///////////////////FOR DEBUGGING
-//        mAdView.setAdListener(new AdListener() {
+//        MobileAds.initialize(this, new OnInitializationCompleteListener() {
 //            @Override
-//            public void onAdLoaded() {
-//                // Code to be executed when an ad finishes loading.
-//                System.out.println("Loaded!");
-//            }
-//
-//            @Override
-//            public void onAdFailedToLoad(int errorCode) {
-//                // Code to be executed when an ad request fails.
-//                System.out.println("Error! " + errorCode);
-//
-//            }
-//
-//            @Override
-//            public void onAdOpened() {
-//                // Code to be executed when an ad opens an overlay that
-//                // covers the screen.
-//            }
-//
-//            @Override
-//            public void onAdLeftApplication() {
-//                // Code to be executed when the user has left the app.
-//            }
-//
-//            @Override
-//            public void onAdClosed() {
-//                // Code to be executed when when the user is about to return
-//                // to the app after tapping on an ad.
-//                System.out.println("CLOSED");
-//
+//            public void onInitializationComplete(InitializationStatus initializationStatus) {
 //            }
 //        });
 
 
+        CloudFirestore cloudFirestore = CloudFirestore.getInstance();
+        cloudFirestore.fetchAllChargingStations(this);
     }
 
     @Override
     public void onLocationChanged(Location location) {
         LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 10);
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 12);
         mMap.animateCamera(cameraUpdate);
         locationManager.removeUpdates(this);
     }
@@ -182,6 +152,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             //Request GPS Permission
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_LOCATION_REQUEST_CODE);
         }
+
+        LatLng latLng = new LatLng(53, 8);
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 5);
+        mMap.animateCamera(cameraUpdate);
     }
 
     //Handler for Permission Result
@@ -231,7 +205,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     public void login(View view) {
-        if (logged_in == false) {
+        if (user == null) {
             List<AuthUI.IdpConfig> providers = Arrays.asList(
                     //new AuthUI.IdpConfig.EmailBuilder().build(),
                     new AuthUI.IdpConfig.GoogleBuilder().build());
@@ -250,10 +224,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                         public void onComplete(@NonNull Task<Void> task) {
                             // ...
-                            logged_in = false;
 
-                            Button btn = MainActivity.this.findViewById(R.id.buttonsignup);
-                            btn.setText("Einloggen");
+                            Toast.makeText(MainActivity.this, "Abgemeldet!", Toast.LENGTH_LONG).show();
+                            user = null;
 
                             TextView nameLabel = MainActivity.this.findViewById((R.id.textView));
                             nameLabel.setText("");
@@ -272,12 +245,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             if (resultCode == RESULT_OK) {
                 // Successfully signed in
                 user = FirebaseAuth.getInstance().getCurrentUser();
-                Button btn = this.findViewById(R.id.buttonsignup);
                 TextView nameLabel = this.findViewById(R.id.textView);
                 if (user != null) {
-                    btn.setText("Ausloggen");
                     nameLabel.setText("Hallo " + user.getDisplayName());
-                    logged_in = true;
+
+                    Toast.makeText(MainActivity.this, "Hallo " + user.getDisplayName(), Toast.LENGTH_LONG).show();
+
                 }
 
                 // ...
@@ -288,7 +261,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 // ...
                 if (response != null) {
                     TextView nameLabel = this.findViewById((R.id.textView));
-                    nameLabel.setText("Anmeldung fehlgeschlagen Fehler:" + response.getError().getMessage());
+                    nameLabel.setText("Anmeldung_fehlgeschlagen Fehler:" + response.getError().getMessage());
+
+                    Toast.makeText(this, "Anmeldung fehlgeschlagen Fehler:" + response.getError().getMessage(), Toast.LENGTH_LONG).show();
+
                 }
             }
         }
@@ -298,5 +274,25 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void chargingStationsReady(ArrayList<Chargingstation> stations)
     {
         this.stations = stations;
+
+        //TODO: MARKER Löschen
+
+        for(Chargingstation cs: stations)
+        {
+            LatLng pos = new LatLng(cs.getLatitude(), cs.getLongitude());
+
+            // Creating a marker
+            MarkerOptions markerOptions = new MarkerOptions();
+            // Setting the position for the marker
+            markerOptions.position(pos);
+            markerOptions.flat(true);
+            markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.new_mark));
+            // Setting the title for the marker.
+            // This will be displayed on taping the marker
+            markerOptions.title("Ladestation: " + cs.getName() + " : " + pos.latitude + " : " + pos.longitude);
+
+            // Placing a marker on the touched position
+            mMap.addMarker(markerOptions);
+        }
     }
 }
