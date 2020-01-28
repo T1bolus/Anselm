@@ -250,7 +250,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                 //Toast.makeText(MainActivity.this, "Google sign in success" + account.getDisplayName(), Toast.LENGTH_LONG).show();
 
-
                 firebaseAuthWithGoogle(account);
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
@@ -346,7 +345,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.new_mark));
             // Setting the title for the marker.
             // This will be displayed on taping the marker
-            markerOptions.title("Ladestation: " + cs.getName() + " : " + pos.latitude + " : " + pos.longitude);
+           // markerOptions.title("Ladestation: " + cs.getName() + " : " + pos.latitude + " : " + pos.longitude);
 
             // Placing a marker on the touched position
             mMap.addMarker(markerOptions);
