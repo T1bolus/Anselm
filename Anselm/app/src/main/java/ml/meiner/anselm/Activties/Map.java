@@ -70,7 +70,7 @@ public class Map extends AppCompatActivity implements GoogleMap.OnMyLocationClic
         if(once == false)
         {
             LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-            CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 12);
+            CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 13);
             mMap.animateCamera(cameraUpdate);
             locationManager.removeUpdates(this);
             once = true;

@@ -194,7 +194,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
 
         LatLng latLng = new LatLng(53, 8);
-        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 5);
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 16);
         mMap.animateCamera(cameraUpdate);
     }
 
