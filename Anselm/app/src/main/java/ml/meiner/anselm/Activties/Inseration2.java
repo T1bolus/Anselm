@@ -58,7 +58,6 @@ public class Inseration2 extends AppCompatActivity {
             TextView userText = findViewById(R.id.textView8);
             userText.setText(user.getDisplayName());
         }
-
     }
 
 

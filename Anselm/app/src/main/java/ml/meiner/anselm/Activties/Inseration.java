@@ -43,7 +43,6 @@ public class Inseration extends FragmentActivity implements OnMapReadyCallback, 
     GoogleMap map;
     SupportMapFragment mapFragment;
     SearchView searchView;
-    Marker markerCenter;
     FirebaseUser user;
 
 
