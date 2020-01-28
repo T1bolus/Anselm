@@ -170,13 +170,14 @@ public class Inseration extends FragmentActivity implements OnMapReadyCallback, 
 //        map.addMarker(markerOptions);
         goToInseration2(view, address, longitude, latitude);
     }
-        public void goToInseration2(View view, String address, Double longitude, Double latitude ){
-            Intent intent = new Intent(this, Inseration2.class);
-            intent.putExtra("longitude", longitude);
-            intent.putExtra("latitude", latitude);
-            intent.putExtra("address", address);
-            startActivity(intent);
-        }
+
+    public void goToInseration2(View view, String address, Double longitude, Double latitude ){
+        Intent intent = new Intent(this, Inseration2.class);
+        intent.putExtra("longitude", longitude);
+        intent.putExtra("latitude", latitude);
+        intent.putExtra("address", address);
+        startActivity(intent);
+    }
 
 
     @Override

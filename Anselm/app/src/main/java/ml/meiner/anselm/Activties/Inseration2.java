@@ -132,7 +132,7 @@ public class Inseration2 extends AppCompatActivity {
         station.setLongitude(longitude);
         station.setLatitude(latitude);
         station.setUsername(user.getDisplayName());
-        station.setUsernamePicturePath(user.getPhotoUrl().getPath());
+        station.setUsernamePicturePath(user.getPhotoUrl().toString());
         station.setUid(user.getUid());
         station.setId(""); //TODOOO
 

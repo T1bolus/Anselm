@@ -8,6 +8,7 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.location.LocationListener;
 import android.media.Image;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -50,6 +51,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -118,11 +120,14 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         if (user != null) {
             TextView nameLabel = this.findViewById(R.id.textView);
             nameLabel.setText("Hallo " + user.getDisplayName());
+
+            ImageView imageView = findViewById(R.id.buttonsignup);
+            Picasso.get().load(user.getPhotoUrl().toString()).into(imageView);
         }
         else
         {
             TextView nameLabel = this.findViewById(R.id.textView);
-            nameLabel.setText("Nicht_angemeldet!");
+            nameLabel.setText("Nicht angemeldet!");
         }
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.googlemap);
@@ -209,21 +214,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     public void gotoInseration(View view) {
 
-        Chargingstation station = new Chargingstation();
-        station.setAddress("Lange Straße");
-        station.setLatitude(0);
-        station.setLongitude(0);
-        station.setName("Test Station");
-        station.setCee16(true);
-        station.setSchuko(true);
-        station.setTyp2(true);
-
-        //CloudFirestore fbdb = CloudFirestore.getInstance();
-        //fbdb.fetchAllChargingStations(this);
-        //fbdb.addChargingStation(station);
-
-
-
         Intent intent = new Intent(this, Inseration.class);
         startActivity(intent);
     }
@@ -265,7 +255,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
                 Log.w(TAG, "Google sign in failed", e);
-                Toast.makeText(MainActivity.this, "Google sign in failed:failure", Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this, "Google sign in failed:failure " + e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
             }
         }
     }
@@ -291,12 +281,14 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                             Toast.makeText(MainActivity.this, "Hallo " + user.getDisplayName(), Toast.LENGTH_LONG).show();
 
+                            ImageView imageView = findViewById(R.id.buttonsignup);
+                            Picasso.get().load(user.getPhotoUrl().toString()).into(imageView);
+
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
 
                             Toast.makeText(MainActivity.this, "signInWithCredential:failure", Toast.LENGTH_LONG).show();
-
                         }
                     }
                 });
@@ -325,6 +317,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                         TextView textView = findViewById(R.id.textView);
                         if(textView != null)
                             textView.setText("Nicht angemeldet!");
+
+                        ImageView imageView = findViewById(R.id.buttonsignup);
+                        imageView.setImageURI(null);
+                        imageView.setImageURI(Uri.parse("android.resource://ml.meiner.anselm/"+R.drawable.user));
 
                         user = null;
                     }
