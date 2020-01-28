@@ -18,18 +18,31 @@
 
             <ImageView
                 android:id="@+id/buttonsignup"
+                android:tooltipText="Login"
                 android:layout_width="40dp"
                 android:layout_height="60dp"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="20dp"
+                android:layout_marginRight="2dp"
                 android:onClick="login"
-                android:src="@drawable/login"></ImageView>
+                android:src="@drawable/user"></ImageView>
 
             <TextView
                 android:id="@+id/textView"
-                android:layout_width="96dp"
-                android:layout_height="20dp"
+                android:layout_width="353dp"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/buttonsignup"
                 android:layout_marginTop="12dp"
+                android:layout_marginEnd="38dp"
+                android:textSize="30dp"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="353dp"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/buttonsignup"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="38dp"
                 android:textSize="30dp"
                 app:layout_constraintVertical_bias="0.0" />
         </RelativeLayout>
@@ -109,7 +122,7 @@
                     <ImageView
                         android:layout_width="70dp"
                         android:layout_height="80dp"
-                        android:src="@drawable/new_mark"></ImageView>
+                        android:src="@drawable/new_markscreen"></ImageView>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -142,7 +155,7 @@
                     <ImageView
                         android:layout_width="70dp"
                         android:layout_height="80dp"
-                        android:src="@drawable/moin"></ImageView>
+                        android:src="@drawable/insert"></ImageView>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -174,7 +187,7 @@
                     <ImageView
                         android:layout_width="70dp"
                         android:layout_height="80dp"
-                        android:src="@drawable/setting"></ImageView>
+                        android:src="@drawable/cog"></ImageView>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -205,7 +218,7 @@
                     <ImageView
                         android:layout_width="70dp"
                         android:layout_height="80dp"
-                        android:src="@drawable/view"></ImageView>
+                        android:src="@drawable/eye"></ImageView>
 
                     <TextView
                         android:layout_width="wrap_content"
