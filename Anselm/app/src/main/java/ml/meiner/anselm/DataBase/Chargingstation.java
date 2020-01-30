@@ -11,8 +11,6 @@ public class Chargingstation {
     private String username;
     private String usernamePicturePath;
     private String uid;
-    private String position; //Blödsinn
-    private int height; //Blödsinn
     private double longitude;
     private double latitude;
     private String address;
@@ -36,13 +34,6 @@ public class Chargingstation {
     public Chargingstation() {
     }
 
-    public Chargingstation(String id, String name, String position, int height) {
-        this.id = id;
-        this.name = name;
-        this.position = position;
-        this.height = height;
-    }
-
     public String getId() {
         return id;
     }
@@ -57,27 +48,6 @@ public class Chargingstation {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getPosition() {
-        return position;
-    }
-
-    public void setPosition(String position) {
-        this.position = position;
-    }
-
-    public int getHeight() {
-        return height;
-    }
-
-    public void setHeight(int height) {
-        this.height = height;
-    }
-
-    @Override
-    public String toString() {
-        return name + " - " + position + " - " + height + " cm";
     }
 
     public double getLongitude() {

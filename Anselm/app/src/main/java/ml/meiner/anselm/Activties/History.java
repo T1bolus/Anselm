@@ -3,8 +3,13 @@ package ml.meiner.anselm.Activties;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,54 +18,38 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import ml.meiner.anselm.DataBase.Chargingstation;
-import ml.meiner.anselm.DataBase.SQLiteDatabaseHandler;
+import ml.meiner.anselm.DataBase.Booking;
+import ml.meiner.anselm.DataBase.FirestoreDatabase;
+import ml.meiner.anselm.DataBase.FirestoreDatabaseBookingListener;
+import ml.meiner.anselm.Main.MainActivity;
 import ml.meiner.anselm.R;
 import ml.meiner.anselm.model.historyListDataHandler;
 
-public class History extends AppCompatActivity {
+public class History extends AppCompatActivity implements FirestoreDatabaseBookingListener {
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
+    ArrayList<Booking> datalist = new ArrayList<>();
 
-    private SQLiteDatabaseHandler db;
+
+    FirebaseUser user;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
 
-        ArrayList<String> datalist = new ArrayList<>();
 
-        // TESTAREA
-        // create our sqlite helper class
-        db = new SQLiteDatabaseHandler(this);
-        // create some chargingstations
-        Chargingstation chargingstation1 = new Chargingstation("1", "Lebron James", "F", 203);
-        Chargingstation chargingstation2 = new Chargingstation("2", "Kevin Durant", "F", 208);
-        Chargingstation chargingstation3 = new Chargingstation("3", "Rudy Gobert", "C", 214);
-        // add them
-        db.addChargingstation(chargingstation1);
-        db.addChargingstation(chargingstation2);
-        db.addChargingstation(chargingstation3);
+        user = FirebaseAuth.getInstance().getCurrentUser();
 
-        // list all chargingstations
-        List<Chargingstation> chargingstations = db.allChargingstations();
+        if (user == null)
+        {
+            Toast.makeText(this, "Bitte einloggen um Buchungen zu sehen!", Toast.LENGTH_LONG).show();
 
-        if (chargingstations != null) {
-            String[] itemsNames = new String[chargingstations.size()];
-
-            for (int i = 0; i < chargingstations.size(); i++) {
-                itemsNames[i] = chargingstations.get(i).toString();
-                datalist.add(itemsNames[i]);
-            }
-
-            // display in a simple list
-            // ListView list = (ListView) findViewById(R.id.list);
-            // list.setAdapter(new ArrayAdapter<String>(this,
-            //         android.R.layout.simple_list_item_1, android.R.id.text1, itemsNames));
-
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
         }
 
 
@@ -78,6 +67,9 @@ public class History extends AppCompatActivity {
         mAdapter = new historyListDataHandler(datalist);
         recyclerView.setAdapter(mAdapter);
 
+        FirestoreDatabase firestoreDatabase = FirestoreDatabase.getInstance();
+        firestoreDatabase.fetchOwnBookings(this, user.getUid());
+
     }
 
     public void gotoMap(View view)
@@ -93,6 +85,19 @@ public class History extends AppCompatActivity {
     }
 
 
+    @Override
+    public void bookingsReady(ArrayList<Booking> bookings)
+    {
+        for(Booking b: bookings)
+        {
+            datalist.add(b);
+        }
 
-
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                mAdapter.notifyDataSetChanged();
+            }
+        });
+    }
 }

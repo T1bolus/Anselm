@@ -2,18 +2,22 @@ package ml.meiner.anselm.model;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import ml.meiner.anselm.DataBase.Booking;
 import ml.meiner.anselm.R;
 
 public class historyListDataHandler extends RecyclerView.Adapter<historyListDataHandler.MyViewHolder> {
 
-    private ArrayList<String> mDataset;
+    private ArrayList<Booking> mDataset;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -21,15 +25,17 @@ public class historyListDataHandler extends RecyclerView.Adapter<historyListData
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
         public TextView textView; //Element to manipulate
+        public ImageView imageView; //Element to manipulate
         public MyViewHolder(ConstraintLayout v)  //Layout around XML
         {
             super(v);
             textView = v.findViewById(R.id.textView3);
+            imageView = v.findViewById(R.id.imageView);
         }
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public historyListDataHandler(ArrayList<String> myDataset) {
+    public historyListDataHandler(ArrayList<Booking> myDataset) {
         mDataset = myDataset;
     }
 
@@ -50,8 +56,9 @@ public class historyListDataHandler extends RecyclerView.Adapter<historyListData
     public void onBindViewHolder(MyViewHolder holder, int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        holder.textView.setText(mDataset.get(position));
 
+        Picasso.get().load(mDataset.get(position).getUsernamePicturePath()).into(holder.imageView);
+        holder.textView.setText(mDataset.get(position).getUsername() + " buchte Station von " + mDataset.get(position).getStation().getUsername() + ": " + mDataset.get(position).getStation().getName());
     }
 
     // Return the size of your dataset (invoked by the layout manager)

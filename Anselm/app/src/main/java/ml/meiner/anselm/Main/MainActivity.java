@@ -47,6 +47,7 @@ import androidx.core.content.ContextCompat;
 import ml.meiner.anselm.Activties.History;
 import ml.meiner.anselm.Activties.Inseration;
 import ml.meiner.anselm.Activties.Map;
+import ml.meiner.anselm.DataBase.Booking;
 import ml.meiner.anselm.DataBase.Chargingstation;
 import ml.meiner.anselm.DataBase.FirestoreDatabase;
 import ml.meiner.anselm.DataBase.FirestoreDatabaseChargingstationListener;
@@ -332,5 +333,16 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             // Placing a marker on the touched position
             mMap.addMarker(markerOptions);
         }
+
+
+//        Booking booking = new Booking();
+//        booking.setUid(user.getUid());
+//        booking.setStation(new stations.get(0));
+//        booking.setUsername(user.getDisplayName());
+//        booking.setStationOwnerUid(stations.get(0).getUid());
+//        booking.setUsernamePicturePath(user.getPhotoUrl().toString());
+//
+//        FirestoreDatabase firestoreDatabase = FirestoreDatabase.getInstance();
+//        firestoreDatabase.addBooking(this, booking);
     }
 }
