@@ -7,26 +7,15 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
 import android.location.LocationListener;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.firebase.ui.auth.AuthUI;
-import com.firebase.ui.auth.IdpResponse;
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.initialization.InitializationStatus;
-import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -41,21 +30,15 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -65,16 +48,15 @@ import ml.meiner.anselm.Activties.History;
 import ml.meiner.anselm.Activties.Inseration;
 import ml.meiner.anselm.Activties.Map;
 import ml.meiner.anselm.DataBase.Chargingstation;
-import ml.meiner.anselm.DataBase.CloudFirestore;
-import ml.meiner.anselm.DataBase.CloudFirestoreListener;
-import ml.meiner.anselm.DataBase.SQLiteDatabaseHandler;
+import ml.meiner.anselm.DataBase.FirestoreDatabase;
+import ml.meiner.anselm.DataBase.FirestoreDatabaseChargingstationListener;
 import ml.meiner.anselm.R;
 
 
 //https://firebase.google.com/docs/firestore/quickstart?authuser=0
 
 
-public class MainActivity extends AppCompatActivity implements OnMapReadyCallback, LocationListener, CloudFirestoreListener {
+public class MainActivity extends AppCompatActivity implements OnMapReadyCallback, LocationListener, FirestoreDatabaseChargingstationListener {
 
     private GoogleMap mMap;
     static int MY_LOCATION_REQUEST_CODE = 1339;
@@ -145,8 +127,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 //        });
 
 
-        CloudFirestore cloudFirestore = CloudFirestore.getInstance();
-        cloudFirestore.fetchAllChargingStations(this);
+        FirestoreDatabase firestoreDatabase = FirestoreDatabase.getInstance();
+        firestoreDatabase.fetchAllChargingStations(this);
     }
 
     @Override
