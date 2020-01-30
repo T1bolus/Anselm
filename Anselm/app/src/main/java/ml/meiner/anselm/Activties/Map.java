@@ -1,6 +1,7 @@
 package ml.meiner.anselm.Activties;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -9,6 +10,8 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
@@ -18,6 +21,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
@@ -44,7 +48,7 @@ public class Map extends AppCompatActivity implements GoogleMap.OnMyLocationClic
 
     ArrayList<Chargingstation> stations = new ArrayList<>();
 
-
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -157,8 +161,12 @@ public class Map extends AppCompatActivity implements GoogleMap.OnMyLocationClic
             // This will be displayed on taping the marker
             markerOptions.title("Ladestation: " + cs.getName() + " : " + pos.latitude + " : " + pos.longitude);
 
-            // Placing a marker on the touched position
-            mMap.addMarker(markerOptions);
+            CustomWindowInfoGoogleMaps customInfoWindow = new CustomWindowInfoGoogleMaps(this);
+            mMap.setInfoWindowAdapter(customInfoWindow);
+
+            Marker m = mMap.addMarker(markerOptions);
+            m.setTag(cs);
         }
     }
+
 }
