@@ -30,10 +30,10 @@ public class History extends AppCompatActivity implements FirestoreDatabaseBooki
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
-    ArrayList<Booking> datalist = new ArrayList<>();
+    private ArrayList<Booking> datalist = new ArrayList<>();
 
 
-    FirebaseUser user;
+    private FirebaseUser user;
 
 
     @Override
@@ -88,6 +88,8 @@ public class History extends AppCompatActivity implements FirestoreDatabaseBooki
     @Override
     public void bookingsReady(ArrayList<Booking> bookings)
     {
+        datalist.clear();
+
         for(Booking b: bookings)
         {
             datalist.add(b);
