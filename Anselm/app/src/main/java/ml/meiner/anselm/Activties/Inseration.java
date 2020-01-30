@@ -70,9 +70,8 @@ public class Inseration extends FragmentActivity implements OnMapReadyCallback, 
             Toast toast = Toast.makeText(context, text, duration);
             toast.show();
 
-
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
+            finish();
+            return;
         }
 
         searchView = findViewById(R.id.sv_location);
@@ -113,6 +112,13 @@ public class Inseration extends FragmentActivity implements OnMapReadyCallback, 
 
         FirestoreDatabase firestoreDatabase = FirestoreDatabase.getInstance();
         firestoreDatabase.fetchAllChargingStations(this);
+
+    }
+
+    @Override
+    public void onStart()
+    {
+        super.onStart();
 
     }
 

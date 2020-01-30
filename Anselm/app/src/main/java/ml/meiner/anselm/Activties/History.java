@@ -48,8 +48,8 @@ public class History extends AppCompatActivity implements FirestoreDatabaseBooki
         {
             Toast.makeText(this, "Bitte einloggen um Buchungen zu sehen!", Toast.LENGTH_LONG).show();
 
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
+            finish();
+            return;
         }
 
 

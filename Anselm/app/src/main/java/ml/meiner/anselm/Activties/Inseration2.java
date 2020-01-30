@@ -49,8 +49,8 @@ public class Inseration2 extends AppCompatActivity {
         {
             Toast.makeText(this, "Bitte einloggen um Ladetsationen hinzuzufügen!", Toast.LENGTH_LONG).show();
 
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
+            finish();
+            return;
         }
         else
         {
