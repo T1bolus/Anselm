@@ -16,8 +16,9 @@ public class Chargingstation {
     private String address;
     private float pph; // Price per Houre in Euro
     //TODO: Datum für mögliche Reservierungen
-    ArrayList<Date> freeTimes;
-    ArrayList<Date> bookedTimes;
+    private boolean weeklyRepeat;
+    private ArrayList<Date> freeTimes;
+    private ArrayList<Date> bookedTimes;
 
 
     //plugs
@@ -168,5 +169,29 @@ public class Chargingstation {
 
     public void setUsernamePicturePath(String usernamePicturePath) {
         this.usernamePicturePath = usernamePicturePath;
+    }
+
+    public boolean isWeeklyRepeat() {
+        return weeklyRepeat;
+    }
+
+    public void setWeeklyRepeat(boolean weeklyRepeat) {
+        this.weeklyRepeat = weeklyRepeat;
+    }
+
+    public ArrayList<Date> getFreeTimes() {
+        return freeTimes;
+    }
+
+    public void setFreeTimes(ArrayList<Date> freeTimes) {
+        this.freeTimes = freeTimes;
+    }
+
+    public ArrayList<Date> getBookedTimes() {
+        return bookedTimes;
+    }
+
+    public void setBookedTimes(ArrayList<Date> bookedTimes) {
+        this.bookedTimes = bookedTimes;
     }
 }
