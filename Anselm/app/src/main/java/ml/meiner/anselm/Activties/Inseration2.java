@@ -2,7 +2,6 @@ package ml.meiner.anselm.Activties;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -13,13 +12,13 @@ import com.google.firebase.auth.FirebaseUser;
 
 import androidx.appcompat.app.AppCompatActivity;
 import ml.meiner.anselm.DataBase.Chargingstation;
-import ml.meiner.anselm.DataBase.CloudFirestore;
+import ml.meiner.anselm.DataBase.FirestoreDatabase;
 import ml.meiner.anselm.Main.MainActivity;
 import ml.meiner.anselm.R;
 
 public class Inseration2 extends AppCompatActivity {
 
-    CloudFirestore cloudFirestore = CloudFirestore.getInstance();
+    FirestoreDatabase firestoreDatabase = FirestoreDatabase.getInstance();
     FirebaseUser user;
 
     double longitude = 0;
@@ -137,7 +136,7 @@ public class Inseration2 extends AppCompatActivity {
         station.setId(""); //TODOOO
 
 
-        cloudFirestore.addChargingStation(this, station);
+        firestoreDatabase.addChargingStation(this, station);
 
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
