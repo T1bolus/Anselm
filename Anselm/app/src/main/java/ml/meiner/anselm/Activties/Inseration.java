@@ -9,6 +9,7 @@ import android.location.Geocoder;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AutoCompleteTextView;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,6 +46,7 @@ public class Inseration extends FragmentActivity implements OnMapReadyCallback, 
     SearchView searchView;
     Marker markerCenter;
     FirebaseUser user;
+    AutoCompleteTextView mAutocompleteTextView;
 
 
     @Override
@@ -53,7 +55,6 @@ public class Inseration extends FragmentActivity implements OnMapReadyCallback, 
         // ruft Actinivty auf
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inseration);
-
 
         user = FirebaseAuth.getInstance().getCurrentUser();
 
