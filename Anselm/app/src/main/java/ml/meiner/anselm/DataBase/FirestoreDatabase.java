@@ -18,31 +18,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
-import ml.meiner.anselm.Main.MainActivity;
 
 
-public class CloudFirestore
+public class FirestoreDatabase
 {
     private FirebaseFirestore db;
     ArrayList<Chargingstation> stations = new ArrayList<>();
+    ArrayList<Booking> bookings = new ArrayList<>();
 
-    private List<CloudFirestoreListener> listeners = new ArrayList<CloudFirestoreListener>();
+    private List<FirestoreDatabaseChargingstationListener> chargingListeners = new ArrayList<>();
+    private List<FirestoreDatabaseBookingListener> bookingListeners = new ArrayList<>();
 
-    private static CloudFirestore instance = null;
+    private static FirestoreDatabase instance = null;
 
 
-    public static CloudFirestore getInstance()
+    public static FirestoreDatabase getInstance()
     {
         if(instance == null)
         {
-            instance = new CloudFirestore();
+            instance = new FirestoreDatabase();
         }
 
         return instance;
     }
 
     //Firebase Cloud Realtime Database init
-    private CloudFirestore()
+    private FirestoreDatabase()
     {
         db = FirebaseFirestore.getInstance();
 
@@ -92,10 +93,10 @@ public class CloudFirestore
     }
 
 
-    public void fetchAllChargingStations(CloudFirestoreListener listener)
+    public void fetchAllChargingStations(FirestoreDatabaseChargingstationListener listener)
     {
-        if(listeners.contains(listener) == false) //add only new listeners
-            listeners.add(listener);
+        if(chargingListeners.contains(listener) == false) //add only new listeners
+            chargingListeners.add(listener);
 
         db.collection("chargingstations")
                 .get()
@@ -109,7 +110,7 @@ public class CloudFirestore
                             }
 
                             //Inform all listeners
-                            for (CloudFirestoreListener hl : listeners)
+                            for (FirestoreDatabaseChargingstationListener hl : chargingListeners)
                                 hl.chargingStationsReady(stations);
 
                         } else {
@@ -123,6 +124,79 @@ public class CloudFirestore
     public ArrayList<Chargingstation> getAllChargingStations()
     {
         return stations;
+    }
+
+
+    public void fetchOwnBookings(FirestoreDatabaseBookingListener listener, String uid)
+    {
+        if(bookingListeners.contains(listener) == false) //add only new listeners
+            bookingListeners.add(listener);
+
+
+        db.collection("bookings")
+                .whereEqualTo("stationOwnerUid", uid)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                //Log.d("", document.getId() + " => " + document.getData());
+                                bookings.add(document.toObject(Booking.class));
+                            }
+
+                        } else {
+                            //Log.d("", "Error getting documents: ", task.getException());
+
+                        }
+                    }
+                });
+
+
+        db.collection("bookings")
+                .whereEqualTo("uid", uid)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                //Log.d("", document.getId() + " => " + document.getData());
+                                bookings.add(document.toObject(Booking.class));
+                            }
+
+                            //Inform all listeners
+                            for (FirestoreDatabaseBookingListener hl : bookingListeners)
+                                hl.bookingsReady(bookings);
+                        } else {
+                            //Log.d("", "Error getting documents: ", task.getException());
+
+                        }
+                    }
+                });
+
+    }
+
+
+    public void addBooking(final Context context, Booking booking) {
+
+        db.collection("bookings").add(booking).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+            @Override
+            public void onSuccess(DocumentReference documentReference) {
+                Log.d("", "DocumentSnapshot added with ID: " + documentReference.getId());
+
+                Toast.makeText(context, "Buchung abgeschlossen!", Toast.LENGTH_LONG).show();
+            }
+        })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w("", "Error adding document", e);
+
+                        Toast.makeText(context, "Buchung fehlgeschlagen!", Toast.LENGTH_LONG).show();
+                    }
+                });
+
     }
 
 }

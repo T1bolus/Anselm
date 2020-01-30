@@ -65,8 +65,8 @@ public class SQLiteDatabaseHandler extends SQLiteOpenHelper {
         Chargingstation chargingstation = new Chargingstation();
         chargingstation.setId(cursor.getString(0));
         chargingstation.setName(cursor.getString(1));
-        chargingstation.setPosition(cursor.getString(2));
-        chargingstation.setHeight(Integer.parseInt(cursor.getString(3)));
+        //chargingstation.setPosition(cursor.getString(2));
+        //chargingstation.setHeight(Integer.parseInt(cursor.getString(3)));
 
         return chargingstation;
     }
@@ -84,8 +84,8 @@ public class SQLiteDatabaseHandler extends SQLiteOpenHelper {
                 chargingstation = new Chargingstation();
                 chargingstation.setId(cursor.getString(0));
                 chargingstation.setName(cursor.getString(1));
-                chargingstation.setPosition(cursor.getString(2));
-                chargingstation.setHeight(Integer.parseInt(cursor.getString(3)));
+                //chargingstation.setPosition(cursor.getString(2));
+                //chargingstation.setHeight(Integer.parseInt(cursor.getString(3)));
                 chargingstations.add(chargingstation);
             } while (cursor.moveToNext());
         }
@@ -97,8 +97,8 @@ public class SQLiteDatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(KEY_NAME, chargingstation.getName());
-        values.put(KEY_POSITION, chargingstation.getPosition());
-        values.put(KEY_HEIGHT, chargingstation.getHeight());
+        //values.put(KEY_POSITION, chargingstation.getPosition());
+        //values.put(KEY_HEIGHT, chargingstation.getHeight());
         // insert
         db.insert(TABLE_NAME,null, values);
         db.close();
@@ -108,8 +108,8 @@ public class SQLiteDatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(KEY_NAME, chargingstation.getName());
-        values.put(KEY_POSITION, chargingstation.getPosition());
-        values.put(KEY_HEIGHT, chargingstation.getHeight());
+        //values.put(KEY_POSITION, chargingstation.getPosition());
+        //values.put(KEY_HEIGHT, chargingstation.getHeight());
 
         int i = db.update(TABLE_NAME, // table
                 values, // column/value

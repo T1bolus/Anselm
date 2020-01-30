@@ -43,7 +43,7 @@
                 android:layout_alignEnd="@+id/buttonsignup"
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="38dp"
-                android:textColor="@color/whiteHere"
+                android:textColor="#FFFFFF"
                 android:textSize="34sp"
                 app:layout_constraintVertical_bias="0.0" />
         </RelativeLayout>

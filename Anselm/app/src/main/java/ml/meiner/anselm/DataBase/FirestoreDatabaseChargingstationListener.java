@@ -2,7 +2,7 @@ package ml.meiner.anselm.DataBase;
 
 import java.util.ArrayList;
 
-public interface CloudFirestoreListener
+public interface FirestoreDatabaseChargingstationListener
 {
     void chargingStationsReady(ArrayList<Chargingstation> stations);
 }

@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.SearchView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
@@ -32,13 +31,14 @@ import java.util.List;
 import java.util.Locale;
 
 import androidx.fragment.app.FragmentActivity;
+import ml.meiner.anselm.DataBase.Booking;
 import ml.meiner.anselm.DataBase.Chargingstation;
-import ml.meiner.anselm.DataBase.CloudFirestore;
-import ml.meiner.anselm.DataBase.CloudFirestoreListener;
+import ml.meiner.anselm.DataBase.FirestoreDatabase;
+import ml.meiner.anselm.DataBase.FirestoreDatabaseChargingstationListener;
 import ml.meiner.anselm.Main.MainActivity;
 import ml.meiner.anselm.R;
 
-public class Inseration extends FragmentActivity implements OnMapReadyCallback, CloudFirestoreListener {
+public class Inseration extends FragmentActivity implements OnMapReadyCallback, FirestoreDatabaseChargingstationListener {
 
     //instanziert die SearchView und das MapFragment
     GoogleMap map;
@@ -111,8 +111,8 @@ public class Inseration extends FragmentActivity implements OnMapReadyCallback, 
         mapFragment.getMapAsync(this);
 
 
-        CloudFirestore cloudFirestore = CloudFirestore.getInstance();
-        cloudFirestore.fetchAllChargingStations(this);
+        FirestoreDatabase firestoreDatabase = FirestoreDatabase.getInstance();
+        firestoreDatabase.fetchAllChargingStations(this);
 
     }
 

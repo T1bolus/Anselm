@@ -31,11 +31,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import ml.meiner.anselm.DataBase.Chargingstation;
-import ml.meiner.anselm.DataBase.CloudFirestore;
-import ml.meiner.anselm.DataBase.CloudFirestoreListener;
+import ml.meiner.anselm.DataBase.FirestoreDatabase;
+import ml.meiner.anselm.DataBase.FirestoreDatabaseChargingstationListener;
 import ml.meiner.anselm.R;
 
-public class Map extends AppCompatActivity implements GoogleMap.OnMyLocationClickListener, OnMapReadyCallback, LocationListener, CloudFirestoreListener {
+public class Map extends AppCompatActivity implements GoogleMap.OnMyLocationClickListener, OnMapReadyCallback, LocationListener, FirestoreDatabaseChargingstationListener {
     //Google Map Object
     private GoogleMap mMap;
 
@@ -63,8 +63,8 @@ public class Map extends AppCompatActivity implements GoogleMap.OnMyLocationClic
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, MIN_TIME, MIN_DISTANCE, this); //You can also use LocationManager.GPS_PROVIDER and LocationManager.PASSIVE_PROVIDER
         }
 
-        CloudFirestore cloudFirestore = CloudFirestore.getInstance();
-        cloudFirestore.fetchAllChargingStations(this);
+        FirestoreDatabase firestoreDatabase = FirestoreDatabase.getInstance();
+        firestoreDatabase.fetchAllChargingStations(this);
     }
 
 
