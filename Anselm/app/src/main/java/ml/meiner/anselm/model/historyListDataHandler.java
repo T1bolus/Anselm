@@ -58,7 +58,7 @@ public class historyListDataHandler extends RecyclerView.Adapter<historyListData
         // - replace the contents of the view with that element
 
         Picasso.get().load(mDataset.get(position).getUsernamePicturePath()).into(holder.imageView);
-        holder.textView.setText(mDataset.get(position).getUsername() + " buchte Station von " + mDataset.get(position).getStation().getUsername() + ": " + mDataset.get(position).getStation().getName());
+        holder.textView.setText(mDataset.get(position).getUsername() + " booked station from " + mDataset.get(position).getStation().getUsername() + ": " + mDataset.get(position).getStation().getName() + " for " + mDataset.get(position).getStation().getPph() + " €/h");
     }
 
     // Return the size of your dataset (invoked by the layout manager)

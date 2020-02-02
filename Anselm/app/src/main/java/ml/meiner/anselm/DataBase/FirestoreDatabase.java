@@ -178,6 +178,13 @@ public class FirestoreDatabase
     }
 
 
+    public ArrayList<Booking> getOwnBookings()
+    {
+        return bookings;
+    }
+
+
+
     public void addBooking(final Context context, Booking booking) {
 
         db.collection("bookings").add(booking).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {

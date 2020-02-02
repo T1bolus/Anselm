@@ -15,6 +15,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.ui.auth.AuthUI;
+import com.firebase.ui.auth.IdpResponse;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -39,6 +41,8 @@ import com.google.firebase.auth.GoogleAuthProvider;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -54,7 +58,7 @@ import ml.meiner.anselm.DataBase.FirestoreDatabaseChargingstationListener;
 import ml.meiner.anselm.R;
 
 
-//https://firebase.google.com/docs/firestore/quickstart?authuser=0
+
 
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback, LocationListener, FirestoreDatabaseChargingstationListener {
@@ -75,28 +79,13 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private AdView mAdView;
     private static final String TAG = "GoogleActivity";
 
-    // [START declare_auth]
-    private FirebaseAuth mAuth;
-    // [END declare_auth]
 
-    private GoogleSignInClient mGoogleSignInClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.web_id_auth))
-                .requestEmail()
-                .build();
-
-        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-
-        // [START initialize_auth]
-        // Initialize Firebase Auth
-        mAuth = FirebaseAuth.getInstance();
 
         user = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -136,7 +125,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
-        user = mAuth.getCurrentUser();
+        user = FirebaseAuth.getInstance().getCurrentUser();
     }
 
     @Override
@@ -219,81 +208,60 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             signOut();
     }
 
-    // [START onactivityresult]
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
-            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            try {
-                // Google Sign In was successful, authenticate with Firebase
-                GoogleSignInAccount account = task.getResult(ApiException.class);
+            IdpResponse response = IdpResponse.fromResultIntent(data);
 
-                //Toast.makeText(MainActivity.this, "Google sign in success" + account.getDisplayName(), Toast.LENGTH_LONG).show();
+            if (resultCode == RESULT_OK) {
+                // Successfully signed in
+                user = FirebaseAuth.getInstance().getCurrentUser();
 
-                firebaseAuthWithGoogle(account);
-            } catch (ApiException e) {
-                // Google Sign In failed, update UI appropriately
-                Log.w(TAG, "Google sign in failed", e);
-                Toast.makeText(MainActivity.this, "Google sign in failed:failure " + e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                TextView textView = findViewById(R.id.textView);
+                if(textView != null)
+                    textView.setText("Hallo " + user.getDisplayName());
+
+                Toast.makeText(MainActivity.this, "Hallo " + user.getDisplayName(), Toast.LENGTH_LONG).show();
+
+                ImageView imageView = findViewById(R.id.buttonsignup);
+                Picasso.get().load(user.getPhotoUrl().toString()).into(imageView);
+                // ...
+            } else {
+                // Sign in failed. If response is null the user canceled the
+                // sign-in flow using the back button. Otherwise check
+                // response.getError().getErrorCode() and handle the error.
+                // ...
+
+                Toast.makeText(MainActivity.this, "Login failed: " + response.getError().getMessage(), Toast.LENGTH_LONG).show();
+
             }
         }
     }
-    // [END onactivityresult]
 
-    // [START auth_with_google]
-    private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
-        Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
 
-        AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
-        mAuth.signInWithCredential(credential)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "signInWithCredential:success");
-                            user = mAuth.getCurrentUser();
-
-                            TextView textView = findViewById(R.id.textView);
-                            if(textView != null)
-                                textView.setText("Hallo " + user.getDisplayName());
-
-                            Toast.makeText(MainActivity.this, "Hallo " + user.getDisplayName(), Toast.LENGTH_LONG).show();
-
-                            ImageView imageView = findViewById(R.id.buttonsignup);
-                            Picasso.get().load(user.getPhotoUrl().toString()).into(imageView);
-
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "signInWithCredential:failure", task.getException());
-
-                            Toast.makeText(MainActivity.this, "signInWithCredential:failure", Toast.LENGTH_LONG).show();
-                        }
-                    }
-                });
-    }
-    // [END auth_with_google]
-
-    // [START signin]
     private void signIn() {
-        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-        startActivityForResult(signInIntent, RC_SIGN_IN);
+        List<AuthUI.IdpConfig> providers = Arrays.asList(
+                new AuthUI.IdpConfig.GoogleBuilder().build()
+        );
+
+        // Create and launch sign-in intent
+        startActivityForResult(
+                AuthUI.getInstance()
+                        .createSignInIntentBuilder()
+                        .setAvailableProviders(providers)
+                        .build(),
+                RC_SIGN_IN);
     }
-    // [END signin]
+
 
     private void signOut() {
-        // Firebase sign out
-        mAuth.signOut();
 
-        // Google sign out
-        mGoogleSignInClient.signOut().addOnCompleteListener(this,
-                new OnCompleteListener<Void>() {
-                    @Override
+        AuthUI.getInstance()
+                .signOut(this)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
                     public void onComplete(@NonNull Task<Void> task) {
-                        //updateUI(null);
                         Toast.makeText(MainActivity.this, "Erfolgreich abgemeldet!", Toast.LENGTH_LONG).show();
 
                         TextView textView = findViewById(R.id.textView);
@@ -307,6 +275,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                         user = null;
                     }
                 });
+
     }
 
     @Override
