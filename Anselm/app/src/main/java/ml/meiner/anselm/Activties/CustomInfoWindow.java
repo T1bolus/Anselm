@@ -12,11 +12,11 @@ import com.google.android.gms.maps.model.Marker;
 import ml.meiner.anselm.DataBase.Chargingstation;
 import ml.meiner.anselm.R;
 
-public class CustomWindowInfoGoogleMaps implements GoogleMap.InfoWindowAdapter {
+public class CustomInfoWindow implements GoogleMap.InfoWindowAdapter {
 
     private Context context;
 
-    public CustomWindowInfoGoogleMaps(Context ctx){
+    public CustomInfoWindow(Context ctx){
         context = ctx;
     }
 
@@ -28,17 +28,21 @@ public class CustomWindowInfoGoogleMaps implements GoogleMap.InfoWindowAdapter {
     @Override
     public View getInfoContents(Marker marker) {
         View view = ((Activity)context).getLayoutInflater()
-                .inflate(R.layout.custominfowindowformarker, null);
+                .inflate(R.layout.custom_info_window, null);
 
         TextView name_tv = view.findViewById(R.id.name);
         TextView address_tv = view.findViewById(R.id.address);
+        //  ImageView img = view.findViewById(R.id.pic);
 
         name_tv.setText(marker.getTitle());
         address_tv.setText(marker.getSnippet());
 
         Chargingstation cs = (Chargingstation) marker.getTag();
 
+        // int imageId = context.getResources().getIdentifier(cs.getImage().toLowerCase(),
+        //        "drawable", context.getPackageName());
+        // img.setImageResource(imageId);
+
         return view;
     }
 }
-
