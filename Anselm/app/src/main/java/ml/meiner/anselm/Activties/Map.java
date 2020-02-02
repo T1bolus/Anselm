@@ -116,7 +116,7 @@ public class Map extends AppCompatActivity implements GoogleMap.OnMyLocationClic
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_LOCATION_REQUEST_CODE);
         }
 
-        
+
     }
 
     @Override
@@ -163,7 +163,15 @@ public class Map extends AppCompatActivity implements GoogleMap.OnMyLocationClic
             // This will be displayed on taping the marker
             // markerOptions.title("Ladestation: " + cs.getName());
 
+
+
             mMap.addMarker(markerOptions);
+
+            CustomInfoWindow customInfoWindow = new CustomInfoWindow(this);
+            mMap.setInfoWindowAdapter(customInfoWindow);
+
+            Marker m = mMap.addMarker(markerOptions);
+            m.setTag(cs);
         }
     }
 
