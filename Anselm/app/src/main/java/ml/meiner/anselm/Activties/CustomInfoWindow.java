@@ -34,10 +34,10 @@ public class CustomInfoWindow implements GoogleMap.InfoWindowAdapter {
         TextView address_tv = view.findViewById(R.id.address);
         //  ImageView img = view.findViewById(R.id.pic);
 
-        name_tv.setText(marker.getTitle());
-        address_tv.setText(marker.getSnippet());
-
         Chargingstation cs = (Chargingstation) marker.getTag();
+
+        name_tv.setText(cs.getName());
+        address_tv.setText(cs.getAddress());
 
         // int imageId = context.getResources().getIdentifier(cs.getImage().toLowerCase(),
         //        "drawable", context.getPackageName());

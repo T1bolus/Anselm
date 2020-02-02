@@ -165,7 +165,7 @@ public class Map extends AppCompatActivity implements GoogleMap.OnMyLocationClic
 
 
 
-            mMap.addMarker(markerOptions);
+            //mMap.addMarker(markerOptions);
 
             CustomInfoWindow customInfoWindow = new CustomInfoWindow(this);
             mMap.setInfoWindowAdapter(customInfoWindow);
