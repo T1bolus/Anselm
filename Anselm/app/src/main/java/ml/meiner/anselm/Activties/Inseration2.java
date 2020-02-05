@@ -38,7 +38,7 @@ public class Inseration2 extends AppCompatActivity {
 
 
 
-        TextView tv = (TextView)findViewById(R.id.addressBox);
+        TextView tv = findViewById(R.id.addressBox);
         tv.setText(address);
 
 
