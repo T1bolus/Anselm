@@ -4,4 +4,5 @@
     <string name="title_activity_rating">RatingActivity</string>
     <string name="title_activity_maps">Map</string>
     <string name="web_id_auth">331512459962-btoq79q6fml593n6426s0nvu93uf0h3q.apps.googleusercontent.com</string>
+    <string name="title_activity_info_window_expand">InfoWindowExpand</string>
 </resources>

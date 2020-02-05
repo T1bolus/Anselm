@@ -172,6 +172,15 @@ public class Map extends AppCompatActivity implements GoogleMap.OnMyLocationClic
 
             Marker m = mMap.addMarker(markerOptions);
             m.setTag(cs);
+
+            mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+                @Override
+                public void onInfoWindowClick(Marker marker)
+                {
+                    Intent intent = new Intent(Map.this, InfoWindowExpand.class);
+                    startActivity(intent);
+                }
+            });
         }
     }
 
