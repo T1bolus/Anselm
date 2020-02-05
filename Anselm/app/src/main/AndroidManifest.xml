@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="ml.meiner.anselm">
     <!--
@@ -18,6 +16,7 @@
         android:label="Electrify"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".Activties.InfoWindowExpand"></activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -45,12 +44,9 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-9653802310132570~5774756389"/>
-
-
+            android:value="ca-app-pub-9653802310132570~5774756389" />
     </application>
 
 </manifest>
