@@ -1,10 +1,11 @@
 package ml.meiner.anselm.DataBase;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Chargingstation {
+public class Chargingstation implements Serializable {
 
     private String id;
     private String name;

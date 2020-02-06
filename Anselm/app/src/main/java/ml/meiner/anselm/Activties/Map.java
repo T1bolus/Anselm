@@ -178,6 +178,7 @@ public class Map extends AppCompatActivity implements GoogleMap.OnMyLocationClic
                 public void onInfoWindowClick(Marker marker)
                 {
                     Intent intent = new Intent(Map.this, InfoWindowExpand.class);
+                    intent.putExtra("station", (Chargingstation) marker.getTag());
                     startActivity(intent);
                 }
             });

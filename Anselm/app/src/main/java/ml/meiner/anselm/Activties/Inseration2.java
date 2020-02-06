@@ -47,7 +47,7 @@ public class Inseration2 extends AppCompatActivity {
 
         if (user == null) //Only logged in User should be able to pass
         {
-            Toast.makeText(this, "Bitte einloggen um Ladetsationen hinzuzufügen!", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Please Login to add charging station!", Toast.LENGTH_LONG).show();
 
             finish();
             return;
