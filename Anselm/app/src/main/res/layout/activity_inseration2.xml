@@ -150,12 +150,12 @@
                 android:textColor="#000000"
                 android:textSize="22sp" />
         </LinearLayout>
-    <GridLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="top|center"
-        android:columnCount="2"
-     >
+
+        <GridLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="top|center"
+            android:columnCount="2">
 
             <Switch
                 android:id="@+id/typ1"
@@ -214,16 +214,17 @@
                 android:layout_height="wrap_content"
                 android:text="CEE 32A" />
 
-        <Button
-            android:id="@+id/button3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="insert"
-            android:text="Insert" />
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="insert"
+                android:text="Insert" />
+
+        </GridLayout>
 
     </LinearLayout>
 
 
-    </GridLayout>
-    </LinearLayout>
 </LinearLayout>
+
