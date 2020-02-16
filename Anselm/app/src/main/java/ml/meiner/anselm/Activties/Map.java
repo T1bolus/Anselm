@@ -159,14 +159,8 @@ public class Map extends AppCompatActivity implements GoogleMap.OnMyLocationClic
             markerOptions.position(pos);
             markerOptions.flat(true);
             markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.new_mark));
-            // Setting the title for the marker.
-            // This will be displayed on taping the marker
-            // markerOptions.title("Ladestation: " + cs.getName());
 
-
-
-            //mMap.addMarker(markerOptions);
-
+            // Setting a new infowindow for every station
             CustomInfoWindow customInfoWindow = new CustomInfoWindow(this);
             mMap.setInfoWindowAdapter(customInfoWindow);
 

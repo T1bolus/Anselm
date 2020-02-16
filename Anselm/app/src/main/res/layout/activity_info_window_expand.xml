@@ -6,50 +6,85 @@
     android:layout_height="match_parent"
     tools:context=".Activties.InfoWindowExpand">
 
-    <EditText
-        android:id="@+id/editText"
-        android:layout_width="284dp"
-        android:layout_height="148dp"
-        android:layout_marginBottom="231dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Hier steht Text"
-        app:layout_constraintBottom_toTopOf="@+id/editText2"
+    <TextView
+        android:id="@+id/stationOwnerTextView"
+        android:layout_width="97dp"
+        android:layout_height="31dp"
+        android:layout_marginBottom="75dp"
+        android:text="placeholder"
+        app:layout_constraintBottom_toTopOf="@+id/stationNameTextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.425"
+        app:layout_constraintHorizontal_bias="0.295"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="91dp"
+        android:layout_height="95dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/stationNameTextView"
+        android:layout_width="220dp"
+        android:layout_height="25dp"
+        android:layout_marginBottom="12dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/stationAddressTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
 
-    <EditText
-        android:id="@+id/editText2"
-        android:layout_width="258dp"
-        android:layout_height="145dp"
-        android:layout_marginBottom="52dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Hallo ihr Affen"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <TextView
+        android:id="@+id/stationAddressTextView"
+        android:layout_width="220dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="12dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/stationPriceTextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.437"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/userTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:id="@+id/stationPriceTextView"
+        android:layout_width="220dp"
+        android:layout_height="25dp"
+        android:layout_marginBottom="60dp"
         android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/textView7"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.084"
-        app:layout_constraintStart_toEndOf="@+id/imageView2"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="91dp"
-        android:layout_height="95dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="154dp"
+        android:layout_height="22dp"
+        android:layout_marginBottom="60dp"
+        android:text="Verfügbare Anschlüsse"
+        app:layout_constraintBottom_toTopOf="@+id/plugTextView"
+        tools:layout_editor_absoluteX="128dp" />
+
+    <TextView
+        android:id="@+id/plugTextView"
+        android:layout_width="157dp"
+        android:layout_height="62dp"
+        android:layout_marginBottom="272dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

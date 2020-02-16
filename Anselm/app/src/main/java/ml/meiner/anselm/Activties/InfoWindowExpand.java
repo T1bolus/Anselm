@@ -29,21 +29,77 @@ public class InfoWindowExpand extends AppCompatActivity {
 
         station = (Chargingstation) getIntent().getSerializableExtra("station");
 
-        if(station != null)
-        {
+        if (station != null) {
             //TODO: Muss noch angepasst und erweitert werden
-            EditText editText = findViewById(R.id.editText);
-            editText.setText(station.getName());
-            TextView userView = findViewById(R.id.userTextView);
-            userView.setText(station.getUsername());
-            ImageView imageView = findViewById(R.id.imageView2);
+
+            // Setting the picture form firebase of the owner of the station
+            ImageView imageView = findViewById(R.id.imageView);
             Picasso.get().load(station.getUsernamePicturePath()).into(imageView);
-        }
-        else
-        {
+
+            // Displaying the name of the owner of the station
+            TextView userView = findViewById(R.id.stationOwnerTextView);
+            userView.setText(station.getUsername());
+
+            // Displaying the name of the station
+            TextView stationNameView = findViewById(R.id.stationNameTextView);
+            stationNameView.setText("Name: " + station.getName());
+
+            // Display address of station
+            TextView addressView = findViewById(R.id.stationAddressTextView);
+            addressView.setText("Addresse: " + station.getAddress());
+
+            // Display Price of station
+            TextView priceView = findViewById(R.id.stationPriceTextView);
+            priceView.setText("Preis pro Stunde: " + Float.toString(station.getPph()) + " €.");
+
+            TextView plugView = findViewById(R.id.plugTextView);
+            plugView.setText(getAllPlugs(station));
+
+
+        } else {
             finish();
             return;
         }
+    }
+
+    public String getAllPlugs(Chargingstation station) {
+        // TODO: Leeren
+        String s = "Test";
+
+        if (!station.isTyp1()) {
+            s.concat("Typ 1 + ");
+        }
+
+        if (station.isTyp2()) {
+            s.concat("Typ 2 + ");
+        }
+
+        if (station.isCcs()) {
+            s.concat("CCs + ");
+        }
+
+        if (station.isChademo()) {
+            s.concat("Chademo + ");
+        }
+
+        if (station.isSchuko()) {
+            s.concat("Schuko + ");
+        }
+
+        if (station.isCee_blue()) {
+            s.concat("Cee_blue + ");
+        }
+
+        if (station.isCee16()) {
+            s.concat("Cee16 + ");
+        }
+
+        if (station.isCee32()) {
+            s.concat("Cee32");
+        }
+
+        return s;
+
     }
 
 
