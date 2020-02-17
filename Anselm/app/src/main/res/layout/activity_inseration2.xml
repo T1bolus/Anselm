@@ -10,7 +10,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        >
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -51,7 +52,9 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="70dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp">
 
             <TextView
                 android:layout_width="0dp"
@@ -73,7 +76,9 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp">
 
             <TextView
                 android:layout_width="0dp"
@@ -95,7 +100,9 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp">
 
             <TextView
                 android:layout_width="0dp"
@@ -117,7 +124,9 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp">
 
             <TextView
                 android:layout_width="0dp"
@@ -138,14 +147,15 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:orientation="horizontal">
+            android:layout_marginTop="40dp"
+            android:orientation="horizontal"
+            >
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
-                android:text="Select your loading pissibilities"
+                android:text="Select your loading possibilities"
                 android:textAlignment="center"
                 android:textColor="#000000"
                 android:textSize="22sp" />
@@ -153,7 +163,7 @@
 
         <GridLayout
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="top|center"
             android:columnCount="2">
 
@@ -161,7 +171,7 @@
                 android:id="@+id/typ1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="25dp"
+                android:layout_marginRight="50dp"
                 android:text="Typ1" />
 
 
@@ -176,7 +186,7 @@
                 android:id="@+id/typ2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="20dp"
+                android:layout_marginRight="50dp"
                 android:text="Typ2" />
 
             <Switch
@@ -190,7 +200,7 @@
                 android:id="@+id/ccs"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="25dp"
+                android:layout_marginRight="50dp"
                 android:text="CCS" />
 
 
@@ -205,7 +215,7 @@
                 android:id="@+id/chademo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="14dp"
+                android:layout_marginRight="50dp"
                 android:text="Chademo" />
 
             <Switch
@@ -214,14 +224,24 @@
                 android:layout_height="wrap_content"
                 android:text="CEE 32A" />
 
-            <Button
-                android:id="@+id/button3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="insert"
-                android:text="Insert" />
+
 
         </GridLayout>
+
+        <Button
+            android:id="@+id/button3"
+            android:background="@drawable/button_rounded"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:onClick="insert"
+            android:text="Insert"
+            android:textColor="#FFFFFF"
+            android:textSize="20dp"
+            android:layout_marginTop="40pt"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            />
 
     </LinearLayout>
 
