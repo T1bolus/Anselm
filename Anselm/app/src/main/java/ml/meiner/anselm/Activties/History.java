@@ -3,25 +3,19 @@ package ml.meiner.anselm.Activties;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import ml.meiner.anselm.DataBase.Booking;
 import ml.meiner.anselm.DataBase.FirestoreDatabase;
 import ml.meiner.anselm.DataBase.FirestoreDatabaseBookingListener;
-import ml.meiner.anselm.Main.MainActivity;
 import ml.meiner.anselm.R;
 import ml.meiner.anselm.model.historyListDataHandler;
 
@@ -69,7 +63,6 @@ public class History extends AppCompatActivity implements FirestoreDatabaseBooki
 
         FirestoreDatabase firestoreDatabase = FirestoreDatabase.getInstance();
         firestoreDatabase.fetchOwnBookings(this, user.getUid());
-
     }
 
     public void gotoMap(View view)

@@ -93,6 +93,7 @@ public class FirestoreDatabase
     }
 
 
+
     public void fetchAllChargingStations(FirestoreDatabaseChargingstationListener listener)
     {
         if(chargingListeners.contains(listener) == false) //add only new listeners
@@ -104,6 +105,7 @@ public class FirestoreDatabase
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
+                            stations.clear();
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Log.d("", document.getId() + " => " + document.getData());
                                 stations.add(document.toObject(Chargingstation.class));
@@ -113,9 +115,10 @@ public class FirestoreDatabase
                             for (FirestoreDatabaseChargingstationListener hl : chargingListeners)
                                 hl.chargingStationsReady(stations);
 
-                        } else {
+                        }
+                        else
+                        {
                             Log.d("", "Error getting documents: ", task.getException());
-
                         }
                     }
                 });
@@ -127,10 +130,25 @@ public class FirestoreDatabase
     }
 
 
+
     public void fetchOwnBookings(FirestoreDatabaseBookingListener listener, String uid)
     {
-        if(bookingListeners.contains(listener) == false) //add only new listeners
+        boolean exits = false;
+        for(FirestoreDatabaseBookingListener l: bookingListeners)
+        {
+            if(l.equals(listener))
+            {
+                exits = true;
+                break;
+            }
+        }
+
+        if(exits == false)
             bookingListeners.add(listener);
+
+
+        //if(bookingListeners.contains(listener) == false) //add only new listeners
+        //    bookingListeners.add(listener);
 
 
         db.collection("bookings")
@@ -140,11 +158,11 @@ public class FirestoreDatabase
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
+                            bookings.clear();
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 //Log.d("", document.getId() + " => " + document.getData());
                                 bookings.add(document.toObject(Booking.class));
                             }
-
                         } else {
                             //Log.d("", "Error getting documents: ", task.getException());
 
