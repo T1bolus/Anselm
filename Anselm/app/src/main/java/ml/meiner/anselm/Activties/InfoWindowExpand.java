@@ -2,6 +2,8 @@ package ml.meiner.anselm.Activties;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+
+import android.widget.Switch;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -13,6 +15,13 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
+
+import java.lang.reflect.Array;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 import ml.meiner.anselm.DataBase.Chargingstation;
 import ml.meiner.anselm.R;
@@ -52,9 +61,11 @@ public class InfoWindowExpand extends AppCompatActivity {
             TextView priceView = findViewById(R.id.stationPriceTextView);
             priceView.setText("Preis pro Stunde: " + Float.toString(station.getPph()) + " €.");
 
-            TextView plugView = findViewById(R.id.plugTextView);
-            plugView.setText(getAllPlugs(station));
+            showPlugs(station);
 
+            // String freeString  = new SimpleDateFormat("MMM dd, yyyyy", Locale.getDefault()).format(station.getFreeTimes());
+            // TextView freeView = findViewById(R.id.freeTimesView);
+            //freeView.setText(freeString);
 
         } else {
             finish();
@@ -62,45 +73,48 @@ public class InfoWindowExpand extends AppCompatActivity {
         }
     }
 
-    public String getAllPlugs(Chargingstation station) {
-        // TODO: Leeren
-        String s = "Test";
+    public void showPlugs(Chargingstation station) {
 
-        if (!station.isTyp1()) {
-            s.concat("Typ 1 + ");
+        Switch switchview1 = findViewById(R.id.typ1);
+        if (station.isTyp1()) {
+            switchview1.toggle();
         }
 
+        Switch switchview2 = findViewById(R.id.typ2);
         if (station.isTyp2()) {
-            s.concat("Typ 2 + ");
+            switchview2.toggle();
         }
 
+        Switch switchview3 = findViewById(R.id.ccs);
         if (station.isCcs()) {
-            s.concat("CCs + ");
+            switchview3.toggle();
         }
 
+        Switch switchview4 = findViewById(R.id.chademo);
         if (station.isChademo()) {
-            s.concat("Chademo + ");
+            switchview4.toggle();
         }
 
+        Switch switchview5 = findViewById(R.id.schuko);
         if (station.isSchuko()) {
-            s.concat("Schuko + ");
+            switchview5.toggle();
         }
 
+        Switch switchview6 = findViewById(R.id.cee_blue);
         if (station.isCee_blue()) {
-            s.concat("Cee_blue + ");
+            switchview6.toggle();
         }
 
+        Switch switchview7 = findViewById(R.id.cee16);
         if (station.isCee16()) {
-            s.concat("Cee16 + ");
+            switchview7.toggle();
         }
 
+        Switch switchview8 = findViewById(R.id.cee32);
         if (station.isCee32()) {
-            s.concat("Cee32");
+            switchview8.toggle();
         }
-
-        return s;
 
     }
-
 
 }

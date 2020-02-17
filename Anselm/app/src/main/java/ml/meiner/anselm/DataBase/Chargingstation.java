@@ -195,4 +195,5 @@ public class Chargingstation implements Serializable {
     public void setBookedTimes(ArrayList<Date> bookedTimes) {
         this.bookedTimes = bookedTimes;
     }
+
 }
