@@ -2,7 +2,9 @@ package ml.meiner.anselm.Activties;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,7 +30,12 @@ public class Inseration2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inseration2);
-
+        Spinner dropdown = findViewById(R.id.planets_spinner);
+        Spinner dropdown2 = findViewById(R.id.planets_spinner2);
+        String[] items = new String[]{"Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
+        dropdown.setAdapter(adapter);
+        dropdown2.setAdapter(adapter);
         //Get information
         Intent i = getIntent();
         String address = i.getStringExtra("address");
@@ -134,6 +141,7 @@ public class Inseration2 extends AppCompatActivity {
         station.setUsernamePicturePath(user.getPhotoUrl().toString());
         station.setUid(user.getUid());
         station.setId(""); //TODOOO
+
 
 
         firestoreDatabase.addChargingStation(this, station);
