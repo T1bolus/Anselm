@@ -30,6 +30,7 @@ import java.util.Locale;
 import ml.meiner.anselm.DataBase.Booking;
 import ml.meiner.anselm.DataBase.Chargingstation;
 import ml.meiner.anselm.DataBase.FirestoreDatabase;
+import ml.meiner.anselm.Main.MainActivity;
 import ml.meiner.anselm.R;
 
 
@@ -129,6 +130,9 @@ public class InfoWindowExpand extends AppCompatActivity {
     public void bookAStation(View view) {
 
         if(user==null) {
+
+            Toast.makeText(this,"Please log in!",Toast.LENGTH_LONG).show();
+
             return;
         }
 
@@ -137,12 +141,15 @@ public class InfoWindowExpand extends AppCompatActivity {
         Booking book = new Booking();
 
         book.setStation(station);
-        book.setStationOwnerUid(station.getUsername());
+        book.setStationOwnerUid(station.getUid());
         book.setUsername(user.getDisplayName());
         book.setUid(user.getUid());
         book.setUsernamePicturePath(user.getPhotoUrl().toString());
 
         FirestoreDatabase.getInstance().addBooking(this,book);
+
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 
 }
