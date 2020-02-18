@@ -27,6 +27,7 @@
         android:onClick="insertMark"
         android:src="@drawable/insert"
         android:text="Inserieren"
+        android:layout_marginBottom="20dp"
         app:layout_constraintBottom_toBottomOf="@+id/googlemap"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
