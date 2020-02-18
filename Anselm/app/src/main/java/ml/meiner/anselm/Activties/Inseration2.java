@@ -1,8 +1,7 @@
 package ml.meiner.anselm.Activties;
-import android.app.TimePickerDialog;
-import android.app.TimePickerDialog.OnTimeSetListener;
-import android.content.Context;
 
+import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -23,15 +22,12 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
 
 import androidx.appcompat.app.AppCompatActivity;
 import ml.meiner.anselm.DataBase.Chargingstation;
 import ml.meiner.anselm.DataBase.FirestoreDatabase;
 import ml.meiner.anselm.Main.MainActivity;
 import ml.meiner.anselm.R;
-
-import static android.app.PendingIntent.getActivity;
 
 public class Inseration2 extends AppCompatActivity  {
 
@@ -87,6 +83,7 @@ public class Inseration2 extends AppCompatActivity  {
             userText.setText(user.getDisplayName());
         }
     }
+
     public void changeTime(final View view){
         Context m_context = this;
         Calendar calender = Calendar.getInstance();
@@ -141,6 +138,16 @@ public class Inseration2 extends AppCompatActivity  {
         }
         return m_day;
     }
+
+
+    public static Date getWeekStartDate() {
+        Calendar calendar = Calendar.getInstance();
+        while (calendar.get(Calendar.DAY_OF_WEEK) != Calendar.MONDAY) {
+            calendar.add(Calendar.DATE, -1);
+        }
+        return calendar.getTime();
+    }
+
     public void insert(View view)
     {
         EditText textView;
@@ -160,6 +167,7 @@ public class Inseration2 extends AppCompatActivity  {
         boolean cee_blue;
         boolean cee16;
         boolean cee32;
+        boolean repeat;
 
         textView = findViewById(R.id.firstName);
         firstName = textView.getText().toString();
@@ -197,10 +205,33 @@ public class Inseration2 extends AppCompatActivity  {
         switchv = findViewById(R.id.cee32);
         cee32 = switchv.isChecked();
 
+        switchv = findViewById(R.id.repeat);
+        repeat = switchv.isChecked();
 
 
-        String giveDateFrom = current_year + "-" + current_month + "-" + "01";
-        String giveDateTo = current_year + "-" + current_month + "-" + "01";
+
+        Spinner spinnerStart = findViewById(R.id.planets_spinner);
+        Spinner spinnerEnd = findViewById(R.id.planets_spinner2);
+
+        Date weekStart = getWeekStartDate();
+        Date startDay = weekStart;
+        Date endDay = weekStart;
+
+        //Increment startDay
+        Calendar calStart = Calendar.getInstance();
+        calStart.setTime(startDay);
+        calStart.add(Calendar.DATE, giveDay(spinnerStart.getSelectedItem().toString()));
+
+        //Increment endDay
+        Calendar calEnd = Calendar.getInstance();
+        calEnd.setTime(endDay);
+        int days = giveDay(spinnerEnd.getSelectedItem().toString());
+        calEnd.add(Calendar.DATE, days);
+
+
+
+        String giveDateFrom = calStart.get(Calendar.YEAR) + "-" + (calStart.get(Calendar.MONTH)+1) + "-" + calStart.get(Calendar.DAY_OF_MONTH);
+        String giveDateTo = calEnd.get(Calendar.YEAR) + "-" + (calEnd.get(Calendar.MONTH)+1)  + "-" + calEnd.get(Calendar.DAY_OF_MONTH);
         String giveTimeFrom = selected_hourFrom + ":" + selected_minuteFrom;
         String giveTimeTo = selected_minuteFrom + ":" + selected_minuteTo;
         Date realDateFrom = null;
@@ -214,9 +245,12 @@ public class Inseration2 extends AppCompatActivity  {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+
         ArrayList<Date> freetimes = new ArrayList<>();
         freetimes.add(realDateFrom);
         freetimes.add(realDateTo);
+
+
         station.setName(firstName + " " + lastName);
         station.setAddress(address);
         station.setPph(pph);
@@ -233,6 +267,7 @@ public class Inseration2 extends AppCompatActivity  {
         station.setUsername(user.getDisplayName());
         station.setUsernamePicturePath(user.getPhotoUrl().toString());
         station.setUid(user.getUid());
+        station.setWeeklyRepeat(repeat);
         station.setId(""); //TODOOO
         station.setFreeTimes(freetimes);
 
