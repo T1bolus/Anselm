@@ -1,7 +1,6 @@
 package ml.meiner.anselm.Activties;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -10,8 +9,6 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
@@ -48,6 +45,8 @@ public class Map extends AppCompatActivity implements GoogleMap.OnMyLocationClic
 
     ArrayList<Chargingstation> stations = new ArrayList<>();
 
+    Location location;
+
     private Context context;
 
     @Override
@@ -63,6 +62,10 @@ public class Map extends AppCompatActivity implements GoogleMap.OnMyLocationClic
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, MIN_TIME, MIN_DISTANCE, this); //You can also use LocationManager.GPS_PROVIDER and LocationManager.PASSIVE_PROVIDER
         }
 
+        Intent intent = getIntent();
+        location = (Location) intent.getSerializableExtra("location");
+
+
         FirestoreDatabase firestoreDatabase = FirestoreDatabase.getInstance();
         firestoreDatabase.fetchAllChargingStations(this);
     }
@@ -76,7 +79,7 @@ public class Map extends AppCompatActivity implements GoogleMap.OnMyLocationClic
             LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
             CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 13);
             mMap.animateCamera(cameraUpdate);
-            locationManager.removeUpdates(this);
+            //locationManager.removeUpdates(this);
             once = true;
         }
     }
@@ -116,7 +119,12 @@ public class Map extends AppCompatActivity implements GoogleMap.OnMyLocationClic
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_LOCATION_REQUEST_CODE);
         }
 
-
+        if(location != null)
+        {
+            LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+            CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 13);
+            mMap.moveCamera(cameraUpdate);
+        }
     }
 
     @Override
