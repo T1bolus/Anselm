@@ -66,9 +66,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     FirebaseUser user;
 
-    private static final String TAG = "GoogleActivity";
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
