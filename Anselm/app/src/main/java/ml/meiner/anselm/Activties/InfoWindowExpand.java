@@ -11,7 +11,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.firebase.ui.auth.data.model.User;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
@@ -23,12 +27,16 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
+import ml.meiner.anselm.DataBase.Booking;
 import ml.meiner.anselm.DataBase.Chargingstation;
+import ml.meiner.anselm.DataBase.FirestoreDatabase;
 import ml.meiner.anselm.R;
 
 
 public class InfoWindowExpand extends AppCompatActivity {
     Chargingstation station;
+
+    FirebaseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +45,7 @@ public class InfoWindowExpand extends AppCompatActivity {
 
 
         station = (Chargingstation) getIntent().getSerializableExtra("station");
+        user = FirebaseAuth.getInstance().getCurrentUser();
 
         if (station != null) {
             //TODO: Muss noch angepasst und erweitert werden
@@ -115,6 +124,25 @@ public class InfoWindowExpand extends AppCompatActivity {
             switchview8.toggle();
         }
 
+    }
+
+    public void bookAStation(View view) {
+
+        if(user==null) {
+            return;
+        }
+
+        station = (Chargingstation) getIntent().getSerializableExtra("station");
+
+        Booking book = new Booking();
+
+        book.setStation(station);
+        book.setStationOwnerUid(station.getUsername());
+        book.setUsername(user.getDisplayName());
+        book.setUid(user.getUid());
+        book.setUsernamePicturePath(user.getPhotoUrl().toString());
+
+        FirestoreDatabase.getInstance().addBooking(this,book);
     }
 
 }
