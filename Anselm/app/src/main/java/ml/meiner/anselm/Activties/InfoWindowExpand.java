@@ -73,6 +73,12 @@ public class InfoWindowExpand extends AppCompatActivity {
 
             showPlugs(station);
 
+            TextView startView = findViewById(R.id.startDayView);
+
+            
+
+
+
             // String freeString  = new SimpleDateFormat("MMM dd, yyyyy", Locale.getDefault()).format(station.getFreeTimes());
             // TextView freeView = findViewById(R.id.freeTimesView);
             //freeView.setText(freeString);

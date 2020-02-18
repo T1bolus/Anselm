@@ -42,22 +42,24 @@
 
     <TextView
         android:id="@+id/stationAddressTextView"
-        android:layout_width="180dp"
-        android:layout_height="40dp"
-        android:layout_marginBottom="12dp"
+        android:layout_width="237dp"
+        android:layout_height="54dp"
+        android:layout_marginBottom="24dp"
         android:text="stationAddress"
         app:layout_constraintBottom_toTopOf="@+id/stationPriceTextView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/stationPriceTextView"
         android:layout_width="180dp"
         android:layout_height="20dp"
-        android:layout_marginBottom="14dp"
+        android:layout_marginBottom="12dp"
         android:text="stationPrice"
         app:layout_constraintBottom_toTopOf="@+id/textView7"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -75,11 +77,10 @@
         android:layout_width="225dp"
         android:layout_height="116dp"
         android:layout_gravity="top|center"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="296dp"
         android:columnCount="2"
-        app:layout_constraintBottom_toTopOf="@+id/freeTimesView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintBottom_toTopOf="@+id/bookingbutton"
+        tools:layout_editor_absoluteX="93dp">
 
         <Switch
             android:id="@+id/typ1"
@@ -149,25 +150,41 @@
     </GridLayout>
 
     <TextView
-        android:id="@+id/freeTimesView"
+        android:id="@+id/startDayView"
         android:layout_width="174dp"
         android:layout_height="38dp"
-        android:layout_marginBottom="208dp"
-        android:text="Free Times"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="268dp"
+        android:text="StartDay"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gridLayout"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/endView"
+        android:layout_width="174dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="65dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="268dp"
+        android:text="EndDay"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.866"
+        app:layout_constraintStart_toEndOf="@+id/startDayView"
+        app:layout_constraintTop_toBottomOf="@+id/gridLayout"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/bookingbutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Book"
         android:onClick="bookAStation"
+        android:text="Book"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/freeTimesView" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
