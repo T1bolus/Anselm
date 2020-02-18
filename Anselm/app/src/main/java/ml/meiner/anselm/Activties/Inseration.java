@@ -1,12 +1,9 @@
 package ml.meiner.anselm.Activties;
 
-import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
@@ -51,7 +48,7 @@ public class Inseration extends FragmentActivity implements OnMapReadyCallback, 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-        // ruft Actinivty auf
+        // ruft Activity auf
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inseration);
 
