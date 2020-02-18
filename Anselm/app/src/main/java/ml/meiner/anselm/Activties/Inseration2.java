@@ -43,8 +43,10 @@ public class Inseration2 extends AppCompatActivity  {
     public int selected_minuteFrom;
     public int selected_hourTo;
     public int selected_minuteTo;
-    public int current_month = calendar.get(Calendar.MONTH);
-    public int current_year = calendar.get(Calendar.YEAR);
+//    public int current_month = (int) calendar.get(Calendar.MONTH);
+//    public int current_year = (int) calendar.get(Calendar.YEAR);
+    public int current_month = 22;
+    public int current_year = 1229;
     public String from_Day;
     public String to_day;
 
@@ -169,6 +171,7 @@ public class Inseration2 extends AppCompatActivity  {
 
         switchv = findViewById(R.id.cee32);
         cee32 = switchv.isChecked();
+
         String giveDateFrom = current_year + "-" + current_month + "-" + from_Day;
         String giveDateTo = current_year + "-" + current_month + "-" + to_day;
         String giveTimeFrom = selected_hourFrom + ":" + selected_minuteFrom;
