@@ -127,6 +127,8 @@ public class Inseration extends FragmentActivity implements OnMapReadyCallback, 
         List<Address> addresses;
 
         LatLng lol = map.getCameraPosition().target;
+        try{
+
         double longitude = lol.longitude;
         double latitude = lol.latitude;
         geocoder = new Geocoder(this, Locale.getDefault());
@@ -138,6 +140,9 @@ public class Inseration extends FragmentActivity implements OnMapReadyCallback, 
         String postalCode = addresses.get(0).getPostalCode();
         String knownName = addresses.get(0).getFeatureName();
         goToInseration2(view, address, longitude, latitude);
+        }
+        catch (Exception ex)
+        {return;} //TODO: Fehler exeption
     }
 
     public void goToInseration2(View view, String address, Double longitude, Double latitude) {
