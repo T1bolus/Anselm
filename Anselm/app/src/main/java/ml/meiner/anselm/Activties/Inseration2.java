@@ -20,6 +20,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -36,17 +37,15 @@ public class Inseration2 extends AppCompatActivity  {
 
     FirestoreDatabase firestoreDatabase = FirestoreDatabase.getInstance();
     FirebaseUser user;
-    Calendar calendar;
+    Calendar calendar = Calendar.getInstance();
     double longitude = 0;
     double latitude = 0;
     public int selected_hourFrom;
     public int selected_minuteFrom;
     public int selected_hourTo;
     public int selected_minuteTo;
-//    public int current_month = (int) calendar.get(Calendar.MONTH);
-//    public int current_year = (int) calendar.get(Calendar.YEAR);
-    public int current_month = 22;
-    public int current_year = 1229;
+    public int current_month = calendar.get(Calendar.MONTH);
+    public int current_year = calendar.get(Calendar.YEAR);
     public String from_Day;
     public String to_day;
 
@@ -115,7 +114,33 @@ public class Inseration2 extends AppCompatActivity  {
         }, hour, min, android.text.format.DateFormat.is24HourFormat(m_context));
         timeDialog.show();
     }
-
+    public int giveDay(String day){
+        int m_day=99;
+        switch (day) {
+            case ("Mo"):
+                m_day=0;
+                return m_day;
+            case ("Di"):
+                m_day=1;
+                return m_day;
+            case ("Mi"):
+                m_day=2;
+                return m_day;
+            case ("Do"):
+                m_day=3;
+                return m_day;
+            case ("Fr"):
+                m_day=4;
+                return m_day;
+            case ("Sa"):
+                m_day=5;
+                return m_day;
+            case ("So"):
+                m_day=6;
+                return m_day;
+        }
+        return m_day;
+    }
     public void insert(View view)
     {
         EditText textView;
@@ -172,21 +197,26 @@ public class Inseration2 extends AppCompatActivity  {
         switchv = findViewById(R.id.cee32);
         cee32 = switchv.isChecked();
 
-        String giveDateFrom = current_year + "-" + current_month + "-" + from_Day;
-        String giveDateTo = current_year + "-" + current_month + "-" + to_day;
+
+
+        String giveDateFrom = current_year + "-" + current_month + "-" + "01";
+        String giveDateTo = current_year + "-" + current_month + "-" + "01";
         String giveTimeFrom = selected_hourFrom + ":" + selected_minuteFrom;
         String giveTimeTo = selected_minuteFrom + ":" + selected_minuteTo;
-
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MMM-dd HH:mm");
+        Date realDateFrom = null;
+        Date realDateTo = null;
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         try {
 
-            Date realDateFrom = formatter.parse(giveDateFrom + " " + giveTimeFrom);
-            Date realDateTo = formatter.parse(giveDateTo + " " + giveTimeTo);
+           realDateFrom = formatter.parse(giveDateFrom + " " + giveTimeFrom);
+           realDateTo = formatter.parse(giveDateTo + " " + giveTimeTo);
 
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
+        ArrayList<Date> freetimes = new ArrayList<>();
+        freetimes.add(realDateFrom);
+        freetimes.add(realDateTo);
         station.setName(firstName + " " + lastName);
         station.setAddress(address);
         station.setPph(pph);
@@ -204,7 +234,7 @@ public class Inseration2 extends AppCompatActivity  {
         station.setUsernamePicturePath(user.getPhotoUrl().toString());
         station.setUid(user.getUid());
         station.setId(""); //TODOOO
-
+        station.setFreeTimes(freetimes);
 
 
         firestoreDatabase.addChargingStation(this, station);

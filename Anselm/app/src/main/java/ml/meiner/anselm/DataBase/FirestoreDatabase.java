@@ -62,7 +62,7 @@ public class FirestoreDatabase
             public void onSuccess(DocumentReference documentReference) {
                 Log.d("","DocumentSnapshot added with ID: " + documentReference.getId());
 
-                Toast.makeText(context, "Ladestation hinzugefügt!", Toast.LENGTH_LONG).show();
+                Toast.makeText(context, "Added chargingstation!", Toast.LENGTH_LONG).show();
             }
         })
                 .addOnFailureListener(new OnFailureListener() {
@@ -70,7 +70,7 @@ public class FirestoreDatabase
                     public void onFailure(@NonNull Exception e) {
                         Log.w("", "Error adding document", e);
 
-                        Toast.makeText(context, "Ladestation nicht hinzugefügt!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, "failed to add chargingstation!", Toast.LENGTH_LONG).show();
                     }
                 });
 
@@ -210,7 +210,7 @@ public class FirestoreDatabase
             public void onSuccess(DocumentReference documentReference) {
                 Log.d("", "DocumentSnapshot added with ID: " + documentReference.getId());
 
-                Toast.makeText(context, "Buchung abgeschlossen!", Toast.LENGTH_LONG).show();
+                Toast.makeText(context, "Booking finished!", Toast.LENGTH_LONG).show();
             }
         })
                 .addOnFailureListener(new OnFailureListener() {
@@ -218,7 +218,7 @@ public class FirestoreDatabase
                     public void onFailure(@NonNull Exception e) {
                         Log.w("", "Error adding document", e);
 
-                        Toast.makeText(context, "Buchung fehlgeschlagen!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, "Booking failed!", Toast.LENGTH_LONG).show();
                     }
                 });
 
