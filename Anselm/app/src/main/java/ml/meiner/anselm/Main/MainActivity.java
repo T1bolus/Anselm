@@ -60,6 +60,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private static final long MIN_TIME = 400;
     private static final float MIN_DISTANCE = 1000;
 
+    Location location;
     ArrayList<Chargingstation> stations = new ArrayList<>();
 
 
@@ -113,10 +114,11 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     @Override
     public void onLocationChanged(Location location) {
+        this.location = location;
         LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 12);
         mMap.animateCamera(cameraUpdate);
-        locationManager.removeUpdates(this);
+        //locationManager.removeUpdates(this);
     }
 
     @Override
@@ -149,7 +151,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
 
         LatLng latLng = new LatLng(53, 8);
-        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 16);
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 6);
         mMap.animateCamera(cameraUpdate);
     }
 
@@ -181,6 +183,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     public void gotoMap(View view) {
         Intent intent = new Intent(this, Map.class);
+        intent.putExtra("location", location);
         startActivity(intent);
     }
 
