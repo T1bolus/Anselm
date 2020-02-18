@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -208,6 +209,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 TextView textView = findViewById(R.id.textView);
                 if(textView != null)
                     textView.setText("Hallo " + user.getDisplayName());
+                    textView.setTextColor(Color.WHITE);
 
                 Toast.makeText(MainActivity.this, "Hallo " + user.getDisplayName(), Toast.LENGTH_LONG).show();
 
