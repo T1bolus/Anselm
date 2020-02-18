@@ -5,11 +5,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
-import android.location.LocationManager;
 import android.location.LocationListener;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -17,12 +16,6 @@ import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -33,11 +26,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthCredential;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.GoogleAuthProvider;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -51,7 +41,6 @@ import androidx.core.content.ContextCompat;
 import ml.meiner.anselm.Activties.History;
 import ml.meiner.anselm.Activties.Inseration;
 import ml.meiner.anselm.Activties.Map;
-import ml.meiner.anselm.DataBase.Booking;
 import ml.meiner.anselm.DataBase.Chargingstation;
 import ml.meiner.anselm.DataBase.FirestoreDatabase;
 import ml.meiner.anselm.DataBase.FirestoreDatabaseChargingstationListener;
@@ -76,7 +65,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     FirebaseUser user;
 
-    private AdView mAdView;
     private static final String TAG = "GoogleActivity";
 
 
