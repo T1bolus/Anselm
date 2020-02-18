@@ -7,6 +7,7 @@
     tools:context=".Activties.Inseration">
 
 
+
     <fragment
         android:id="@+id/googlemap"
         android:name="com.google.android.gms.maps.SupportMapFragment"
@@ -16,23 +17,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.444"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sv_location"
         app:layout_constraintVertical_bias="0.127"
         tools:context="com.example.mapwithmarker.MapsMarkerActivity" />
-
-    <SearchView
-        android:id="@+id/sv_location"
-        android:layout_width="391dp"
-        android:layout_height="70dp"
-        android:layout_margin="10dp"
-        android:background="@color/whiteHere"
-        android:iconifiedByDefault="false"
-        android:queryHint="Search.."
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
         android:id="@+id/buttonInsert"
@@ -45,7 +31,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sv_location"
         app:layout_constraintVertical_bias="0.966" />
 
     <ImageView
@@ -61,5 +46,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/googlemap"
         app:layout_constraintVertical_bias="0.46" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="20dp"
+        android:background="@drawable/inseration_style"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/app_logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <fragment
+            android:id="@+id/autocomplete_fragment"
+            android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </fragment>
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

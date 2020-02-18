@@ -5,11 +5,13 @@ import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import com.google.android.gms.common.api.Status;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -19,20 +21,26 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.libraries.places.api.Places;
+import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.api.net.PlacesClient;
+import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
+import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
-import ml.meiner.anselm.DataBase.Booking;
+
 import ml.meiner.anselm.DataBase.Chargingstation;
 import ml.meiner.anselm.DataBase.FirestoreDatabase;
 import ml.meiner.anselm.DataBase.FirestoreDatabaseChargingstationListener;
-import ml.meiner.anselm.Main.MainActivity;
 import ml.meiner.anselm.R;
 
 public class Inseration extends FragmentActivity implements OnMapReadyCallback, FirestoreDatabaseChargingstationListener {
@@ -40,26 +48,20 @@ public class Inseration extends FragmentActivity implements OnMapReadyCallback, 
     //instanziert die SearchView und das MapFragment
     GoogleMap map;
     SupportMapFragment mapFragment;
-    SearchView searchView;
     FirebaseUser user;
-    AutoCompleteTextView mAutocompleteTextView;
-
+    PlacesClient plclient;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         // ruft Activity auf
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inseration);
 
         user = FirebaseAuth.getInstance().getCurrentUser();
 
-        if (user != null)
-        {
+        if (user != null) {
             Toast.makeText(getApplicationContext(), user.getDisplayName(), Toast.LENGTH_SHORT).show();
-        }
-        else
-        {
+        } else {
             Context context = getApplicationContext();
             CharSequence text = "Nicht angemeldet!";
             int duration = Toast.LENGTH_SHORT;
@@ -71,47 +73,40 @@ public class Inseration extends FragmentActivity implements OnMapReadyCallback, 
             return;
         }
 
-        searchView = findViewById(R.id.sv_location);
         mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.googlemap);
-
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String s) {
-                String location = searchView.getQuery().toString();
-                List<Address> addressList = null;
-
-                if (location != null || !location.equals("")) {
-                    Geocoder geocoder = new Geocoder(Inseration.this);
-                    try {
-                        addressList = geocoder.getFromLocationName(location, 1);
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    Address address = addressList.get(0);
-                    LatLng latlng = new LatLng(address.getLatitude(), address.getLongitude());
-                    //map.addMarker(new MarkerOptions().position(latlng).title(location));
-                    map.animateCamera(CameraUpdateFactory.newLatLngZoom(latlng, 18));
-
-                }
-
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String s) {
-                return false;
-            }
-        });
-
         mapFragment.getMapAsync(this);
-
 
         FirestoreDatabase firestoreDatabase = FirestoreDatabase.getInstance();
         firestoreDatabase.fetchAllChargingStations(this);
 
-    }
+        String apikey = "AIzaSyDYoQybddM6c-Daz0bHVe7h2tuyzxHmW1k";
 
+        if(!Places.isInitialized()) {
+            Places.initialize(getApplicationContext(),apikey);
+        }
+
+        plclient = Places.createClient(this);
+
+        final AutocompleteSupportFragment autoFrag = (AutocompleteSupportFragment) getSupportFragmentManager().findFragmentById(R.id.autocomplete_fragment);
+        autoFrag.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.LAT_LNG, Place.Field.NAME));
+
+        autoFrag.setOnPlaceSelectedListener(new PlaceSelectionListener() {
+            @Override
+            public void onPlaceSelected(@NonNull Place place) {
+                final LatLng latlng = place.getLatLng();
+
+                CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latlng, 16);
+                map.animateCamera(cameraUpdate);
+            }
+
+            @Override
+            public void onError(@NonNull Status status) {
+
+            }
+        });
+
+
+    }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -135,19 +130,6 @@ public class Inseration extends FragmentActivity implements OnMapReadyCallback, 
         Geocoder geocoder;
         List<Address> addresses;
 
-
-//        LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-//        if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-//            // TODO: Consider calling
-//            //    Activity#requestPermissions
-//            // here to request the missing permissions, and then overriding
-//            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-//            //                                          int[] grantResults)
-//            // to handle the case where the user grants the permission. See the documentation
-//            // for Activity#requestPermissions for more details.
-//            return;
-//        }
-
         LatLng lol = map.getCameraPosition().target;
         double longitude = lol.longitude;
         double latitude = lol.latitude;
@@ -159,17 +141,10 @@ public class Inseration extends FragmentActivity implements OnMapReadyCallback, 
         String country = addresses.get(0).getCountryName();
         String postalCode = addresses.get(0).getPostalCode();
         String knownName = addresses.get(0).getFeatureName();
-//        MarkerOptions markerOptions = new MarkerOptions();
-//        markerOptions.draggable(true);
-//        markerOptions.flat(true);
-//        markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.new_mark));
-//        markerOptions.position(map.getCameraPosition().target);
-//        markerOptions.title("Ladestation: " + address);
-//        map.addMarker(markerOptions);
         goToInseration2(view, address, longitude, latitude);
     }
 
-    public void goToInseration2(View view, String address, Double longitude, Double latitude ){
+    public void goToInseration2(View view, String address, Double longitude, Double latitude) {
         Intent intent = new Intent(this, Inseration2.class);
         intent.putExtra("longitude", longitude);
         intent.putExtra("latitude", latitude);
@@ -177,15 +152,12 @@ public class Inseration extends FragmentActivity implements OnMapReadyCallback, 
         startActivity(intent);
     }
 
-
     @Override
-    public void chargingStationsReady(ArrayList<Chargingstation> stations)
-    {
+    public void chargingStationsReady(ArrayList<Chargingstation> stations) {
 
         //TODO: MARKER Löschen
 
-        for(Chargingstation cs: stations)
-        {
+        for (Chargingstation cs : stations) {
             LatLng pos = new LatLng(cs.getLatitude(), cs.getLongitude());
 
             // Creating a marker
@@ -202,4 +174,5 @@ public class Inseration extends FragmentActivity implements OnMapReadyCallback, 
             map.addMarker(markerOptions);
         }
     }
+
 }

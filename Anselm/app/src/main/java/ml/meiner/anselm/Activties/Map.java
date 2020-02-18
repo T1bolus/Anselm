@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.android.gms.common.api.Status;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -20,8 +21,14 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.libraries.places.api.Places;
+import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.api.net.PlacesClient;
+import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
+import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -48,6 +55,7 @@ public class Map extends AppCompatActivity implements GoogleMap.OnMyLocationClic
     Location location;
 
     private Context context;
+    PlacesClient plclient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +76,32 @@ public class Map extends AppCompatActivity implements GoogleMap.OnMyLocationClic
 
         FirestoreDatabase firestoreDatabase = FirestoreDatabase.getInstance();
         firestoreDatabase.fetchAllChargingStations(this);
+
+        String apikey = "AIzaSyDYoQybddM6c-Daz0bHVe7h2tuyzxHmW1k";
+
+        if(!Places.isInitialized()) {
+            Places.initialize(getApplicationContext(),apikey);
+        }
+
+        plclient = Places.createClient(this);
+
+        final AutocompleteSupportFragment autoFrag = (AutocompleteSupportFragment) getSupportFragmentManager().findFragmentById(R.id.autocomplete_fragment);
+        autoFrag.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.LAT_LNG, Place.Field.NAME));
+
+        autoFrag.setOnPlaceSelectedListener(new PlaceSelectionListener() {
+            @Override
+            public void onPlaceSelected(@NonNull Place place) {
+                final LatLng latlng = place.getLatLng();
+
+                CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latlng, 16);
+                mMap.animateCamera(cameraUpdate);
+            }
+
+            @Override
+            public void onError(@NonNull Status status) {
+
+            }
+        });
     }
 
 
