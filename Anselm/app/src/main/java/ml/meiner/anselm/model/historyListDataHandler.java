@@ -1,5 +1,7 @@
 package ml.meiner.anselm.model;
 
+import android.text.Html;
+import android.text.style.UnderlineSpan;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -13,6 +15,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import ml.meiner.anselm.DataBase.Booking;
+import ml.meiner.anselm.DataBase.Chargingstation;
 import ml.meiner.anselm.R;
 
 public class historyListDataHandler extends RecyclerView.Adapter<historyListDataHandler.MyViewHolder> {
@@ -56,9 +59,9 @@ public class historyListDataHandler extends RecyclerView.Adapter<historyListData
     public void onBindViewHolder(MyViewHolder holder, int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-
-        Picasso.get().load(mDataset.get(position).getUsernamePicturePath()).into(holder.imageView);
-        holder.textView.setText(mDataset.get(position).getUsername() + " booked station from " + mDataset.get(position).getStation().getUsername() + ": " + mDataset.get(position).getStation().getName() + " for " + mDataset.get(position).getStation().getPph() + " €/h");
+        Booking booking = mDataset.get(position);
+        Picasso.get().load(booking.getUsernamePicturePath()).into(holder.imageView);
+        holder.textView.setText("Booked from: " + booking.getUsername() + "\nStation belongs to: " + booking.getStation().getName() + "\nPrice: " + booking.getStation().getPph() + " €/h" + "\nAdress: " + booking.getStation().getAddress());
     }
 
     // Return the size of your dataset (invoked by the layout manager)

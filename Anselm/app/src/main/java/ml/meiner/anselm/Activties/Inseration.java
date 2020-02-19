@@ -5,10 +5,7 @@ import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.AutoCompleteTextView;
-import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.api.Status;
@@ -37,7 +34,6 @@ import java.util.Locale;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
-
 import ml.meiner.anselm.DataBase.Chargingstation;
 import ml.meiner.anselm.DataBase.FirestoreDatabase;
 import ml.meiner.anselm.DataBase.FirestoreDatabaseChargingstationListener;
@@ -116,7 +112,7 @@ public class Inseration extends FragmentActivity implements OnMapReadyCallback, 
             @Override
             public void onInfoWindowClick(Marker marker) {
                 // Remove the marker
-                marker.remove();
+                //marker.remove();
             }
         });
 
@@ -131,6 +127,8 @@ public class Inseration extends FragmentActivity implements OnMapReadyCallback, 
         List<Address> addresses;
 
         LatLng lol = map.getCameraPosition().target;
+        try{
+
         double longitude = lol.longitude;
         double latitude = lol.latitude;
         geocoder = new Geocoder(this, Locale.getDefault());
@@ -142,6 +140,9 @@ public class Inseration extends FragmentActivity implements OnMapReadyCallback, 
         String postalCode = addresses.get(0).getPostalCode();
         String knownName = addresses.get(0).getFeatureName();
         goToInseration2(view, address, longitude, latitude);
+        }
+        catch (Exception ex)
+        {return;} //TODO: Fehler exeption
     }
 
     public void goToInseration2(View view, String address, Double longitude, Double latitude) {
@@ -155,7 +156,6 @@ public class Inseration extends FragmentActivity implements OnMapReadyCallback, 
     @Override
     public void chargingStationsReady(ArrayList<Chargingstation> stations) {
 
-        //TODO: MARKER Löschen
 
         for (Chargingstation cs : stations) {
             LatLng pos = new LatLng(cs.getLatitude(), cs.getLongitude());
@@ -164,7 +164,7 @@ public class Inseration extends FragmentActivity implements OnMapReadyCallback, 
             MarkerOptions markerOptions = new MarkerOptions();
             // Setting the position for the marker
             markerOptions.position(pos);
-            markerOptions.flat(true);
+            //markerOptions.flat(true);
             markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.new_mark));
             // Setting the title for the marker.
             // This will be displayed on taping the marker

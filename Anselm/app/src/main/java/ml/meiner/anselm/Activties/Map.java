@@ -113,7 +113,7 @@ public class Map extends AppCompatActivity implements GoogleMap.OnMyLocationClic
             LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
             CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 13);
             mMap.animateCamera(cameraUpdate);
-            //locationManager.removeUpdates(this);
+            locationManager.removeUpdates(this);
             once = true;
         }
     }
