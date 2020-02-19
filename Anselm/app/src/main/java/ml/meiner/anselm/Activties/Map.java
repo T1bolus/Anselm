@@ -48,13 +48,11 @@ public class Map extends AppCompatActivity implements GoogleMap.OnMyLocationClic
     private LocationManager locationManager;
     private static final long MIN_TIME = 4000;
     private static final float MIN_DISTANCE = 1000;
-    boolean once = false;
 
     ArrayList<Chargingstation> stations = new ArrayList<>();
 
     Location location;
 
-    private Context context;
     PlacesClient plclient;
 
     @Override
@@ -71,7 +69,7 @@ public class Map extends AppCompatActivity implements GoogleMap.OnMyLocationClic
         }
 
         Intent intent = getIntent();
-        location = (Location) intent.getSerializableExtra("location");
+        location = intent.getParcelableExtra("location");
 
 
         FirestoreDatabase firestoreDatabase = FirestoreDatabase.getInstance();
@@ -108,14 +106,10 @@ public class Map extends AppCompatActivity implements GoogleMap.OnMyLocationClic
     @Override
     public void onLocationChanged(Location location)
     {
-        if(once == false)
-        {
             LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
             CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 13);
             mMap.animateCamera(cameraUpdate);
             locationManager.removeUpdates(this);
-            once = true;
-        }
     }
 
     @Override

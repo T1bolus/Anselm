@@ -118,7 +118,7 @@ public class Inseration extends FragmentActivity implements OnMapReadyCallback, 
 
         LatLng latLng = new LatLng(53, 8);
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 6);
-        map.animateCamera(cameraUpdate);
+        map.moveCamera(cameraUpdate);
     }
 
     public void insertMark(android.view.View view) throws IOException {
@@ -140,7 +140,7 @@ public class Inseration extends FragmentActivity implements OnMapReadyCallback, 
         }
         catch (Exception ex)
         {
-            Toast.makeText(this, "No address found, please enter manually", Toast.LENGTH_SHORT);
+            Toast.makeText(this, "No address found, please enter manually", Toast.LENGTH_LONG);
         } //TODO: Fehler exeption
 
         goToInseration2(view, address, longitude, latitude);
