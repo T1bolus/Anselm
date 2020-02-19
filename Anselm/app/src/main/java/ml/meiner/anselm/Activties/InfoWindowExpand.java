@@ -171,6 +171,8 @@ public class InfoWindowExpand extends AppCompatActivity {
         book.setUid(user.getUid());
         book.setUsernamePicturePath(user.getPhotoUrl().toString());
 
+
+
         FirestoreDatabase.getInstance().addBooking(this,book);
 
         Intent intent = new Intent(this, MainActivity.class);
@@ -205,4 +207,7 @@ public class InfoWindowExpand extends AppCompatActivity {
         }, hour, min, android.text.format.DateFormat.is24HourFormat(m_context));
         timeDialog.show();
     }
+
+
+
 }
