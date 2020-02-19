@@ -127,22 +127,24 @@ public class Inseration extends FragmentActivity implements OnMapReadyCallback, 
         List<Address> addresses;
 
         LatLng lol = map.getCameraPosition().target;
-        try{
 
+        String address = ""; // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
         double longitude = lol.longitude;
         double latitude = lol.latitude;
-        geocoder = new Geocoder(this, Locale.getDefault());
-        addresses = geocoder.getFromLocation(latitude, longitude, 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
-        String address = addresses.get(0).getAddressLine(0); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
-        String city = addresses.get(0).getLocality();
-        String state = addresses.get(0).getAdminArea();
-        String country = addresses.get(0).getCountryName();
-        String postalCode = addresses.get(0).getPostalCode();
-        String knownName = addresses.get(0).getFeatureName();
-        goToInseration2(view, address, longitude, latitude);
+
+        try
+        {
+            geocoder = new Geocoder(this, Locale.getDefault());
+            addresses = geocoder.getFromLocation(latitude, longitude, 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
+            address = addresses.get(0).getAddressLine(0); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
         }
         catch (Exception ex)
-        {return;} //TODO: Fehler exeption
+        {
+            Toast.makeText(this, "No address found, please enter manually", Toast.LENGTH_SHORT);
+        } //TODO: Fehler exeption
+
+        goToInseration2(view, address, longitude, latitude);
+
     }
 
     public void goToInseration2(View view, String address, Double longitude, Double latitude) {
