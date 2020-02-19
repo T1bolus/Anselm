@@ -52,8 +52,8 @@ public class InfoWindowExpand extends AppCompatActivity {
             //TODO: Muss noch angepasst und erweitert werden
 
             // Setting the picture form firebase of the owner of the station
-            ImageView imageView = findViewById(R.id.imageView);
-            Picasso.get().load(station.getUsernamePicturePath()).into(imageView);
+            //ImageView imageView = findViewById(R.id.imageView);
+            //Picasso.get().load(station.getUsernamePicturePath()).into(imageView);
 
             // Displaying the name of the owner of the station
             TextView userView = findViewById(R.id.stationOwnerTextView);
@@ -73,7 +73,7 @@ public class InfoWindowExpand extends AppCompatActivity {
 
             showPlugs(station);
 
-            TextView startView = findViewById(R.id.startDayView);
+            // TextView startView = findViewById(R.id.startDayView);
 
             
 
