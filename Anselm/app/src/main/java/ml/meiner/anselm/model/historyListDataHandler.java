@@ -1,7 +1,5 @@
 package ml.meiner.anselm.model;
 
-import android.text.Html;
-import android.text.style.UnderlineSpan;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -9,13 +7,12 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
-
 import ml.meiner.anselm.DataBase.Booking;
-import ml.meiner.anselm.DataBase.Chargingstation;
 import ml.meiner.anselm.R;
 
 public class historyListDataHandler extends RecyclerView.Adapter<historyListDataHandler.MyViewHolder> {
@@ -29,6 +26,7 @@ public class historyListDataHandler extends RecyclerView.Adapter<historyListData
         // each data item is just a string in this case
         public TextView textView; //Element to manipulate
         public ImageView imageView; //Element to manipulate
+
         public MyViewHolder(ConstraintLayout v)  //Layout around XML
         {
             super(v);
@@ -45,7 +43,7 @@ public class historyListDataHandler extends RecyclerView.Adapter<historyListData
     // Create new views (invoked by the layout manager)
     @Override
     public historyListDataHandler.MyViewHolder onCreateViewHolder(ViewGroup parent,
-                                                     int viewType) {
+                                                                  int viewType) {
         // create a new view
         ConstraintLayout v = (ConstraintLayout) LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.list_element, parent, false);
@@ -61,7 +59,16 @@ public class historyListDataHandler extends RecyclerView.Adapter<historyListData
         // - replace the contents of the view with that element
         Booking booking = mDataset.get(position);
         Picasso.get().load(booking.getUsernamePicturePath()).into(holder.imageView);
-        holder.textView.setText("Booked: " + booking.getUsername() + "\n\nOwner: " + booking.getStation().getName() + "\n\nPrice: " + booking.getStation().getPph() + " €/h" + "\n\nAdress: " + booking.getStation().getAddress() + "\n\nFrom "+ booking.getBookedTimes().get(0) + "\n\nTo: " + booking.getBookedTimes().get(1));
+
+        String pattern = "EEEE dd-MM HH:mm";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+
+        String start = simpleDateFormat.format(booking.getBookedTimes().get(0));
+
+        String end = simpleDateFormat.format(booking.getBookedTimes().get(1));
+
+        holder.textView.setText("Booked: " + booking.getUsername() + "\n\nOwner: " + booking.getStation().getName() + "\n\nPrice: " + booking.getStation().getPph() + " €/h" + "\n\nAdress: " + booking.getStation().getAddress() + "\n\nFrom " + start + "\n\nTo: " + end);
+
     }
 
     // Return the size of your dataset (invoked by the layout manager)
