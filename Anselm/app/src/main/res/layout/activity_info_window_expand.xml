@@ -39,7 +39,7 @@
             android:layout_marginRight="20dp">
 
             <TextView
-                android:id="@+id/textView8"
+                android:id="@+id/userNameView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="UserName"
@@ -51,7 +51,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="70dp"
+            android:layout_marginTop="50dp"
             android:layout_marginRight="20dp"
             android:orientation="horizontal">
 
@@ -67,7 +67,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.75"
-                android:ems="10" />
+                android:textSize="20sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -81,7 +81,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
-                android:text="Stationowner"
+                android:text="Owner"
                 android:textSize="20sp" />
 
             <TextView
@@ -89,24 +89,22 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.75"
-                android:ems="10" />
+                android:layout_marginLeft="10dp"
+                android:textSize="20sp" />
+
+
+            <ImageView
+                android:id="@+id/userPicture"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                tools:srcCompat="@tools:sample/avatars" />
+
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="2dp"
-            android:layout_marginRight="20dp"
-            android:orientation="horizontal">
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="2dp"
             android:layout_marginRight="20dp"
             android:orientation="horizontal">
 
@@ -122,14 +120,13 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.75"
-                android:ems="10" />
+                android:textSize="20sp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="2dp"
             android:layout_marginRight="20dp"
             android:orientation="horizontal">
 
@@ -137,7 +134,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
-                android:text="Price/Hour(€)"
+                android:text="Price/Hour"
                 android:textSize="20sp" />
 
             <TextView
@@ -145,61 +142,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.75"
-                android:ems="10" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="2dp"
-            android:layout_marginRight="20dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="0dip"
-                android:layout_height="wrap_content"
-                android:layout_weight=".5"
-                android:text="Days"
                 android:textSize="20sp" />
-
-            <Spinner
-                android:id="@+id/planets_spinner"
-                android:layout_width="0dip"
-                android:layout_height="wrap_content"
-                android:layout_weight=".35" />
-
-            <Spinner
-                android:id="@+id/planets_spinner2"
-                android:layout_width="0dip"
-                android:layout_height="wrap_content"
-                android:layout_weight=".35" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="2dp"
-            android:layout_marginRight="20dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="0dip"
-                android:layout_height="wrap_content"
-                android:layout_weight=".3"
-                android:text="Repeat Weekly"
-                android:textSize="20sp" />
-
-            <Switch
-                android:id="@+id/repeat"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginRight="150dp" />
-
 
         </LinearLayout>
 
@@ -213,7 +156,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
-                android:text="Select your loading possibilities"
+                android:text="Available Plugs"
                 android:textAlignment="center"
                 android:textColor="#000000"
                 android:textSize="22sp" />
@@ -230,6 +173,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="50dp"
+                android:clickable="false"
                 android:text="Typ1" />
 
 
@@ -238,6 +182,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="25dp"
+                android:clickable="false"
                 android:text="Schuko" />
 
             <Switch
@@ -245,12 +190,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="50dp"
+                android:clickable="false"
                 android:text="Typ2" />
 
             <Switch
                 android:id="@+id/cee_blue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:clickable="false"
                 android:text="CEE Blau" />
 
 
@@ -259,6 +206,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="50dp"
+                android:clickable="false"
                 android:text="CCS" />
 
 
@@ -267,6 +215,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="25dp"
+                android:clickable="false"
                 android:text="CEE 16A" />
 
             <Switch
@@ -274,12 +223,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="50dp"
+                android:clickable="false"
                 android:text="Chademo" />
 
             <Switch
                 android:id="@+id/cee32"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:clickable="false"
                 android:text="CEE 32A" />
 
 
@@ -294,8 +245,8 @@
             android:layout_marginTop="5pt"
             android:layout_marginRight="20dp"
             android:background="@drawable/button_rounded"
-            android:onClick="insert"
-            android:text="Insert"
+            android:onClick="bookAStation"
+            android:text="Book"
             android:textColor="#FFFFFF"
             android:textSize="20dp" />
 
