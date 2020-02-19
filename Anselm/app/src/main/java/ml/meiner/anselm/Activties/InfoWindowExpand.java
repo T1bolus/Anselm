@@ -82,7 +82,7 @@ public class InfoWindowExpand extends AppCompatActivity {
 
             showPlugs(station);
 
-            String pattern = "dd-MM-yyyy HH:mm:ss";
+            String pattern = "EEEE dd-MM HH:mm:ss";
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 
             TextView startView = findViewById(R.id.startTextView);
