@@ -23,11 +23,7 @@ public class CustomInfoWindow extends AppCompatActivity implements GoogleMap.Inf
 
     @Override
     public View getInfoWindow(Marker marker) {
-        return null;
-    }
 
-    @Override
-    public View getInfoContents(Marker marker) {
         View view = ((Activity)context).getLayoutInflater()
                 .inflate(R.layout.custom_info_window, null);
 
@@ -40,10 +36,14 @@ public class CustomInfoWindow extends AppCompatActivity implements GoogleMap.Inf
         name_tv.setText(cs.getName());
         address_tv.setText(cs.getAddress());
 
-        // int imageId = context.getResources().getIdentifier(cs.getImage().toLowerCase(),
-        //        "drawable", context.getPackageName());
-        // img.setImageResource(imageId);
-
         return view;
+
+
+    }
+
+    @Override
+    public View getInfoContents(Marker marker) {
+
+        return null;
     }
 }

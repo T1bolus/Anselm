@@ -25,6 +25,7 @@ import org.w3c.dom.Text;
 
 import java.lang.reflect.Array;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -47,6 +48,9 @@ public class InfoWindowExpand extends AppCompatActivity {
     public int selected_minuteFrom;
     public int selected_hourTo;
     public int selected_minuteTo;
+
+    Date realDateFrom;
+    Date realDateTo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,7 +99,6 @@ public class InfoWindowExpand extends AppCompatActivity {
             TextView endView = findViewById(R.id.endTextView);
             date = simpleDateFormat.format(station.getFreeTimes().get(1));
             endView.setText(date);
-
 
 
             // String freeString  = new SimpleDateFormat("MMM dd, yyyyy", Locale.getDefault()).format(station.getFreeTimes());
@@ -154,9 +157,9 @@ public class InfoWindowExpand extends AppCompatActivity {
 
     public void bookAStation(View view) {
 
-        if(user==null) {
+        if (user == null) {
 
-            Toast.makeText(this,"Please log in!",Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Please log in!", Toast.LENGTH_LONG).show();
 
             return;
         }
@@ -171,35 +174,33 @@ public class InfoWindowExpand extends AppCompatActivity {
         book.setUid(user.getUid());
         book.setUsernamePicturePath(user.getPhotoUrl().toString());
 
-
-
-        FirestoreDatabase.getInstance().addBooking(this,book);
+        FirestoreDatabase.getInstance().addBooking(this, book);
 
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 
 
-    public void changeTime(final View view){
+    public void changeTime(final View view) {
         Context m_context = this;
         Calendar calender = Calendar.getInstance();
         final int hour = calender.get(calender.HOUR_OF_DAY);
         final int min = calender.get(calender.MINUTE);
-        TimePickerDialog timeDialog = new TimePickerDialog(m_context, R.style.TimePickerTheme, new TimePickerDialog.OnTimeSetListener(){
+        TimePickerDialog timeDialog = new TimePickerDialog(m_context, R.style.TimePickerTheme, new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker timePicker, int i, int i1) {
                 switch (view.getId()) {
                     case (R.id.time_spinner):
                         Button butt = findViewById(R.id.time_spinner);
                         butt.setText(i + " : " + i1);
-                        selected_hourFrom=i;
-                        selected_minuteFrom=i1;
+                        selected_hourFrom = i;
+                        selected_minuteFrom = i1;
                         break;
                     case (R.id.time_spinner2):
                         Button butt2 = findViewById(R.id.time_spinner2);
                         butt2.setText(i + " : " + i1);
-                        selected_hourTo=i;
-                        selected_minuteTo=i1;
+                        selected_hourTo = i;
+                        selected_minuteTo = i1;
                         break;
                 }
 
@@ -207,7 +208,5 @@ public class InfoWindowExpand extends AppCompatActivity {
         }, hour, min, android.text.format.DateFormat.is24HourFormat(m_context));
         timeDialog.show();
     }
-
-
 
 }
