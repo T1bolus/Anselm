@@ -88,8 +88,8 @@
                 android:id="@+id/stationOwnerTextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.75"
                 android:layout_marginLeft="10dp"
+                android:layout_weight="0.75"
                 android:textSize="20sp" />
 
 
@@ -236,19 +236,78 @@
 
         </GridLayout>
 
-        <Button
-            android:id="@+id/button3"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="5pt"
-            android:layout_marginRight="20dp"
-            android:background="@drawable/button_rounded"
-            android:onClick="bookAStation"
-            android:text="Book"
-            android:textColor="#FFFFFF"
-            android:textSize="20dp" />
+            android:layout_height="match_parent"
+            android:layout_marginTop="50dp"
+            android:layout_marginLeft="20dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="Startday"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/startTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.75"
+                android:textSize="20sp" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="Lastday"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/endTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.75"
+                android:textSize="20sp" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="30dp">
+
+
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="5pt"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/button_rounded"
+                android:onClick="bookAStation"
+                android:text="Book"
+                android:textColor="#FFFFFF"
+                android:textSize="20dp" />
+
+        </LinearLayout>
+
+
+
+
+
+
 
     </LinearLayout>
 
