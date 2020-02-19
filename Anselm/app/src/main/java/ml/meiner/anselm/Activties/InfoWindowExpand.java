@@ -3,6 +3,8 @@ package ml.meiner.anselm.Activties;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import android.app.TimePickerDialog;
+import android.content.Context;
 import android.widget.Switch;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.firebase.ui.auth.data.model.User;
@@ -24,6 +27,7 @@ import java.lang.reflect.Array;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -38,6 +42,11 @@ public class InfoWindowExpand extends AppCompatActivity {
     Chargingstation station;
 
     FirebaseUser user;
+
+    public int selected_hourFrom;
+    public int selected_minuteFrom;
+    public int selected_hourTo;
+    public int selected_minuteTo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -168,4 +177,32 @@ public class InfoWindowExpand extends AppCompatActivity {
         startActivity(intent);
     }
 
+
+    public void changeTime(final View view){
+        Context m_context = this;
+        Calendar calender = Calendar.getInstance();
+        final int hour = calender.get(calender.HOUR_OF_DAY);
+        final int min = calender.get(calender.MINUTE);
+        TimePickerDialog timeDialog = new TimePickerDialog(m_context, R.style.TimePickerTheme, new TimePickerDialog.OnTimeSetListener(){
+            @Override
+            public void onTimeSet(TimePicker timePicker, int i, int i1) {
+                switch (view.getId()) {
+                    case (R.id.time_spinner):
+                        Button butt = findViewById(R.id.time_spinner);
+                        butt.setText(i + " : " + i1);
+                        selected_hourFrom=i;
+                        selected_minuteFrom=i1;
+                        break;
+                    case (R.id.time_spinner2):
+                        Button butt2 = findViewById(R.id.time_spinner2);
+                        butt2.setText(i + " : " + i1);
+                        selected_hourTo=i;
+                        selected_minuteTo=i1;
+                        break;
+                }
+
+            }
+        }, hour, min, android.text.format.DateFormat.is24HourFormat(m_context));
+        timeDialog.show();
+    }
 }
