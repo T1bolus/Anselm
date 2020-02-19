@@ -98,7 +98,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
 
 
-
         FirestoreDatabase firestoreDatabase = FirestoreDatabase.getInstance();
         firestoreDatabase.fetchAllChargingStations(this);
     }

@@ -170,7 +170,7 @@ public class Inseration extends FragmentActivity implements OnMapReadyCallback, 
             markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.new_mark));
             // Setting the title for the marker.
             // This will be displayed on taping the marker
-            markerOptions.title(cs.getName() + ": " + pos.latitude + " : " + pos.longitude);
+            markerOptions.title("Ladestation from: " + cs.getName());
 
             // Placing a marker on the touched position
             map.addMarker(markerOptions);

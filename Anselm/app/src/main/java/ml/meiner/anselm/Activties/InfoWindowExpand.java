@@ -209,10 +209,8 @@ public class InfoWindowExpand extends AppCompatActivity {
         book.setUsernamePicturePath(user.getPhotoUrl().toString());
 
 
-
         Spinner spinner = findViewById(R.id.planets_spinner3);
         int days = giveDay(spinner.getSelectedItem().toString());
-
 
 
         Date weekStart = getWeekStartDate();

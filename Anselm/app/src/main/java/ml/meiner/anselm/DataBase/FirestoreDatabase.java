@@ -96,6 +96,7 @@ public class FirestoreDatabase
 
     public void fetchAllChargingStations(FirestoreDatabaseChargingstationListener listener)
     {
+        chargingListeners.clear();
         if(chargingListeners.contains(listener) == false) //add only new listeners
             chargingListeners.add(listener);
 
@@ -133,22 +134,9 @@ public class FirestoreDatabase
 
     public void fetchOwnBookings(FirestoreDatabaseBookingListener listener, String uid)
     {
-        boolean exits = false;
-        for(FirestoreDatabaseBookingListener l: bookingListeners)
-        {
-            if(l.equals(listener))
-            {
-                exits = true;
-                break;
-            }
-        }
-
-        if(exits == false)
+        bookingListeners.clear();
+        if(bookingListeners.contains(listener) == false)
             bookingListeners.add(listener);
-
-
-        //if(bookingListeners.contains(listener) == false) //add only new listeners
-        //    bookingListeners.add(listener);
 
 
         db.collection("bookings")
