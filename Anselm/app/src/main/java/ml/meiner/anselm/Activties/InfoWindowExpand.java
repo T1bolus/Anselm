@@ -1,36 +1,25 @@
 package ml.meiner.anselm.Activties;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-
 import android.app.TimePickerDialog;
 import android.content.Context;
-import android.widget.Switch;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.firebase.ui.auth.data.model.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.squareup.picasso.Picasso;
 
-import org.w3c.dom.Text;
-
-import java.lang.reflect.Array;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
 
+import androidx.appcompat.app.AppCompatActivity;
 import ml.meiner.anselm.DataBase.Booking;
 import ml.meiner.anselm.DataBase.Chargingstation;
 import ml.meiner.anselm.DataBase.FirestoreDatabase;
@@ -171,7 +160,13 @@ public class InfoWindowExpand extends AppCompatActivity {
         book.setUid(user.getUid());
         book.setUsernamePicturePath(user.getPhotoUrl().toString());
 
+        if((selected_hourTo < selected_hourFrom) || (selected_hourTo == selected_hourFrom && selected_minuteTo < selected_minuteFrom) || (selected_hourTo == 0 && selected_hourFrom == 0 && selected_minuteTo == 0 && selected_minuteFrom == 0))
+        {
+            Toast.makeText(this, "Impossible Time!", Toast.LENGTH_LONG).show();
+            return;
+        }
 
+        
 
         FirestoreDatabase.getInstance().addBooking(this,book);
 
