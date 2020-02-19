@@ -51,9 +51,12 @@ public class InfoWindowExpand extends AppCompatActivity {
         if (station != null) {
             //TODO: Muss noch angepasst und erweitert werden
 
-            // Setting the picture form firebase of the owner of the station
-            ImageView imageView = findViewById(R.id.imageView);
+            //Setting the picture form firebase of the owner of the station
+            ImageView imageView = findViewById(R.id.userPicture);
             Picasso.get().load(station.getUsernamePicturePath()).into(imageView);
+
+            TextView uView = findViewById(R.id.userNameView);
+            uView.setText(user.getDisplayName());
 
             // Displaying the name of the owner of the station
             TextView userView = findViewById(R.id.stationOwnerTextView);
@@ -61,19 +64,19 @@ public class InfoWindowExpand extends AppCompatActivity {
 
             // Displaying the name of the station
             TextView stationNameView = findViewById(R.id.stationNameTextView);
-            stationNameView.setText("Name: " + station.getName());
+            stationNameView.setText(station.getName());
 
             // Display address of station
             TextView addressView = findViewById(R.id.stationAddressTextView);
-            addressView.setText("Addresse: " + station.getAddress());
+            addressView.setText(station.getAddress());
 
             // Display Price of station
             TextView priceView = findViewById(R.id.stationPriceTextView);
-            priceView.setText("Preis pro Stunde: " + Float.toString(station.getPph()) + " €.");
+            priceView.setText(Float.toString(station.getPph()) + " €.");
 
             showPlugs(station);
 
-            TextView startView = findViewById(R.id.startDayView);
+            // TextView startView = findViewById(R.id.startDayView);
 
             
 
