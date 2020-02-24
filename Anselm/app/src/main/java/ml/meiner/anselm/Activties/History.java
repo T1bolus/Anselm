@@ -53,7 +53,7 @@ public class History extends AppCompatActivity implements FirestoreDatabaseBooki
         // in content do not change the layout size of the RecyclerView
         recyclerView.setHasFixedSize(true);
 
-        // use a linear layout manager
+        // use a linear layout manager here
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
